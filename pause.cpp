@@ -442,7 +442,7 @@ void CPauseQuit::Update(void)
 		if (pKeyboard->GetTrigger(DIK_RETURN) || pJoyPad->GetTrigger(pJoyPad->JOYKEY_A))
 		{
 			// フェードの取得
-			CFade* pFade = CManager::GetFade();
+			//CFade* pFade = CManager::GetFade();
 		}
 	}
 	else
