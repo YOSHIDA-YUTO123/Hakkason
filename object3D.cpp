@@ -278,9 +278,6 @@ CObject3D* CObject3D::Create(const D3DXVECTOR3 pos, const D3DXVECTOR3 rot, const
 
 	if (pObject3D == nullptr) return nullptr;
 
-	// テクスチャクラスの取得
-	CTextureManager* pTexture = CManager::GetTexture();
-
 	pObject3D->m_pos = pos;
 	pObject3D->m_rot = rot;
 	pObject3D->m_Size = size;
