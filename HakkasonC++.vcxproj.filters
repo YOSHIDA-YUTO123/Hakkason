@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\base">
+      <UniqueIdentifier>{78dc0a92-90df-4632-a944-8cb5dd965408}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\base">
+      <UniqueIdentifier>{d0d4f752-e056-4819-a713-b30e9cd8de07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\billboard">
+      <UniqueIdentifier>{94cc5c9b-42c0-47c6-a25c-c83e5bfd308f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\billboardAnim">
+      <UniqueIdentifier>{1e8fd6a5-476a-4872-a270-e125df665ecd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\character">
+      <UniqueIdentifier>{8fa45768-cdd4-47bf-a17b-862561f1c686}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\manager">
+      <UniqueIdentifier>{6ace2d95-d70f-46b0-bd02-c73ca8a75c6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\scene">
+      <UniqueIdentifier>{b0a9a863-4090-485f-a718-937696178185}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\number">
+      <UniqueIdentifier>{f728f2c1-2056-4fe4-9489-53eb8d7ad156}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\system">
+      <UniqueIdentifier>{742a9777-6de6-4410-9c6e-80f15fa96756}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\object2D">
+      <UniqueIdentifier>{24918932-dece-4eb3-98c9-091db34663e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\object2DAnim">
+      <UniqueIdentifier>{62706150-103a-42d5-b4ed-c33e259634eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\object2DMT">
+      <UniqueIdentifier>{452fb4a5-f0eb-4dc8-bf83-a44dd97d6fec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\object3D">
+      <UniqueIdentifier>{b7b00e24-3d04-4b58-9300-f57aa583ab8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\object3DAnim">
+      <UniqueIdentifier>{e547deae-69b6-42b4-a78e-aad9f4758aa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\object3DMT">
+      <UniqueIdentifier>{4c663a14-8471-4b20-8d78-b2cfa130098c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\objectX">
+      <UniqueIdentifier>{56704dad-b232-4962-bb12-4d866f4e943c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\billboard">
+      <UniqueIdentifier>{8f6374f8-1de2-4bde-b444-02591b5e14a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\billboardAnim">
+      <UniqueIdentifier>{7234c9f2-0243-4c15-8d31-4ea540eb05bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\character">
+      <UniqueIdentifier>{01ca5e1d-2b4d-4bf8-99cc-8b5a1566621d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\manager">
+      <UniqueIdentifier>{4cbdd9d2-1e7c-419f-8bc3-b1c6dd368eba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\system">
+      <UniqueIdentifier>{3ce7588d-3269-45b6-b0e9-b15cecf3b4a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\scene">
+      <UniqueIdentifier>{9a065084-136a-48e8-8545-aa56c6a4e836}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\object2D">
+      <UniqueIdentifier>{9134ce0d-e439-407e-90a7-2c8c46431831}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\object2DMT">
+      <UniqueIdentifier>{70cf35af-0837-49c7-acb9-2282daf6e720}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\object2DAnim">
+      <UniqueIdentifier>{6b2a4298-e79c-4fd7-888c-2506aa47c5ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\number">
+      <UniqueIdentifier>{9cd5503c-fe9e-4fbd-8c07-7069f547d634}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\object3D">
+      <UniqueIdentifier>{ae574ddf-b072-4181-9aa9-953820116a9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\object3DAnim">
+      <UniqueIdentifier>{5539ae4e-d951-4bbf-9ce6-edeb5362e43f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\object3DMT">
+      <UniqueIdentifier>{5d61dd98-5021-49f6-bf0f-cde0b9607b94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\objectX">
+      <UniqueIdentifier>{56fb0a59-4dfe-44ab-888d-f39f38fd9b20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\mesh">
+      <UniqueIdentifier>{1e24caff-494a-463e-b5c2-cdb1041c9f43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\mesh">
+      <UniqueIdentifier>{a0b50ca7-38ff-4499-aa8d-8dee82630948}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="camera.cpp">
+      <Filter>ソース ファイル\base</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>ソース ファイル\base</Filter>
+    </ClCompile>
+    <ClCompile Include="fade.cpp">
+      <Filter>ソース ファイル\base</Filter>
+    </ClCompile>
+    <ClCompile Include="light.cpp">
+      <Filter>ソース ファイル\base</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>ソース ファイル\base</Filter>
+    </ClCompile>
+    <ClCompile Include="manager.cpp">
+      <Filter>ソース ファイル\base</Filter>
+    </ClCompile>
+    <ClCompile Include="object.cpp">
+      <Filter>ソース ファイル\base</Filter>
+    </ClCompile>
+    <ClCompile Include="billboard.cpp">
+      <Filter>ソース ファイル\billboard</Filter>
+    </ClCompile>
+    <ClCompile Include="billboardAnim.cpp">
+      <Filter>ソース ファイル\billboardAnim</Filter>
+    </ClCompile>
+    <ClCompile Include="character2D.cpp">
+      <Filter>ソース ファイル\character</Filter>
+    </ClCompile>
+    <ClCompile Include="character3D.cpp">
+      <Filter>ソース ファイル\character</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterManager.cpp">
+      <Filter>ソース ファイル\manager</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>ソース ファイル\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="result.cpp">
+      <Filter>ソース ファイル\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="title.cpp">
+      <Filter>ソース ファイル\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="textureManager.cpp">
+      <Filter>ソース ファイル\manager</Filter>
+    </ClCompile>
+    <ClCompile Include="scene.cpp">
+      <Filter>ソース ファイル\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="modelManager.cpp">
+      <Filter>ソース ファイル\manager</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadManager.cpp">
+      <Filter>ソース ファイル\manager</Filter>
+    </ClCompile>
+    <ClCompile Include="number.cpp">
+      <Filter>ソース ファイル\number</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>ソース ファイル\base</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>ソース ファイル\system</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>ソース ファイル\system</Filter>
+    </ClCompile>
+    <ClCompile Include="debugproc.cpp">
+      <Filter>ソース ファイル\system</Filter>
+    </ClCompile>
+    <ClCompile Include="math.cpp">
+      <Filter>ソース ファイル\system</Filter>
+    </ClCompile>
+    <ClCompile Include="model.cpp">
+      <Filter>ソース ファイル\character</Filter>
+    </ClCompile>
+    <ClCompile Include="motion.cpp">
+      <Filter>ソース ファイル\system</Filter>
+    </ClCompile>
+    <ClCompile Include="object2D.cpp">
+      <Filter>ソース ファイル\object2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Object2DAnimMT.cpp">
+      <Filter>ソース ファイル\object2DAnim</Filter>
+    </ClCompile>
+    <ClCompile Include="object2DMT.cpp">
+      <Filter>ソース ファイル\object2DMT</Filter>
+    </ClCompile>
+    <ClCompile Include="object3D.cpp">
+      <Filter>ソース ファイル\object3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Object3DAnim.cpp">
+      <Filter>ソース ファイル\object3DAnim</Filter>
+    </ClCompile>
+    <ClCompile Include="Object3DMT.cpp">
+      <Filter>ソース ファイル\object3DMT</Filter>
+    </ClCompile>
+    <ClCompile Include="objectX.cpp">
+      <Filter>ソース ファイル\objectX</Filter>
+    </ClCompile>
+    <ClCompile Include="pause.cpp">
+      <Filter>ソース ファイル\object2D</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer.cpp">
+      <Filter>ソース ファイル\base</Filter>
+    </ClCompile>
+    <ClCompile Include="shadow.cpp">
+      <Filter>ソース ファイル\object3D</Filter>
+    </ClCompile>
+    <ClCompile Include="shadowS.cpp">
+      <Filter>ソース ファイル\objectX</Filter>
+    </ClCompile>
+    <ClCompile Include="slow.cpp">
+      <Filter>ソース ファイル\system</Filter>
+    </ClCompile>
+    <ClCompile Include="sound.cpp">
+      <Filter>ソース ファイル\system</Filter>
+    </ClCompile>
+    <ClCompile Include="meshfield.cpp">
+      <Filter>ソース ファイル\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshCylinder.cpp">
+      <Filter>ソース ファイル\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshCircle.cpp">
+      <Filter>ソース ファイル\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshOrbit.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="camera.h">
+      <Filter>ヘッダー ファイル\base</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>ヘッダー ファイル\base</Filter>
+    </ClInclude>
+    <ClInclude Include="light.h">
+      <Filter>ヘッダー ファイル\base</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>ヘッダー ファイル\base</Filter>
+    </ClInclude>
+    <ClInclude Include="manager.h">
+      <Filter>ヘッダー ファイル\base</Filter>
+    </ClInclude>
+    <ClInclude Include="object.h">
+      <Filter>ヘッダー ファイル\base</Filter>
+    </ClInclude>
+    <ClInclude Include="billboard.h">
+      <Filter>ヘッダー ファイル\billboard</Filter>
+    </ClInclude>
+    <ClInclude Include="billboardAnim.h">
+      <Filter>ヘッダー ファイル\billboardAnim</Filter>
+    </ClInclude>
+    <ClInclude Include="character2D.h">
+      <Filter>ヘッダー ファイル\character</Filter>
+    </ClInclude>
+    <ClInclude Include="character3D.h">
+      <Filter>ヘッダー ファイル\character</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterManager.h">
+      <Filter>ヘッダー ファイル\manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>ヘッダー ファイル\system</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>ヘッダー ファイル\system</Filter>
+    </ClInclude>
+    <ClInclude Include="debugproc.h">
+      <Filter>ヘッダー ファイル\system</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadManager.h">
+      <Filter>ヘッダー ファイル\manager</Filter>
+    </ClInclude>
+    <ClInclude Include="modelManager.h">
+      <Filter>ヘッダー ファイル\manager</Filter>
+    </ClInclude>
+    <ClInclude Include="motion.h">
+      <Filter>ヘッダー ファイル\system</Filter>
+    </ClInclude>
+    <ClInclude Include="math.h">
+      <Filter>ヘッダー ファイル\system</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>ヘッダー ファイル\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="scene.h">
+      <Filter>ヘッダー ファイル\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="title.h">
+      <Filter>ヘッダー ファイル\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="result.h">
+      <Filter>ヘッダー ファイル\system</Filter>
+    </ClInclude>
+    <ClInclude Include="object2D.h">
+      <Filter>ヘッダー ファイル\object2D</Filter>
+    </ClInclude>
+    <ClInclude Include="pause.h">
+      <Filter>ヘッダー ファイル\object2D</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>ヘッダー ファイル\base</Filter>
+    </ClInclude>
+    <ClInclude Include="fade.h">
+      <Filter>ヘッダー ファイル\base</Filter>
+    </ClInclude>
+    <ClInclude Include="model.h">
+      <Filter>ヘッダー ファイル\character</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer.h">
+      <Filter>ヘッダー ファイル\base</Filter>
+    </ClInclude>
+    <ClInclude Include="object2DMT.h">
+      <Filter>ヘッダー ファイル\object2DMT</Filter>
+    </ClInclude>
+    <ClInclude Include="Object2DAnimMT.h">
+      <Filter>ヘッダー ファイル\object2DAnim</Filter>
+    </ClInclude>
+    <ClInclude Include="number.h">
+      <Filter>ヘッダー ファイル\number</Filter>
+    </ClInclude>
+    <ClInclude Include="object3D.h">
+      <Filter>ヘッダー ファイル\object3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Object3DAnim.h">
+      <Filter>ヘッダー ファイル\object3DAnim</Filter>
+    </ClInclude>
+    <ClInclude Include="Object3DMT.h">
+      <Filter>ヘッダー ファイル\object3DMT</Filter>
+    </ClInclude>
+    <ClInclude Include="objectX.h">
+      <Filter>ヘッダー ファイル\objectX</Filter>
+    </ClInclude>
+    <ClInclude Include="shadow.h">
+      <Filter>ヘッダー ファイル\object3D</Filter>
+    </ClInclude>
+    <ClInclude Include="shadowS.h">
+      <Filter>ヘッダー ファイル\objectX</Filter>
+    </ClInclude>
+    <ClInclude Include="sound.h">
+      <Filter>ヘッダー ファイル\system</Filter>
+    </ClInclude>
+    <ClInclude Include="slow.h">
+      <Filter>ヘッダー ファイル\system</Filter>
+    </ClInclude>
+    <ClInclude Include="textureManager.h">
+      <Filter>ヘッダー ファイル\manager</Filter>
+    </ClInclude>
+    <ClInclude Include="meshfield.h">
+      <Filter>ヘッダー ファイル\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshCylinder.h">
+      <Filter>ヘッダー ファイル\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshCircle.h">
+      <Filter>ヘッダー ファイル\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshOrbit.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
