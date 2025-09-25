@@ -27,6 +27,8 @@
 #include "camera.h"
 #include "title.h"
 #include "MeshCircle.h"
+#include "particle3d.h"
+#include "effect3d.h"
 
 using namespace Const;			// 名前空間Constを使用する
 using namespace std;			// 名前空間stdを使用する
@@ -299,6 +301,31 @@ void CManager::Update(void)
 	if (m_pInputKeyboard->GetTrigger(DIK_F2))
 	{
 		m_bShowDebug = m_bShowDebug ? false : true;
+	}
+	if (m_pInputKeyboard->GetTrigger(DIK_6))
+	{
+		// 火の情報を設定
+		CParticle3D::DefoultEffectInfo FireInfo;
+		FireInfo.Bece.Col = { 1.0f, 0.3f, 0.1f, 1.0f };
+		FireInfo.Bece.fMaxSpeed = 1.0f;
+		FireInfo.Bece.fMinSpeed = 1.0f;
+		FireInfo.Bece.MaxDir = { 0.1f,0.5f,0.1f };
+		FireInfo.Bece.MinDir = { -0.1f,0.5f,-0.1f };
+		FireInfo.Bece.nLife = 1;
+		FireInfo.Bece.nMaxLife = 30;
+		FireInfo.Bece.nMinLife = 30;
+		FireInfo.Bece.nNumEffect = 5;
+		FireInfo.Bece.Pos = Const::VEC3_NULL;
+		FireInfo.MaxRadius = 15.0f;
+		FireInfo.MinRadius = 15.0f;
+		FireInfo.Bece.bLoop = true;
+		FireInfo.Bece.nCoolDown = 2;
+		FireInfo.Bece.Gravity = 0.0f;
+		FireInfo.Bece.FilePath = CEffect3D::Config::Smoke;
+		FireInfo.Bece.nPriority = 5;
+
+		// 生成
+		CParticle3D::Create(FireInfo);
 	}
 
 	// ワイヤーフレームの状態

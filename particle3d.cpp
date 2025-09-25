@@ -108,7 +108,6 @@ CParticle3D* CParticle3D::Create(DefoultEffectInfo ParticleInfo)
 	pParticle = new CParticle3D;
 	// ‰Šú‰»ˆ—
 	pParticle->Init();
-
 	// î•ñ‚ÌÝ’è
 	pParticle->m_ParticleInfo = ParticleInfo;
 	pParticle->m_ParticleInfo.Bece.nCounter = ParticleInfo.Bece.nCoolDown;
