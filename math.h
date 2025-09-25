@@ -122,8 +122,10 @@ namespace math
 	* @return 正規化されたベクトル
 	*/
 	D3DXVECTOR3 GetVector(const D3DXVECTOR3 dest, const D3DXVECTOR3 pos);
-	float GetTargetAngle(const D3DXVECTOR3 dest, const D3DXVECTOR3 pos); // 目標までの角度の取得
-	D3DXVECTOR3 GetPositionFromMatrix(const D3DXMATRIX mtxWorld);		 // MATRIXの位置の情報をD3DXVECTOR3型に変換する
-	D3DXVECTOR3 MatrixToEulerXYZ(const D3DXMATRIX mtxWorld);			// 回転行列をオイラー角に変換
+	float GetTargetAngle(const D3DXVECTOR3 dest, const D3DXVECTOR3 pos);	// 目標までの角度の取得
+	D3DXVECTOR3 GetPositionFromMatrix(const D3DXMATRIX mtxWorld);			// MATRIXの位置の情報をD3DXVECTOR3型に変換する
+	D3DXVECTOR3 MatrixToEulerXYZ(const D3DXMATRIX mtxWorld);				// 回転行列をオイラー角に変換
+	float Randf(float Max, float Min);										// 小数点第二位までのランダム
+	D3DXVECTOR3 RandVec(D3DXVECTOR3 Max, D3DXVECTOR3 Min);					// ベクトル間をランダムなスカラー値で補完
 }
 #endif
