@@ -58,8 +58,13 @@ CMeshOrbit* CMeshOrbit::Create(const D3DXVECTOR3 Top, const D3DXVECTOR3 Bottom, 
 	// インデックスの総数
 	pOrbit->m_nNumIdx = pOrbit->m_nNumVtx;
 
+	pOrbit->m_Bottom = Bottom;
+	pOrbit->m_Top = Top;
+	pOrbit->m_nSegH = nSegH;
+	pOrbit->m_col = col;
+
 	// ポリゴンの総数
-	int nNumPolygon = pOrbit->m_nNumVtx - 2;
+	pOrbit->m_nNumPolygon = pOrbit->m_nNumVtx - 2;
 
 	// 生成に失敗した
 	if (FAILED(pOrbit->Init()))
