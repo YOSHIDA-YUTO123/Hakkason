@@ -227,7 +227,7 @@ void CNumber::SetColor(const D3DXCOLOR col)
 void CNumber::SetTextureID(const char* pFileName)
 {
 	// 省略用パス
-	string filePath = "data/TEXTURE/";
+	string filePath = "data/TEXTURE/number/";
 
 	// 文字列の連結
 	filePath += pFileName;

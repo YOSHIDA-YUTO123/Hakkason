@@ -240,14 +240,14 @@
     <ClCompile Include="MeshOrbit.cpp">
       <Filter>ソース ファイル\mesh</Filter>
     </ClCompile>
-    <ClCompile Include="score.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="modelmanager.cpp">
       <Filter>ソース ファイル\manager</Filter>
     </ClCompile>
     <ClCompile Include="texmanager.cpp">
       <Filter>ソース ファイル\manager</Filter>
+    </ClCompile>
+    <ClCompile Include="score.cpp">
+      <Filter>ソース ファイル\number</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -377,9 +377,6 @@
     <ClInclude Include="MeshOrbit.h">
       <Filter>ヘッダー ファイル\mesh</Filter>
     </ClInclude>
-    <ClInclude Include="score.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="modelmanager.h">
       <Filter>ヘッダー ファイル\manager</Filter>
     </ClInclude>
@@ -388,6 +385,9 @@
     </ClInclude>
     <ClInclude Include="model.h">
       <Filter>ヘッダー ファイル\character</Filter>
+    </ClInclude>
+    <ClInclude Include="score.h">
+      <Filter>ヘッダー ファイル\number</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

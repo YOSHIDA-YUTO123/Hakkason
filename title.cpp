@@ -18,6 +18,7 @@
 #include "light.h"
 #include "MeshCylinder.h"
 #include "MeshCircle.h"
+#include "score.h"
 
 using namespace Const;	// 名前空間Constの使用
 using namespace std;	// 名前空間stdの使用
@@ -55,6 +56,9 @@ HRESULT CTitle::Init(void)
 
 	// メッシュフィールドの生成
 	CMeshField::Create(VEC3_NULL, 10, 10, D3DXVECTOR2(500.0f, 500.0f));
+
+	// スコアの表示
+	CScore::Create(D3DXVECTOR3(1000.0f,100.0f,0.0f), D3DXVECTOR2(50.0f, 50.0f), 4649);
 
 	//// メッシュシリンダーの生成
 	//CMeshCylinder::Create(VEC3_NULL, -500.0f, 500.0f, 10, 10);
