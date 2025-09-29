@@ -18,6 +18,7 @@
 // インクルードファイル
 //***************************************************
 #include "object.h"
+#include <string>
 
 //***************************************************
 // マルチテクスチャ2Dアニメーションクラスの定義
@@ -52,12 +53,12 @@ private:
 	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuffer;	// 頂点バッファ
 	D3DXVECTOR3 m_pos;						// 位置
 	D3DXVECTOR2 m_Size;						// 大きさ
+	std::string m_TextureName[MAX_TEXTURE]; // テクスチャのパス
 	int m_nPattern;							// パータン
 	int m_nCounter;							// カウンター
 	int m_nUV;								// テクスチャの分割横
 	int m_nHV;								// テクスチャの分割縦
 	int m_nSpeed;							// アニメーションスピード
-	int m_nTextureIdx[MAX_TEXTURE];			// テクスチャのID
 	bool m_bLoop;							// ループするかどうか
 };
 

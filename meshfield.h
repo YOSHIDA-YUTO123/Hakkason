@@ -15,6 +15,7 @@
 // インクルードファイル
 //************************************************
 #include "object.h"
+#include <string>
 
 //************************************************
 // メッシュフィールドクラスの定義
@@ -31,11 +32,11 @@ public:
 	void Uninit(void) override;
 	void Update(void) override;
 	void Draw(void) override;
-
+	void SetTextureID(const char* pTexturePath);
 	bool Collision(const D3DXVECTOR3 pos, float* pOutHeight); // 地面との当たり判定
 
 	void UpdateNor(void); // 法線の再設定
-
+	
 	// ゲッター
 	D3DXVECTOR3 GetNor(void) const { return m_Nor; }
 private:
@@ -47,11 +48,11 @@ private:
 	D3DXVECTOR2 m_Size;						// 大きさ
 	D3DXVECTOR3 m_Nor;						// 法線
 	D3DXMATRIX m_mtxWorld;					// ワールドマトリックス
+	std::string m_TexturePath;				// テクスチャのパス
 	int m_nSegH, m_nSegV;					// 横の分割数、縦の分割数
 	int m_nNumVtx;							// 頂点の数
 	int m_nNumPolygon;						// ポリゴンの数
 	int m_nNumIdx;							// インデックス数
-	int m_nTextureIdx;						// テクスチャのID
 };
 
 #endif

@@ -14,8 +14,8 @@
 //***************************************************
 // インクルードファイル
 //***************************************************
-#include"main.h"
-#include"object.h"
+#include "object.h"
+#include <string>
 
 //***************************************************
 // オブジェクト3Dクラスの定義
@@ -53,6 +53,6 @@ private:
 	D3DXVECTOR3 m_rot;						// 向き
 	D3DXVECTOR3 m_Size;						// 大きさ
 	D3DXMATRIX m_mtxWorld;					// ワールドマトリックス
-	int m_nTextureIdx;						// テクスチャのインデックス
+	std::string m_TexturePath;				// テクスチャのパス
 };
 #endif

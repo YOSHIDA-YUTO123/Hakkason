@@ -11,7 +11,8 @@
 #include "MeshOrbit.h"
 #include "manager.h"
 #include "renderer.h"
-#include "textureManager.h"
+#include "texmanager.h"
+using namespace std;
 
 using namespace Const;							// 名前空間Constを使用する
 
@@ -28,7 +29,6 @@ CMeshOrbit::CMeshOrbit()
 	m_nNumPolygon = NULL;
 	m_nNumVtx = NULL;
 	m_nSegH = 1;
-	m_nTextureIdx = -1;
 	m_pos = VEC3_NULL;
 	m_pIdxBuffer = nullptr;
 	m_pVtxBuffer = nullptr;
@@ -237,9 +237,6 @@ void CMeshOrbit::Draw(void)
 	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
 
-	// テクスチャクラスの取得
-	CTextureManager* pTexture = CManager::GetTexture();
-
 	//計算用のマトリックス
 	D3DXMATRIX mtxRot, mtxTrans;
 
@@ -266,18 +263,8 @@ void CMeshOrbit::Draw(void)
 	//テクスチャフォーマットの設定
 	pDevice->SetFVF(FVF_VERTEX_3D);
 
-	// テクスチャが無かったら
-	if (m_nTextureIdx == -1)
-	{
-		//テクスチャの設定
-		pDevice->SetTexture(0, NULL);
-	}
-	else
-	{
-		//テクスチャの設定
-		pDevice->SetTexture(0, pTexture->GetAdress(m_nTextureIdx));
-
-	}
+	//テクスチャの設定
+	pDevice->SetTexture(0, CLoadTexture::GetTex(m_TexturePath));
 
 	//ポリゴンの描画
 	pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLESTRIP, 0, 0, m_nNumVtx, 0, m_nNumPolygon);
@@ -298,4 +285,18 @@ void CMeshOrbit::SetPosition(const D3DXVECTOR3 Top, const D3DXVECTOR3 Bottom)
 {
 	m_Top = Top;
 	m_Bottom = Bottom;
+}
+
+//================================================
+// テクスチャのIDの設定
+//================================================
+void CMeshOrbit::SetTextureID(const char* pTexturePath)
+{
+	// 省略用パス
+	string filePath = "data/TEXTURE/";
+
+	// 文字列の連結
+	filePath += pTexturePath;
+
+	m_TexturePath = filePath;
 }

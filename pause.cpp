@@ -11,7 +11,7 @@
 #include "pause.h"
 #include"manager.h"
 #include"renderer.h"
-#include"textureManager.h"
+#include"texmanager.h"
 #include"input.h"
 #include"math.h"
 #include"fade.h"

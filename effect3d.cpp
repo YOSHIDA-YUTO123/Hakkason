@@ -7,7 +7,7 @@
 
 // インクルード
 #include "effect3d.h"
-#include "textureManager.h"
+#include "texmanager.h"
 #include "manager.h"
 #include "renderer.h"
 

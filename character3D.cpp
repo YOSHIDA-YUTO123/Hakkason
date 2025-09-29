@@ -9,7 +9,6 @@
 // インクルードファイル
 //***************************************************
 #include "character3D.h"
-#include "textureManager.h"
 #include"manager.h"
 #include"renderer.h"
 #include"math.h"

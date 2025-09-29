@@ -14,7 +14,8 @@
 //***************************************************
 // インクルードファイル
 //***************************************************
-#include"object.h"
+#include "object.h"
+#include <string>
 
 //***************************************************
 // ビルボードクラスの定義
@@ -32,17 +33,17 @@ public:
 	virtual void Update(void) override;
 	virtual void Draw(void) override;
 
-	/**
-	* @brief ワールドマトリックスの設定処理
-	* @param 回転行列
-	* @param 位置行列
-	*/
+	/// <summary>
+	/// マトリックスの設定処理
+	/// </summary>
+	/// <param name="mtxRot"></param>
+	/// <param name="mtxTrans"></param>
 	void SetMatrix(const D3DXMATRIX mtxRot, const D3DXMATRIX mtxTrans);
 
-	/**
-	* @brief 描画の部分だけの処理
-	* SetUpDrawの次に呼ぶ
-	*/
+	/// <summary>
+	/// 描画の設定処理 (SetMatrixの後に呼ぶ)
+	/// </summary>
+	/// <param name=""></param>
 	void SetUpDraw(void);
 
 	D3DXVECTOR3 GetPosition(void) const { return m_pos; }
@@ -60,6 +61,6 @@ private:
 	D3DXVECTOR3 m_pos;						// 位置のクラスのポインタ
 	D3DXVECTOR2 m_Size;						// 大きさ
 	D3DXMATRIX m_mtxWorld;					// ワールドマトリックス
-	int m_nTextureIdx;						// テクスチャのインデックス
+	std::string m_TexturePath;				// テクスチャのパス
 };
 #endif

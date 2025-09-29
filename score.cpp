@@ -1,2 +1,2 @@
 #include "pch.h"
-#include "CScore.h"
+#include "score.h"

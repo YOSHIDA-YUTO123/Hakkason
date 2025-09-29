@@ -15,7 +15,7 @@
 #include "Collision.h"
 #include "sound.h"
 #include "input.h"
-#include "textureManager.h"
+#include "texmanager.h"
 #include "modelManager.h"
 #include "light.h"
 #include "scene.h"
@@ -41,9 +41,7 @@ unique_ptr<CInputKeyboard> CManager::m_pInputKeyboard = nullptr;	// キーボードへ
 unique_ptr<CInputJoypad> CManager::m_pInputJoypad = nullptr;		// パッドへのポインタ
 unique_ptr<CInputMouse> CManager::m_pInputMouse = nullptr;			// マウスへのポインタ
 unique_ptr<CSound> CManager::m_pSound = nullptr;					// サウンドのポインタ
-unique_ptr<CTextureManager> CManager::m_pTexture = nullptr;			// テクスチャクラスへのポインタ
 unique_ptr<CLight> CManager::m_pLight = nullptr;					// ライトクラスへのポインタ
-unique_ptr<CModelManager> CManager::m_pModel = nullptr;				// モデルのクラスへのポインタ
 unique_ptr<CScene> CManager::m_pScene = nullptr;					// シーンクラスへのポインタ
 unique_ptr<CSlow> CManager::m_pSlow = nullptr;						// スローモーションクラスへのポインタ
 unique_ptr<CFade> CManager::m_pFade = nullptr;						// フェードクラスへのポインタ
@@ -107,15 +105,11 @@ HRESULT CManager::Init(HINSTANCE hInstance,HWND hWnd, BOOL bWindow)
 	// キャラクターマネージャーの生成
 	CCharacterManager::Create();
 
-	// テクスチャの生成
-	m_pTexture = make_unique<CTextureManager>();
-
 	// すべてのテクスチャの読み込み処理
-	m_pTexture->Load();
+	CLoadTexture::Load("texture_list.txt");
 
-	// モデルの生成
-	m_pModel = make_unique<CModelManager>();
-	m_pModel->Load();
+	// すべてのモデルのロード処理
+	CModelManager::Load("model_list.txt");
 
 	// カメラの生成
 	m_pCamera = make_unique<CCamera>();
@@ -149,10 +143,10 @@ void CManager::Uninit(void)
 	m_pSound->StopSound();
 
 	// モデルの破棄
-	if (m_pModel != nullptr)
-	{
-		m_pModel->UnLoad();
-	}
+	CModelManager::UnRegistModel();
+
+	// テクスチャの破棄
+	CLoadTexture::UnRegistTex();
 
 	// カメラの破棄
 	if (m_pCamera != nullptr)
@@ -166,13 +160,6 @@ void CManager::Uninit(void)
 	{
 		m_pLight->Uninit();
 		m_pLight = nullptr;
-	}
-
-	// テクスチャの破棄
-	if (m_pTexture != nullptr)
-	{
-		// 終了処理
-		m_pTexture->UnLoad();
 	}
 
 	// サウンドの破棄

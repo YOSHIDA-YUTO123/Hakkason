@@ -11,7 +11,7 @@
 #include "billboard.h"
 #include "manager.h"
 #include "renderer.h"
-#include "textureManager.h"
+#include "texmanager.h"
 #include <string>
 
 using namespace Const;	// 名前空間Constを使用
@@ -25,7 +25,7 @@ CObjectBillboard::CObjectBillboard(int nPriority) : CObject(nPriority)
 	memset(m_mtxWorld, NULL, sizeof(D3DXMATRIX));
 	m_pos = VEC3_NULL;
 	m_Size = VEC2_NULL;
-	m_nTextureIdx = -1;
+	m_TexturePath.clear();
 	m_pVtxBuffer = nullptr;
 }
 
@@ -125,9 +125,6 @@ void CObjectBillboard::Draw(void)
 	// デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
-	// テクスチャクラスの取得
-	CTextureManager* pTexture = CManager::GetTexture();
-
 	// 計算用のマトリックスを宣言
 	D3DXMATRIX mtxRot, mtxTrans;
 
@@ -172,7 +169,7 @@ void CObjectBillboard::Draw(void)
 	pDevice->SetFVF(FVF_VERTEX_3D);
 
 	//テクスチャの設定
-	pDevice->SetTexture(0, pTexture->GetAdress(m_nTextureIdx));
+	pDevice->SetTexture(0, CLoadTexture::GetTex(m_TexturePath));
 
 	// ポリゴンの描画
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
@@ -213,9 +210,6 @@ void CObjectBillboard::SetUpDraw(void)
 	// デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
-	// テクスチャクラスの取得
-	CTextureManager* pTexture = CManager::GetTexture();
-
 	// ライトを無効にする
 	pDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
 
@@ -226,7 +220,7 @@ void CObjectBillboard::SetUpDraw(void)
 	pDevice->SetFVF(FVF_VERTEX_3D);
 
 	//テクスチャの設定
-	pDevice->SetTexture(0, pTexture->GetAdress(m_nTextureIdx));
+	pDevice->SetTexture(0, CLoadTexture::GetTex(m_TexturePath));
 
 	// ポリゴンの描画
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
@@ -261,17 +255,14 @@ void CObjectBillboard::SetColor(const D3DXCOLOR col)
 //===================================================
 void CObjectBillboard::SetTextureID(const char* pTextureName)
 {
-	// テクスチャクラスの取得
-	CTextureManager* pTexture = CManager::GetTexture();
-
 	// 省略用ファイルパス
 	string filePath = "data/TEXTURE/";
 
 	// 文字列の連結
 	filePath += pTextureName;
 
-	// テクスチャのIDの設定
-	m_nTextureIdx = pTexture->Register(filePath.c_str());
+	// テクスチャのパスの設定
+	m_TexturePath = filePath;
 }
 
 //===================================================

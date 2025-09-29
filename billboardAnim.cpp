@@ -10,7 +10,7 @@
 //***************************************************
 #include "billboardAnim.h"
 #include "manager.h"
-#include "textureManager.h"
+#include "texmanager.h"
 #include "renderer.h"
 #include <string>
 
@@ -30,7 +30,7 @@ CBillboardAnimation::CBillboardAnimation(int nPriority) : CObject(nPriority)
 	m_nPattern = NULL;
 	m_nDivU = 1;
 	m_nDivV = 1;
-	m_nTextureIdx = -1;
+	m_TexturePath.clear();
 }
 
 //===================================================
@@ -105,17 +105,13 @@ void CBillboardAnimation::SetColor(const D3DXCOLOR col)
 //===================================================
 void CBillboardAnimation::SetTextureID(const char* pTextureName)
 {
-	// テクスチャマネージャーの取得
-	CTextureManager* pTexture = CManager::GetTexture();
-
 	// 省略用パス
 	string filePath = "data/TEXTURE/Animation/";
 
 	// テクスチャのパスの連結
 	filePath += pTextureName;
 
-	// テクスチャのIDの登録
-	m_nTextureIdx = pTexture->Register(filePath.c_str());
+	m_TexturePath = filePath;
 }
 
 //===================================================
@@ -293,9 +289,6 @@ void CBillboardAnimation::Draw(void)
 	// デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
-	// テクスチャクラスの取得
-	CTextureManager* pTexture = CManager::GetTexture();
-
 	// 計算用のマトリックスを宣言
 	D3DXMATRIX mtxRot, mtxTrans;
 
@@ -336,7 +329,7 @@ void CBillboardAnimation::Draw(void)
 	pDevice->SetFVF(FVF_VERTEX_3D);
 
 	//テクスチャの設定
-	pDevice->SetTexture(0, pTexture->GetAdress(m_nTextureIdx));
+	pDevice->SetTexture(0, CLoadTexture::GetTex(m_TexturePath));
 
 	// ポリゴンの描画
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);

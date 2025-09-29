@@ -10,15 +10,15 @@
 //************************************************
 #include "number.h"
 #include "object2D.h"
-#include"manager.h"
-#include"renderer.h"
-#include"textureManager.h"
+#include "manager.h"
+#include "renderer.h"
+#include "texmanager.h"
+using namespace std;
 
 //************************************************
 // 静的メンバ変数宣言
 //************************************************
-
-using namespace Const;							// 名前空間Constを使用する
+using namespace Const; // 名前空間Constを使用する
 
 //================================================
 // コンストラクタ
@@ -28,7 +28,6 @@ CNumber::CNumber()
 	m_pVtxBuffer = NULL;
 	m_pos = VEC3_NULL;
 	m_Size = VEC2_NULL;
-	m_nTextureIdx = NULL;
 }
 
 //================================================
@@ -139,9 +138,6 @@ void CNumber::Draw(void)
 	// デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
-	// テクスチャの取得
-	CTextureManager* pTexture = CManager::GetTexture();
-
 	//頂点バッファをデータストリームに設定
 	pDevice->SetStreamSource(0, m_pVtxBuffer, 0, sizeof(VERTEX_2D));
 
@@ -149,7 +145,7 @@ void CNumber::Draw(void)
 	pDevice->SetFVF(FVF_VERTEX_2D);
 
 	// もとに戻しておく
-	pDevice->SetTexture(0, pTexture->GetAdress(m_nTextureIdx));
+	pDevice->SetTexture(0, CLoadTexture::GetTex(m_TexturePath));
 
 	// プレイヤーの描画
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2); // プリミティブの種類
@@ -230,13 +226,11 @@ void CNumber::SetColor(const D3DXCOLOR col)
 //================================================
 void CNumber::SetTextureID(const char* pFileName)
 {
-	// テクスチャの取得
-	CTextureManager* pTexture = CManager::GetTexture();
+	// 省略用パス
+	string filePath = "data/TEXTURE/";
 
-	if (pFileName == NULL)
-	{
-		m_nTextureIdx = -1;
-		return;
-	}
-	m_nTextureIdx = pTexture->Register(pFileName);
+	// 文字列の連結
+	filePath += pFileName;
+
+	m_TexturePath = filePath;
 }

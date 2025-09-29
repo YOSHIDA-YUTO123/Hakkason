@@ -14,8 +14,7 @@
 #include "Object2DAnimMT.h"
 #include "manager.h"
 #include "renderer.h"
-#include "textureManager.h"
-#include <string>
+#include "texmanager.h"
 
 using namespace Const;	// 名前空間Constを使用
 using namespace std;	// 名前空間stdを使用
@@ -34,12 +33,6 @@ CObject2DAnimMT::CObject2DAnimMT() : CObject(7)
 	m_nPattern = NULL;
 	m_nSpeed = NULL;
 	m_bLoop = false;
-
-	// テクスチャの数分回す
-	for (int nCnt = 0; nCnt < MAX_TEXTURE; nCnt++)
-	{
-		m_nTextureIdx[nCnt] = -1;
-	}
 }
 
 //===================================================
@@ -225,9 +218,6 @@ void CObject2DAnimMT::Draw(void)
 	// デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
-	// テクスチャクラスの取得
-	CTextureManager* pTexture = CManager::GetTexture();
-
 	// テクスチャステージステートの設定
 	pDevice->SetTextureStageState(1, D3DTSS_COLOROP, D3DTOP_MODULATE);
 	pDevice->SetTextureStageState(1, D3DTSS_COLORARG1, D3DTA_TEXTURE);
@@ -242,17 +232,8 @@ void CObject2DAnimMT::Draw(void)
 	// テクスチャの数分回す
 	for (int nCnt = 0; nCnt < MAX_TEXTURE; nCnt++)
 	{
-		// テクスチャがあったら
-		if (m_nTextureIdx[nCnt] != -1)
-		{
-			// テクスチャを設定
-			pDevice->SetTexture(nCnt, pTexture->GetAdress(m_nTextureIdx[nCnt]));
-		}
-		else
-		{
-			// テクスチャがない
-			pDevice->SetTexture(nCnt, NULL);
-		}
+		// テクスチャを設定
+		pDevice->SetTexture(nCnt,CLoadTexture::GetTex(m_TextureName[nCnt]));
 	}
 
 	// ポリゴンの描画
@@ -286,20 +267,13 @@ void CObject2DAnimMT::SetAnim(const int nUV, const int nHV)
 //===================================================
 void CObject2DAnimMT::SetTextureID(const char* pTextureName0, const char* pTextureName1)
 {
-	// テクスチャクラスの取得
-	CTextureManager* pTexture = CManager::GetTexture();
-
-	// 取得できなかったら処理しない
-	if (pTexture == nullptr) return;
-
 	// 省略用パス
 	string filePath = "data/TEXTURE/";
 
 	// 文字列の連結
 	filePath += pTextureName0;
 
-	// IDの設定
-	m_nTextureIdx[0] = pTexture->Register(filePath.c_str());
+	m_TextureName[0] = filePath;
 
 	// 省略用パス
 	filePath = "data/TEXTURE/";
@@ -308,5 +282,5 @@ void CObject2DAnimMT::SetTextureID(const char* pTextureName0, const char* pTextu
 	filePath += pTextureName1;
 
 	// IDの設定
-	m_nTextureIdx[1] = pTexture->Register(filePath.c_str());
+	m_TextureName[1] = filePath;
 }

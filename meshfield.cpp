@@ -18,7 +18,7 @@
 #include "game.h"
 #include "math.h"
 #include "renderer.h"
-#include "textureManager.h"
+#include "texmanager.h"
 
 using namespace Const;		// 名前空間Constを使用する
 using namespace std;		// 名前空間stdを使用する
@@ -45,7 +45,6 @@ CMeshField::CMeshField(int nPriority) : CObject(nPriority)
 	m_pos = VEC3_NULL;
 	m_Nor = VEC3_NULL;
 	m_rot = VEC3_NULL;
-	m_nTextureIdx = -1;
 	m_Size = VEC2_NULL;
 	m_nNumIdx = NULL;
 	m_nNumPolygon = NULL;
@@ -246,9 +245,6 @@ void CMeshField::Draw(void)
 	// デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
-	// テクスチャクラスの取得
-	CTextureManager* pTexture = CManager::GetTexture();
-
 	//計算用のマトリックス
 	D3DXMATRIX mtxRot, mtxTrans;
 
@@ -275,21 +271,25 @@ void CMeshField::Draw(void)
 	//テクスチャフォーマットの設定
 	pDevice->SetFVF(FVF_VERTEX_3D);
 
-	// テクスチャが無かったら
-	if (m_nTextureIdx == -1)
-	{
-		//テクスチャの設定
-		pDevice->SetTexture(0, NULL);
-	}
-	else
-	{
-		//テクスチャの設定
-		pDevice->SetTexture(0, pTexture->GetAdress(m_nTextureIdx));
-
-	}
+	//テクスチャの設定
+	pDevice->SetTexture(0, CLoadTexture::GetTex(m_TexturePath));
 
 	//ポリゴンの描画
 	pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLESTRIP, 0, 0, m_nNumVtx, 0, m_nNumPolygon);
+}
+
+//================================================
+// テクスチャのIDの設定
+//================================================
+void CMeshField::SetTextureID(const char* pTexturePath)
+{
+	// 省略用パス
+	string filePath = "data/TEXTURE/";
+
+	// 文字列の連結
+	filePath += pTexturePath;
+
+	m_TexturePath = filePath;
 }
 
 //================================================

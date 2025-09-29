@@ -1,57 +1,58 @@
-//==============================================
+//****************************************************************
 //
-// モデルマネージャー [modelManager.h]
-// Author:YUTO YOSHIDA
+// モデルを一括管理するクラスの処理[modelmanager.h]
+// Author Kensaku Hatori
 //
-//==============================================
+//****************************************************************
 
-//**********************************************
-// 多重インクルード防止
-//**********************************************
+// 二重インクルード防止
 #ifndef _MODELMANAGER_H_
 #define _MODELMANAGER_H_
 
-//**********************************************
-// インクルードファイル
-//**********************************************
-#include"main.h"
-#include"object.h"
-#include<vector>
-//**********************************************
-// マクロ定義
-//**********************************************
-//#define MAX_MODEL (256) // モデルの最大数
+// インクルード
+#include "texmanager.h"
 
-//**********************************************
-// モデルのマネージャークラスの定義
-//**********************************************
+// モデルマネージャーを定義
 class CModelManager
 {
 public:
-	CModelManager();
-	~CModelManager();
-
-	int Register(const char* pFilename);
-	LPD3DXMESH GetMesh(int nIdx);
-	LPD3DXBUFFER GetBuffMat(int nIdx);
-	DWORD GetNumMat(int nIdx);
-	D3DXVECTOR3 GetSize(int nIdx);
-	HRESULT Load(void);
-	void UnLoad(void);
-private:
-
-	// モデルの情報の定義
+	// モデルの基礎情報の構造体
 	struct ModelInfo
 	{
-		D3DXVECTOR3 vtxMin, vtxMax;		  // 最大、最小の頂点
-		LPD3DXMESH pMesh;				  // メッシュ(頂点情報)へのポインタ
-		LPD3DXBUFFER pBuffMat;			  // マテリアルへのポインタ
-		DWORD dwNumMat;					  // マテリアルの数
-		char filepath[Const::MAX_WORD]; // ファイルパス
+		// モデル情報の構造体
+		LPD3DXMESH pMesh;					// メッシュへのポインタ
+		LPD3DXBUFFER pBuffMat;				// マテリアルへのポインタ
+		DWORD dwNumMat;						// マテリアルの数
+		std::vector<std::string> TexPath;	// テクスチャパス
+		D3DXVECTOR3 Size;					// 大きさ
 	};
 
-	std::vector<ModelInfo> m_apModelInfo; // モデルの情報
-	static int m_nNumAll;				  // テクスチャの番号
-};
+	// マップに出すオブジェクトの基礎情報
+	struct MapObject
+	{
+		ModelInfo modelinfo;	// モデルの基本情報
+	};
 
-#endif
+	// デストラクタ
+	~CModelManager();
+
+	// 読み込み・破棄
+	static void Load(std::string LoadFilePath);
+
+	// 静的メンバ関数
+	static void UnRegistModel(void);
+
+	// ゲッター
+	static MapObject* GetModelInfo(std::string Path);
+	static MapObject* GetModelInfo(const int Indx);
+private:
+	// コンストラクタ・デストラクタ
+	CModelManager();
+
+	// モデルの大きさの設定処理
+	static void SetModelSize(MapObject *pMapObject);
+
+	// 静的メンバ変数
+	static std::unordered_map<std::string, MapObject> m_ModelMap;	// モデル情報を格納する変数
+};
+#endif // !_MODELMANAGER_H_

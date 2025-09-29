@@ -12,7 +12,8 @@
 #include "manager.h"
 #include "renderer.h"
 #include "meshfield.h"
-#include "textureManager.h"
+#include "texmanager.h"
+using namespace std;
 
 using namespace Const;							// 名前空間Constを使用する
 
@@ -35,7 +36,6 @@ CMeshCircle::CMeshCircle()
 	m_nNumVtx = NULL;
 	m_nSegH = 1;
 	m_nSegV = 1;
-	m_nTextureIdx = -1;
 	m_pIdxBuffer = nullptr;
 	m_pVtxBuffer = nullptr;
 	m_pos = VEC3_NULL;
@@ -359,9 +359,6 @@ void CMeshCircle::Draw(void)
 	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
 
-	// テクスチャクラスの取得
-	CTextureManager* pTexture = CManager::GetTexture();
-
 	//計算用のマトリックス
 	D3DXMATRIX mtxRot, mtxTrans;
 
@@ -388,18 +385,8 @@ void CMeshCircle::Draw(void)
 	//テクスチャフォーマットの設定
 	pDevice->SetFVF(FVF_VERTEX_3D);
 
-	// テクスチャが無かったら
-	if (m_nTextureIdx == -1)
-	{
-		//テクスチャの設定
-		pDevice->SetTexture(0, NULL);
-	}
-	else
-	{
-		//テクスチャの設定
-		pDevice->SetTexture(0, pTexture->GetAdress(m_nTextureIdx));
-
-	}
+	//テクスチャの設定
+	pDevice->SetTexture(0, CLoadTexture::GetTex(m_TexturePath));
 
 	//ポリゴンの描画
 	pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLESTRIP, 0, 0, m_nNumVtx, 0, m_nNumPolygon);
@@ -418,4 +405,18 @@ void CMeshCircle::Draw(void)
 	//// Zテスト
 	//pDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_LESSEQUAL);
 	//pDevice->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
+}
+
+//================================================
+// テクスチャのパスの設定
+//================================================
+void CMeshCircle::SetTextureID(const char* pTexturePath)
+{
+	// 省略用パス
+	string filePath = "data/TEXTURE/";
+
+	// 文字列の連結
+	filePath += pTexturePath;
+
+	m_TexturePath = filePath;
 }

@@ -15,6 +15,7 @@
 // インクルードファイル
 //************************************************
 #include "object.h"
+#include <string>
 
 //************************************************
 // オブジェクト2D(マルチテクスチャ)クラスの定義
@@ -48,14 +49,14 @@ public:
 	void SetTexture(const D3DXVECTOR2 tex0, const D3DXVECTOR2 tex1, const D3DXVECTOR2 tex2, const D3DXVECTOR2 tex3, const int nCnt);
 private:
 
-	static constexpr int MAX_TEXTURE = 2; // テクスチャの最大数
+	static constexpr int MAX_TEXTURE = 2;	// テクスチャの最大数
 
-	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuffer; // 頂点バッファへのポインタ
-	D3DXVECTOR3 m_pos;					  // 位置
-	D3DXVECTOR3 m_rot;					  // 向き
-	D3DXCOLOR m_col;					  // 色
-	D3DXVECTOR2 m_Size;					  // 大きさ
-	int m_nTextureIdx[MAX_TEXTURE];		  // テクスチャのID
+	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuffer;	// 頂点バッファへのポインタ
+	D3DXVECTOR3 m_pos;						// 位置
+	D3DXVECTOR3 m_rot;						// 向き
+	D3DXCOLOR m_col;						// 色
+	D3DXVECTOR2 m_Size;						// 大きさ
+	std::string m_TexturePath[MAX_TEXTURE];	// テクスチャのパス
 };
 
 #endif

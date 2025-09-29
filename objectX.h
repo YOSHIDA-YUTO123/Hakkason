@@ -14,8 +14,8 @@
 //***************************************************
 // インクルードファイル
 //***************************************************
-#include"main.h"
-#include"object.h"
+#include "object.h"
+#include <string>
 
 //***************************************************
 // オブジェクトXファイルのクラスの定義
@@ -49,11 +49,9 @@ public:
 	D3DXVECTOR3 GetPosition(void) const { return m_pos; }
 
 private:
-	D3DXVECTOR3 m_pos;		// 位置
-	D3DXVECTOR3 m_rot;		// 向きクラスへのポインタ
-	D3DXMATRIX m_mtxWorld;	// ワールドマトリックス
-	int m_nModelIdx;		// モデルのインデックス
-	int *m_pTextureIdx;		// テクスチャのインデックス
-	int m_nTextureMT;		// マルチテクスチャのインデックス
+	D3DXVECTOR3 m_pos;			// 位置
+	D3DXVECTOR3 m_rot;			// 向きクラスへのポインタ
+	D3DXMATRIX m_mtxWorld;		// ワールドマトリックス
+	std::string m_ModelPath;	// モデルのパス
 };
 #endif

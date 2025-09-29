@@ -138,9 +138,6 @@
     <ClCompile Include="billboardAnim.cpp">
       <Filter>ソース ファイル\billboardAnim</Filter>
     </ClCompile>
-    <ClCompile Include="character2D.cpp">
-      <Filter>ソース ファイル\character</Filter>
-    </ClCompile>
     <ClCompile Include="character3D.cpp">
       <Filter>ソース ファイル\character</Filter>
     </ClCompile>
@@ -156,14 +153,8 @@
     <ClCompile Include="title.cpp">
       <Filter>ソース ファイル\scene</Filter>
     </ClCompile>
-    <ClCompile Include="textureManager.cpp">
-      <Filter>ソース ファイル\manager</Filter>
-    </ClCompile>
     <ClCompile Include="scene.cpp">
       <Filter>ソース ファイル\scene</Filter>
-    </ClCompile>
-    <ClCompile Include="modelManager.cpp">
-      <Filter>ソース ファイル\manager</Filter>
     </ClCompile>
     <ClCompile Include="LoadManager.cpp">
       <Filter>ソース ファイル\manager</Filter>
@@ -252,6 +243,12 @@
     <ClCompile Include="score.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="modelmanager.cpp">
+      <Filter>ソース ファイル\manager</Filter>
+    </ClCompile>
+    <ClCompile Include="texmanager.cpp">
+      <Filter>ソース ファイル\manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h">
@@ -278,9 +275,6 @@
     <ClInclude Include="billboardAnim.h">
       <Filter>ヘッダー ファイル\billboardAnim</Filter>
     </ClInclude>
-    <ClInclude Include="character2D.h">
-      <Filter>ヘッダー ファイル\character</Filter>
-    </ClInclude>
     <ClInclude Include="character3D.h">
       <Filter>ヘッダー ファイル\character</Filter>
     </ClInclude>
@@ -297,9 +291,6 @@
       <Filter>ヘッダー ファイル\system</Filter>
     </ClInclude>
     <ClInclude Include="LoadManager.h">
-      <Filter>ヘッダー ファイル\manager</Filter>
-    </ClInclude>
-    <ClInclude Include="modelManager.h">
       <Filter>ヘッダー ファイル\manager</Filter>
     </ClInclude>
     <ClInclude Include="motion.h">
@@ -331,9 +322,6 @@
     </ClInclude>
     <ClInclude Include="fade.h">
       <Filter>ヘッダー ファイル\base</Filter>
-    </ClInclude>
-    <ClInclude Include="model.h">
-      <Filter>ヘッダー ファイル\character</Filter>
     </ClInclude>
     <ClInclude Include="renderer.h">
       <Filter>ヘッダー ファイル\base</Filter>
@@ -371,9 +359,6 @@
     <ClInclude Include="slow.h">
       <Filter>ヘッダー ファイル\system</Filter>
     </ClInclude>
-    <ClInclude Include="textureManager.h">
-      <Filter>ヘッダー ファイル\manager</Filter>
-    </ClInclude>
     <ClInclude Include="meshfield.h">
       <Filter>ヘッダー ファイル\mesh</Filter>
     </ClInclude>
@@ -394,6 +379,15 @@
     </ClInclude>
     <ClInclude Include="score.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="modelmanager.h">
+      <Filter>ヘッダー ファイル\manager</Filter>
+    </ClInclude>
+    <ClInclude Include="texmanager.h">
+      <Filter>ヘッダー ファイル\manager</Filter>
+    </ClInclude>
+    <ClInclude Include="model.h">
+      <Filter>ヘッダー ファイル\character</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -11,8 +11,7 @@
 #include "Object3DAnim.h"
 #include "manager.h"
 #include "renderer.h"
-#include "textureManager.h"
-#include <string>
+#include "texmanager.h"
 
 using namespace Const;	// 名前空間Constを使用
 using namespace std;	// 名前空間stdを使用
@@ -32,7 +31,6 @@ CObject3DAnim::CObject3DAnim(const int nPriority) : CObject(nPriority)
 	m_nPattern = NULL;				 // パターン
 	m_nDivU = 1;					 // 横の分割数
 	m_nDivV = 1;					 // 縦の分割数
-	m_nTextureIdx = -1;				 // テクスチャのID
 	m_bLoop = false;				 // ループするかどうか
 }
 
@@ -206,9 +204,6 @@ void CObject3DAnim::Draw(void)
 	// デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = pRenderer->GetDevice();
 
-	// テクスチャクラスの取得
-	CTextureManager* pTexture = CManager::GetTexture();
-
 	// 計算用マトリックス
 	D3DXMATRIX mtxRot, mtxTrans;
 
@@ -238,15 +233,8 @@ void CObject3DAnim::Draw(void)
 	//頂点フォーマットの設定
 	pDevice->SetFVF(FVF_VERTEX_3D);
 
-#if 0
-	LPDIRECT3DTEXTURE9 pTextureMT = pRenderer->GetTextureMT();
-
 	// テクスチャ設定
-	pDevice->SetTexture(0, pTextureMT);
-#else
-	// テクスチャ設定
-	pDevice->SetTexture(0, pTexture->GetAdress(m_nTextureIdx));
-#endif
+	pDevice->SetTexture(0, CLoadTexture::GetTex(m_TexturePath));
 
 	// ポリゴンの描画
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
@@ -257,17 +245,13 @@ void CObject3DAnim::Draw(void)
 //===================================================
 void CObject3DAnim::SetTextureID(const char* pTextureName)
 {
-	// テクスチャクラスの取得
-	CTextureManager* pTexture = CManager::GetTexture();
-
 	// 省略用パス
 	string filePath = "data/TEXTURE/";
 
 	// 文字列の連結
 	filePath += pTextureName;
 
-	// IDの設定
-	m_nTextureIdx = pTexture->Register(filePath.c_str());
+	m_TexturePath = filePath;
 }
 
 //===================================================

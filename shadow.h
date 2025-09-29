@@ -14,8 +14,9 @@
 //************************************************
 // インクルードファイル
 //************************************************
-#include"object3D.h"
-#include<memory>
+#include "object3D.h"
+#include <memory>
+#include <string>
 
 //*************************************************
 // 前方宣言
@@ -46,6 +47,7 @@ private:
 	D3DXVECTOR3 m_Size;					  // 大きさ
 	D3DXMATRIX m_mtxWorld;				  // ワールドマトリックス
 	D3DXCOLOR m_col;					  // 色
-	int m_nTextureIdx;					  // テクスチャのID
+	std::string m_TexturePath;			  // テクスチャのパス
+
 };
 #endif

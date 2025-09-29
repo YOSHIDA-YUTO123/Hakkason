@@ -11,8 +11,7 @@
 #include "object2DMT.h"
 #include "manager.h"
 #include "renderer.h"
-#include "textureManager.h"
-#include <string>
+#include "texmanager.h"
 
 using namespace Const;	// 名前空間Constを使用
 using namespace std;	// 名前空間stdを使用
@@ -22,8 +21,6 @@ using namespace std;	// 名前空間stdを使用
 //===================================================
 CObject2DMT::CObject2DMT() : CObject(7)
 {
-	// すべてに-1を入れる
-	memset(&m_nTextureIdx, -1, sizeof(m_nTextureIdx));
 	m_rot = VEC3_NULL;
 	m_pos = VEC3_NULL;
 	m_pVtxBuffer = nullptr;
@@ -214,9 +211,6 @@ void CObject2DMT::Draw(void)
 	// デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
-	// テクスチャクラスの取得
-	CTextureManager* pTexture = CManager::GetTexture();
-
 	// テクスチャステージステートの設定
 	pDevice->SetTextureStageState(1, D3DTSS_COLOROP, D3DTOP_MODULATE);
 	pDevice->SetTextureStageState(1, D3DTSS_COLORARG1, D3DTA_TEXTURE);
@@ -231,17 +225,8 @@ void CObject2DMT::Draw(void)
 	// テクスチャの数分回す
 	for (int nCnt = 0; nCnt < MAX_TEXTURE; nCnt++)
 	{
-		// テクスチャがあったら
-		if (m_nTextureIdx[nCnt] != -1)
-		{
-			// テクスチャを設定
-			pDevice->SetTexture(nCnt, pTexture->GetAdress(m_nTextureIdx[nCnt]));
-		}
-		else
-		{
-			// テクスチャがない
-			pDevice->SetTexture(nCnt, NULL);
-		}
+		// テクスチャを設定
+		pDevice->SetTexture(nCnt, CLoadTexture::GetTex(m_TexturePath[nCnt]));
 	}
 
 	// ポリゴンの描画
@@ -257,26 +242,22 @@ void CObject2DMT::Draw(void)
 //===================================================
 void CObject2DMT::SetTextureID(const char* pTexture1, const char* pTexture2)
 {
-	// テクスチャクラスの取得
-	CTextureManager* pTexture = CManager::GetTexture();
-
-	// 省略用ファイルパス
+	// 省略用パス
 	string filePath = "data/TEXTURE/";
 
 	// 文字列の連結
 	filePath += pTexture1;
 
-	// IDの登録
-	m_nTextureIdx[0] = pTexture->Register(filePath.c_str());
+	m_TexturePath[0] = filePath;
 
-	// 省略用ファイルパス
+	// 省略用パス
 	filePath = "data/TEXTURE/";
 
 	// 文字列の連結
 	filePath += pTexture2;
 
-	// IDの登録
-	m_nTextureIdx[1] = pTexture->Register(filePath.c_str());
+	// IDの設定
+	m_TexturePath[1] = filePath;
 }
 
 //===================================================

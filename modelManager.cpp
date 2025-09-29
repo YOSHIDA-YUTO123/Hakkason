@@ -1,181 +1,56 @@
-//==============================================
+//****************************************************************
 //
-// モデルマネージャー [modelManager.h]
-// Author:YUTO YOSHIDA
+// モデルを一括管理するクラスの処理[modelmanager.cpp]
+// Author Kensaku Hatori
 //
-//==============================================
+//****************************************************************
 
-//**********************************************
-// インクルードファイル
-//**********************************************
-#include "modelManager.h"
+// インクルード
+#include "modelmanager.h"
 #include "manager.h"
-#include"renderer.h"
-#include<stdio.h>
-#include"LoadManager.h"
+#include <cassert>
+#include "renderer.h"
+#include <fstream>
+#include <sstream>
 
-//**********************************************
-// 静的メンバ変数宣言
-//**********************************************
-int CModelManager::m_nNumAll = 0;	// モデルの総数
+// 名前空間
+using namespace std;
+using namespace Const;
 
-using namespace Const;		// 名前空間Constを使用する
-using namespace std;		// 名前空間stdを使用する
+// 静的メンバ変数
+unordered_map<std::string, CModelManager::MapObject> CModelManager::m_ModelMap = {};
 
-//==============================================
+//*********************************************
 // コンストラクタ
-//==============================================
+//*********************************************
 CModelManager::CModelManager()
 {
-
 }
 
-//==============================================
-// デストラクタ
-//==============================================
-CModelManager::~CModelManager()
+//*********************************************
+// モデルの大きさの設定処理
+//*********************************************
+void CModelManager::SetModelSize(MapObject* pMapObject)
 {
-}
-
-//==============================================
-// インデックスの登録
-//==============================================
-int CModelManager::Register(const char* pFilename)
-{
-	// デバイスの取得
-	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
-
-	int nIdx = -1;
-
-	// モデルの数
-	int nNumModel = static_cast<int>(m_apModelInfo.size());
-
-	for (int nCnt = 0; nCnt < nNumModel; nCnt++)
-	{
-		if (pFilename == NULL || m_apModelInfo[nCnt].filepath == NULL)
-		{
-			continue;
-		}
-
-		if (strcmp(m_apModelInfo[nCnt].filepath, pFilename) == 0)
-		{
-			return nCnt;
-		}
-	}
-
-	if (nIdx == -1)
-	{
-		// モデルの情報
-		ModelInfo info;
-
-		// 値をクリアしておく
-		memset(&info, NULL, sizeof(info));
-
-		////Xファイルの読み込み
-		if (FAILED(D3DXLoadMeshFromX(pFilename,
-			D3DXMESH_SYSTEMMEM,
-			pDevice,
-			NULL,
-			&info.pBuffMat,
-			NULL,
-			&info.dwNumMat,
-			&info.pMesh)))
-		{
-			// メッセージボックスの表示
-			MessageBox(NULL, pFilename, "モデルが読み込めませんでした", MB_OK | MB_ICONWARNING);
-
-			return -1;
-		}
-
-		// 文字列をコピーする
-		strncpy(info.filepath, pFilename, sizeof(info.filepath));
-
-		// 要素の設定
-		m_apModelInfo.push_back(info);
-
-		// インデックスの番号を返す
-		nIdx = m_nNumAll;
-
-		m_nNumAll++;
-	}
-
-	return nIdx;
-}
-
-//==============================================
-// メッシュの取得
-//==============================================
-LPD3DXMESH CModelManager::GetMesh(int nIdx)
-{
-	// モデルの数
-	int nNumModel = static_cast<int>(m_apModelInfo.size());
-
-	if (nIdx < 0 || nIdx >= nNumModel)
-	{
-		return nullptr;
-	}
-
-	return m_apModelInfo[nIdx].pMesh;
-}
-
-//==============================================
-// バッファの取得
-//==============================================
-LPD3DXBUFFER CModelManager::GetBuffMat(int nIdx)
-{
-	// モデルの数
-	int nNumModel = static_cast<int>(m_apModelInfo.size());
-
-	if (nIdx < 0 || nIdx >= nNumModel)
-	{
-		return nullptr;
-	}
-
-	return m_apModelInfo[nIdx].pBuffMat;
-}
-
-//==============================================
-// マテリアルのの取得
-//==============================================
-DWORD CModelManager::GetNumMat(int nIdx)
-{
-	// モデルの数
-	int nNumModel = static_cast<int>(m_apModelInfo.size());
-
-	if (nIdx < 0 || nIdx >= nNumModel)
-	{
-		return 0;
-	}
-
-	return m_apModelInfo[nIdx].dwNumMat;
-}
-
-//==============================================
-// 大きさの取得
-//==============================================
-D3DXVECTOR3 CModelManager::GetSize(int nIdx)
-{
-	// モデルの数
-	int nNumModel = static_cast<int>(m_apModelInfo.size());
-
-	if (nIdx < 0 || nIdx >= nNumModel)
-	{
-		return VEC3_NULL;
-	}
-
 	// 頂点座標の取得
 	int nNumVtx;	// 頂点数
 	DWORD sizeFVF;  // 頂点フォーマットのサイズ
 	BYTE* pVtxBuff; // 頂点バッファへのポインタ
 
 	// 頂点数の取得
-	nNumVtx = m_apModelInfo[nIdx].pMesh->GetNumVertices();
+	nNumVtx = pMapObject->modelinfo.pMesh->GetNumVertices();
 
 	// 頂点フォーマットのサイズ取得
-	sizeFVF = D3DXGetFVFVertexSize(m_apModelInfo[nIdx].pMesh->GetFVF());
+	sizeFVF = D3DXGetFVFVertexSize(pMapObject->modelinfo.pMesh->GetFVF());
 
 	// 頂点バッファのロック
-	m_apModelInfo[nIdx].pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVtxBuff);
+	pMapObject->modelinfo.pMesh->LockVertexBuffer(D3DLOCK_READONLY, (void**)&pVtxBuff);
+
+	// 最小の頂点
+	D3DXVECTOR3 vtxMin = VEC3_NULL;
+
+	// 最大の頂点
+	D3DXVECTOR3 vtxMax = VEC3_NULL;
 
 	for (int nCntVtx = 0; nCntVtx < nNumVtx; nCntVtx++)
 	{
@@ -183,29 +58,29 @@ D3DXVECTOR3 CModelManager::GetSize(int nIdx)
 		D3DXVECTOR3 vtx = *(D3DXVECTOR3*)pVtxBuff;
 
 		// 頂点座標を比較してブロックの最小値,最大値を取得
-		if (vtx.x < m_apModelInfo[nIdx].vtxMin.x)
+		if (vtx.x < vtxMin.x)
 		{
-			m_apModelInfo[nIdx].vtxMin.x = vtx.x;
+			vtxMin.x = vtx.x;
 		}
-		if (vtx.y < m_apModelInfo[nIdx].vtxMin.y)
+		if (vtx.y < vtxMin.y)
 		{
-			m_apModelInfo[nIdx].vtxMin.y = vtx.y;
+			vtxMin.y = vtx.y;
 		}
-		if (vtx.z < m_apModelInfo[nIdx].vtxMin.z)
+		if (vtx.z < vtxMin.z)
 		{
-			m_apModelInfo[nIdx].vtxMin.z = vtx.z;
+			vtxMin.z = vtx.z;
 		}
-		if (vtx.x > m_apModelInfo[nIdx].vtxMax.x)
+		if (vtx.x > vtxMax.x)
 		{
-			m_apModelInfo[nIdx].vtxMax.x = vtx.x;
+			vtxMax.x = vtx.x;
 		}
-		if (vtx.y > m_apModelInfo[nIdx].vtxMax.y)
+		if (vtx.y > vtxMax.y)
 		{
-			m_apModelInfo[nIdx].vtxMax.y = vtx.y;
+			vtxMax.y = vtx.y;
 		}
-		if (vtx.z > m_apModelInfo[nIdx].vtxMax.z)
+		if (vtx.z > vtxMax.z)
 		{
-			m_apModelInfo[nIdx].vtxMax.z = vtx.z;
+			vtxMax.z = vtx.z;
 		}
 
 		// 頂点フォーマットのサイズ分ポインタを進める
@@ -216,129 +91,182 @@ D3DXVECTOR3 CModelManager::GetSize(int nIdx)
 	D3DXVECTOR3 Size = VEC3_NULL;
 
 	// サイズに代入
-	Size.x = m_apModelInfo[nIdx].vtxMax.x - m_apModelInfo[nIdx].vtxMin.x;
-	Size.y = m_apModelInfo[nIdx].vtxMax.y - m_apModelInfo[nIdx].vtxMin.y;
-	Size.z = m_apModelInfo[nIdx].vtxMax.z - m_apModelInfo[nIdx].vtxMin.z;
+	pMapObject->modelinfo.Size.x = vtxMax.x - vtxMin.x;
+	pMapObject->modelinfo.Size.y = vtxMax.y - vtxMin.y;
+	pMapObject->modelinfo.Size.z = vtxMax.z - vtxMin.z;
 
 	// 頂点バッファのアンロック
-	m_apModelInfo[nIdx].pMesh->UnlockVertexBuffer();
-
-	return Size;
+	pMapObject->modelinfo.pMesh->UnlockVertexBuffer();
 }
 
-//==============================================
-// すべてのxFileのロード処理
-//==============================================
-HRESULT CModelManager::Load(void)
+//*********************************************
+// デストラクタ
+//*********************************************
+CModelManager::~CModelManager()
 {
-	// デバイスの取得
-	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
-
-	// ファイルを開く
-	fstream file("data/TXT/Modellist.txt");
-	string line, input;
-
-	// nullじゃなかったら
-	if (file.is_open())
-	{
-		// ロードマネージャーの生成
-		unique_ptr<CLoadManager> pLoad = make_unique<CLoadManager>();
-
-		// ファイルを一行ずつ読み取る
-		while (getline(file, line))
-		{
-			size_t equal_pos = line.find("="); // =の位置
-
-			// [=] から先を求める
-			input = line.substr(equal_pos + 1);
-
-			// 文字列が一致していたら
-			if (line.find("FILENAME") != string::npos)
-			{
-				// 数値を読み込む準備
-				istringstream value_Input = pLoad->SetInputvalue(input);
-
-				// モデルの名前格納用変数
-				string modelName;
-
-				// 数値を代入する
-				value_Input >> modelName;
-
-				// モデルの名前を代入
-				const char* MODEL_NAME = modelName.c_str();
-
-				// モデルの情報
-				ModelInfo info;
-
-				// 値をクリアしておく
-				memset(&info, NULL, sizeof(info));
-
-				////Xファイルの読み込み
-				if (FAILED(D3DXLoadMeshFromX(MODEL_NAME,
-					D3DXMESH_SYSTEMMEM,
-					pDevice,
-					NULL,
-					&info.pBuffMat,
-					NULL,
-					&info.dwNumMat,
-					&info.pMesh)))
-				{
-					// メッセージボックスの表示
-					MessageBox(NULL, MODEL_NAME, "モデルが読み込めませんでした", MB_OK | MB_ICONWARNING);
-
-					return E_FAIL;
-				}
-
-				// 文字列をコピーする
-				strncpy(info.filepath, MODEL_NAME, sizeof(info.filepath));
-
-				// 要素の設定
-				m_apModelInfo.push_back(info);
-
-				m_nNumAll++;
-			}
-		}
-
-		// ファイルを閉じる
-		file.close();
-		file.clear();
-	}
-	else
-	{
-		// メッセージボックス
-		MessageBox(NULL, "ファイルが開けません", "modelManager.txt", MB_OK | MB_ICONWARNING);
-		return E_FAIL;
-	}
-
-	return S_OK;
 }
 
-//==============================================
-// すべてのxFileの破棄処理
-//==============================================
-void CModelManager::UnLoad(void)
+//*********************************************
+// ファイルを開く
+//*********************************************
+void CModelManager::Load(std::string LoadFilePath)
 {
-	// モデルの数
-	int nNumModel = static_cast<int>(m_apModelInfo.size());
+	// 省略用パス
+	string txtFilePath = "data/TXT/";
 
-	// すべてのモデルのクリア
-	for (int nCnt = 0; nCnt < nNumModel; nCnt++)
+	// 文字列の連結
+	txtFilePath += LoadFilePath;
+
+	ifstream ifs(txtFilePath.c_str());
+
+	if (!ifs)
 	{
-		// メッシュの破棄
-		if (m_apModelInfo[nCnt].pMesh != nullptr)
+		MessageBox(NULL, "ファイルが読み込めませんでした", txtFilePath.c_str(), MB_OK);
+		return;
+	}
+
+	string line = {};
+	string label = {}, equal = {};
+
+	while (getline(ifs, line))
+	{
+		string FilePath;
+		string Category;
+
+		istringstream iss(line);
+		if (line.find("MODELFILE_NAME") != string::npos)
 		{
-			m_apModelInfo[nCnt].pMesh->Release();
-			m_apModelInfo[nCnt].pMesh = nullptr;
+			iss >> label >> equal >> FilePath;
+		}
+		if (line.find("CATEGORY") != string::npos)
+		{
+			iss >> label >> equal >> Category;
 		}
 
-		// マテリアルの破棄
-		if (m_apModelInfo[nCnt].pBuffMat != nullptr)
+		if (FilePath[0] != NULL && Category[0] != NULL)
 		{
-			m_apModelInfo[nCnt].pBuffMat->Release();
-			m_apModelInfo[nCnt].pBuffMat = nullptr;
+			string filePath = "data/MODEL/";
+
+			GetModelInfo(filePath += FilePath);
+		}
+
+		if (line.find("#") != string::npos)
+		{
+			continue;
+		}
+	}
+}
+
+//*********************************************
+// モデルの情報を取得 & 追加
+//*********************************************
+CModelManager::MapObject* CModelManager::GetModelInfo(string Path)
+{
+	// すでに存在したらその情報を返す
+	if (m_ModelMap.find(Path) != m_ModelMap.end()) return &m_ModelMap[Path];
+
+	// 被りがなくてパスの長さが短かったらクリエイト
+	CRenderer* pRenderer;
+	pRenderer = CManager::GetRenderer();
+	LPDIRECT3DDEVICE9 pDevice = pRenderer->GetDevice();
+
+	// モデルの情報を読み込む一時変数
+	MapObject LocalInfo = {};
+
+	// Xファイル読込
+	HRESULT hr;
+	hr = D3DXLoadMeshFromX(
+		Path.c_str(),
+		D3DXMESH_MANAGED,
+		pDevice,
+		NULL,
+		&LocalInfo.modelinfo.pBuffMat,
+		NULL,
+		&LocalInfo.modelinfo.dwNumMat,
+		&LocalInfo.modelinfo.pMesh
+	);
+
+	// 読み込めなかったら
+	if (FAILED(hr))
+	{
+		// 失敗したら
+		assert(0 && "モデルパスが間違っています");
+	}
+
+	//マテリアル辺のポインタを取得
+	D3DXMATERIAL* pMat;
+	pMat = (D3DXMATERIAL*)LocalInfo.modelinfo.pBuffMat->GetBufferPointer();
+
+	// マテリアル分パスを確保
+	LocalInfo.modelinfo.TexPath.resize(LocalInfo.modelinfo.dwNumMat);
+
+	// マテリアルの数分回す
+	for (int nCntMat = 0; nCntMat < (int)LocalInfo.modelinfo.dwNumMat; nCntMat++)
+	{
+		// パスが存在したら
+		if (pMat[nCntMat].pTextureFilename != NULL)
+		{
+			// 代入
+			LocalInfo.modelinfo.TexPath[nCntMat] = pMat[nCntMat].pTextureFilename;
 		}
 	}
 
-	// 要素のクリア
-	m_apModelInfo.clear();
+	// モデルの大きさの取得
+	SetModelSize(&LocalInfo);
+
+	// マップにVlueとして設定
+	m_ModelMap[Path] = LocalInfo;
+
+	// 情報を返す
+	return &m_ModelMap[Path];
+}
+
+//*********************************************
+// モデルの情報を取得
+//*********************************************
+CModelManager::MapObject* CModelManager::GetModelInfo(const int Indx)
+{
+	// 不正なインデックスならアサート
+	if (Indx < 0 || Indx >= (int)m_ModelMap.size()) assert(0 && "存在しないモデルにアクセスしようとしています");
+
+	// 配列でアクセスするためのイテレーター
+	auto Map = m_ModelMap.begin();
+
+	// 要素を進める
+	std::advance(Map, Indx);
+
+	// Vlueを返す
+	return &Map->second;
+}
+
+//*********************************************
+// いろいろ破棄
+//*********************************************
+void CModelManager::UnRegistModel(void)
+{
+	// マップの中にアクセス
+	for (auto& Map : m_ModelMap)
+	{
+		// nullptrチェック
+		if (Map.second.modelinfo.pMesh != nullptr)
+		{
+			// メモリ開放
+			Map.second.modelinfo.pMesh->Release();
+
+			// nullptrを代入する
+			Map.second.modelinfo.pMesh = nullptr;
+		}
+		// nullptrチェック
+		if (Map.second.modelinfo.pBuffMat != nullptr)
+		{
+			// メモリ開放
+			Map.second.modelinfo.pBuffMat->Release();
+
+			// nullptrを代入する
+			Map.second.modelinfo.pBuffMat = nullptr;
+		}
+	}
+
+	// マップ自体をクリア
+	m_ModelMap.clear();
 }

@@ -11,8 +11,7 @@
 #include "Object3DMT.h"
 #include"manager.h"
 #include"renderer.h"
-#include"textureManager.h"
-#include<string>
+#include"texmanager.h"
 
 using namespace Const; // 名前空間Constを使用
 using namespace std;   // 名前空間stdを使用
@@ -27,7 +26,6 @@ CObject3DMT::CObject3DMT()
 	m_Size = VEC3_NULL;
 	D3DXMatrixIdentity(&m_mtxWorld);
 	m_pVtxBuffer = nullptr;
-	memset(&m_nTextureIdx, -1, sizeof(m_nTextureIdx));
 }
 
 //===================================================
@@ -163,9 +161,6 @@ void CObject3DMT::Draw(void)
 	pDevice->SetTextureStageState(1, D3DTSS_COLORARG1, D3DTA_TEXTURE);
 	pDevice->SetTextureStageState(1, D3DTSS_COLORARG2, D3DTA_CURRENT);
 
-	// テクスチャクラスの取得
-	CTextureManager* pTexture = CManager::GetTexture();
-
 	// 計算用マトリックス
 	D3DXMATRIX mtxRot, mtxTrans;
 
@@ -197,16 +192,8 @@ void CObject3DMT::Draw(void)
 
 	for (int nCnt = 0; nCnt < MAX_TEXTURE; nCnt++)
 	{
-		if (m_nTextureIdx[nCnt] != -1)
-		{
-			// テクスチャ設定
-			pDevice->SetTexture(nCnt, pTexture->GetAdress(m_nTextureIdx[nCnt]));
-		}
-		else
-		{
-			// テクスチャ設定
-			pDevice->SetTexture(nCnt, NULL);
-		}
+		// テクスチャ設定
+		pDevice->SetTexture(nCnt, CLoadTexture::GetTex(m_TexturePath[nCnt]));
 	}
 
 	// ポリゴンの描画
@@ -243,26 +230,20 @@ void CObject3DMT::SetColor(const D3DXCOLOR col)
 //===================================================
 void CObject3DMT::SetTextureID(const char* pTexture0, const char* pTexture1)
 {
-	// テクスチャクラスの取得
-	CTextureManager* pTexture = CManager::GetTexture();
+	// 省略用パス
+	string filePath = "data/TEXTURE/";
 
-	// 取得できなかったら処理しない
-	if (pTexture == nullptr) return;
+	// 文字列の連結
+	filePath += pTexture0;
 
-	// テクスチャのパス
-	string TexturePath = "data/TEXTURE/";
+	m_TexturePath[0] = filePath;
 
-	// 文字列をつなげる
-	TexturePath += pTexture0;
+	// 省略用パス
+	filePath = "data/TEXTURE/";
 
-	m_nTextureIdx[0] = pTexture->Register(TexturePath.c_str());
+	// 文字列の連結
+	filePath += pTexture1;
 
-	// テクスチャのパス
-	TexturePath = "data/TEXTURE/";
-
-	// 文字列をつなげる
-	TexturePath += pTexture1;
-
-	m_nTextureIdx[1] = pTexture->Register(TexturePath.c_str());
-
+	// IDの設定
+	m_TexturePath[1] = filePath;
 }

@@ -14,8 +14,8 @@
 //************************************************
 // インクルードファイル
 //************************************************
-#include"main.h"
-#include"object.h"
+#include "object.h"
+#include <string>
 
 //************************************************
 // ナンバークラスの定義
@@ -40,6 +40,6 @@ private:
 	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuffer;	// 頂点へのポインタ
 	D3DXVECTOR3 m_pos;						// 位置
 	D3DXVECTOR2 m_Size;						// 大きさ
-	int m_nTextureIdx;						// テクスチャのインデックス
+	std::string m_TexturePath;				// テクスチャのパス
 };
 #endif

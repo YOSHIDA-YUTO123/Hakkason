@@ -14,7 +14,8 @@
 //***************************************************
 // インクルードファイル
 //***************************************************
-#include"object.h"
+#include "object.h"
+#include <string>
 
 //***************************************************
 // ビルボード(アニメーション)クラスの定義
@@ -25,14 +26,14 @@ public:
 	CBillboardAnimation(int nPriority = 4);
 	virtual ~CBillboardAnimation();
 
-	/**
-	* @brief 生成処理(速度設定はSetParam関数)
-	* @param 位置
-	* @param 大きさ
-	* @param 分割数(横)
-	* @param 分割数(縦)
-	* @return 自分のインスタンス
-	*/
+	/// <summary>
+	/// 生成処理(SetParam関数でアニメーションの設定をしてください)
+	/// </summary>
+	/// <param name="位置"></param>
+	/// <param name="大きさ"></param>
+	/// <param name="横の分割数"></param>
+	/// <param name="縦の分割数"></param>
+	/// <returns>自分のインスタンス</returns>
 	static CBillboardAnimation* Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 Size,const int nDivU,const int nDivV);
 
 	virtual HRESULT Init(void) override;
@@ -59,6 +60,7 @@ private:
 	D3DXVECTOR3 m_pos;						// 位置のクラスのポインタ
 	D3DXVECTOR2 m_Size;						// 大きさ
 	D3DXMATRIX m_mtxWorld;					// ワールドマトリックス
+	std::string m_TexturePath;				// テクスチャのファイルパス
 	float m_fPosTexU;						// テクスチャ座標UV
 	float m_fPosTexH;						// テクスチャ座標HV
 	int m_nSpeed;							// アニメーションの速さ
@@ -66,7 +68,6 @@ private:
 	int m_nCounter;							// アニメーションのカウンター
 	int m_nDivU;							// テクスチャ座標の分割数横
 	int m_nDivV;							// テクスチャ座標の分割数縦 
-	int m_nTextureIdx;						// テクスチャのインデックス
 	bool m_bLoop;							// ループするかどうか
 };
 

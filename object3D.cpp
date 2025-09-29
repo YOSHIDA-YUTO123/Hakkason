@@ -11,8 +11,7 @@
 #include "object3D.h"
 #include"manager.h"
 #include"renderer.h"
-#include"textureManager.h"
-#include<string>
+#include"texmanager.h"
 
 using namespace Const;		// 名前空間Constを使用する
 using namespace std;		// 名前空間stdを使用する
@@ -27,7 +26,6 @@ CObject3D::CObject3D(int nPriority) : CObject(nPriority)
 	m_rot = VEC3_NULL;
 	m_Size = VEC3_NULL;
 	m_pVtxBuffer = NULL;
-	m_nTextureIdx = NULL;
 }
 
 //===================================================
@@ -129,9 +127,6 @@ void CObject3D::Draw(void)
 	// デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = pRenderer->GetDevice();
 
-	// テクスチャクラスの取得
-	CTextureManager* pTexture = CManager::GetTexture();
-
 	// 計算用マトリックス
 	D3DXMATRIX mtxRot, mtxTrans;
 
@@ -161,15 +156,8 @@ void CObject3D::Draw(void)
 	//頂点フォーマットの設定
 	pDevice->SetFVF(FVF_VERTEX_3D);
 
-#if 0
-	LPDIRECT3DTEXTURE9 pTextureMT = pRenderer->GetTextureMT();
-
 	// テクスチャ設定
-	pDevice->SetTexture(0, pTextureMT);
-#else
-	// テクスチャ設定
-	pDevice->SetTexture(0, pTexture->GetAdress(m_nTextureIdx));
-#endif
+	pDevice->SetTexture(0, CLoadTexture::GetTex(m_TexturePath));
 
 	// ポリゴンの描画
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
@@ -186,9 +174,6 @@ void CObject3D::SetDraw(void)
 	// デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = pRenderer->GetDevice();
 
-	// テクスチャクラスの取得
-	CTextureManager* pTexture = CManager::GetTexture();
-
 	// 頂点バッファをデータストリームに設定
 	pDevice->SetStreamSource(0, m_pVtxBuffer, 0, sizeof(VERTEX_3D));
 
@@ -196,7 +181,7 @@ void CObject3D::SetDraw(void)
 	pDevice->SetFVF(FVF_VERTEX_3D);
 
 	// テクスチャ設定
-	pDevice->SetTexture(0, pTexture->GetAdress(m_nTextureIdx));
+	pDevice->SetTexture(0, CLoadTexture::GetTex(m_TexturePath));
 
 	// ポリゴンの描画
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
@@ -208,17 +193,13 @@ void CObject3D::SetDraw(void)
 //===================================================
 void CObject3D::SetTextureID(const char* pTextureName)
 {
-	// テクスチャクラスの取得
-	CTextureManager* pTexture = CManager::GetTexture();
-
-	// 省略用ファイルパス
+	// 省略用パス
 	string filePath = "data/TEXTURE/";
 
 	// 文字列の連結
 	filePath += pTextureName;
 
-	// テクスチャのIDの設定
-	m_nTextureIdx = pTexture->Register(filePath.c_str());
+	m_TexturePath = filePath;
 }
 
 //===================================================

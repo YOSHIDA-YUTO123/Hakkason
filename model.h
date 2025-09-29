@@ -62,9 +62,7 @@ private:
 	D3DXMATRIX m_mtxWorld;			// ワールドマトリックス
 	CModel* m_pParent;				// 親モデルへのポインタ
 	std::string m_aModelName;		// モデルの名前
+	std::string m_aTexturePath;		// テクスチャのパス
 	int m_nParentIdx;				// 親のインデックス
-	int m_nModelIdx;				// モデルのインデックス
-	int m_nTextureMTIdx;			// マルチテクスチャのインデックス
-	int* m_pTextureIdx;				// テクスチャのインデックス
 };
 #endif

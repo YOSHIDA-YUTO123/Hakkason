@@ -27,9 +27,7 @@ class CInputKeyboard;
 class CInputJoypad;
 class CInputMouse;
 class CSound;
-class CTextureManager;
 class CLight;
-class CModelManager;
 class CFade;
 class CSlow;
 class CCamera;
@@ -57,9 +55,7 @@ public:
 	static CSound* GetSound(void) { return m_pSound.get(); }
 	static CFade* GetFade(void) { return m_pFade.get(); }
 	static CSlow* GetSlow(void) { return m_pSlow.get(); }
-	static CTextureManager* GetTexture(void) { return m_pTexture.get(); }
 	static CLight* GetLight(void) { return m_pLight.get(); }
-	static CModelManager* GetModel(void) { return m_pModel.get(); }
 	static CCamera* GetCamera(void) { return m_pCamera.get(); }
 	static int GetFrameCounter(void);
 	static bool GetShowDebug(void) { return m_bShowDebug; }
@@ -72,9 +68,7 @@ private:
 	static std::unique_ptr<CInputJoypad> m_pInputJoypad;		// パッドのポインタ
 	static std::unique_ptr<CInputMouse> m_pInputMouse;			// マウスのポインタ
 	static std::unique_ptr<CSound> m_pSound;					// サウンドのポインタ
-	static std::unique_ptr<CTextureManager> m_pTexture;			// テクスチャクラスへのポインタ	
 	static std::unique_ptr<CLight> m_pLight;					// ライトへのポインタ
-	static std::unique_ptr<CModelManager> m_pModel;				// モデルクラスへのポインタ
 	static std::unique_ptr<CScene> m_pScene;					// シーンのクラスへのポインタ
 	static std::unique_ptr<CSlow> m_pSlow;						// スローモーションクラスへのポインタ
 	static std::unique_ptr<CFade> m_pFade;						// フェードクラスへのポインタ

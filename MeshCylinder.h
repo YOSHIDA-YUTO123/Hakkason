@@ -15,6 +15,7 @@
 // インクルードファイル
 //************************************************
 #include "object.h"
+#include <string>
 
 //************************************************
 // メッシュシリンダーのクラスの定義
@@ -32,19 +33,20 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 
+	void SetTextureID(const char* pTexturePath);
 private:
 	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuffer;	// 頂点バッファへのポインタ
 	LPDIRECT3DINDEXBUFFER9 m_pIdxBuffer;	// インデックスバッファへのポインタ
 	D3DXVECTOR3 m_pos;						// 位置
 	D3DXVECTOR3 m_rot;						// 向き
 	D3DXMATRIX m_mtxWorld;					// ワールドマトリックス
+	std::string m_TexturePath;				// テクスチャのパス
 	float m_fRadius;						// 半径
 	float m_fHeight;						// 高さ
 	int m_nSegH, m_nSegV;					// 横の分割数、縦の分割数
 	int m_nNumVtx;							// 頂点の数
 	int m_nNumPolygon;						// ポリゴンの数
 	int m_nNumIdx;							// インデックス数
-	int m_nTextureIdx;						// テクスチャのID
 };
 
 #endif

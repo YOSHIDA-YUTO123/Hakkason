@@ -15,6 +15,7 @@
 // インクルードファイル
 //************************************************
 #include "object.h"
+#include <string>
 
 //************************************************
 // 軌跡のクラスの定義
@@ -32,6 +33,7 @@ public:
 	void Update(void);
 	void Draw(void);
 	void SetPosition(const D3DXVECTOR3 Top, const D3DXVECTOR3 Bottom);
+	void SetTextureID(const char* pTexturePath);
 private:
 	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuffer;	// 頂点バッファへのポインタ
 	LPDIRECT3DINDEXBUFFER9 m_pIdxBuffer;	// インデックスバッファへのポインタ
@@ -41,11 +43,11 @@ private:
 	D3DXVECTOR3 m_rot;						// 向き
 	D3DXCOLOR m_col;						// 色
 	D3DXMATRIX m_mtxWorld;					// ワールドマトリックス
+	std::string m_TexturePath;				// テクスチャのパス
 	int m_nSegH;							// 横の分割数
 	int m_nNumVtx;							// 頂点の数
 	int m_nNumPolygon;						// ポリゴンの数
 	int m_nNumIdx;							// インデックス数
-	int m_nTextureIdx;						// テクスチャのID
 };
 
 #endif

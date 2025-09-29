@@ -11,7 +11,7 @@
 #include "object2D.h"
 #include "renderer.h"
 #include "manager.h"
-#include "textureManager.h"
+#include "texmanager.h"
 #include <string>
 
 using namespace std;	// 名前空間stdの使用
@@ -29,9 +29,8 @@ CObject2D::CObject2D(int nPriority) : CObject(nPriority)
 	m_pVtxBuffer = NULL;
 	m_fAngle = 0.0f;
 	m_Length = 0.0f;
-
-	m_nTextureIdx = -1;
 }
+
 //===================================================
 // デストラクタ
 //===================================================
@@ -113,6 +112,7 @@ HRESULT CObject2D::Init(void)
 
 	return S_OK;
 }
+
 //===================================================
 // 終了処理
 //===================================================
@@ -128,6 +128,7 @@ void CObject2D::Uninit(void)
 	// 自分自身の破棄
 	CObject2D::Release();
 }
+
 //===================================================
 // 更新処理
 //===================================================
@@ -136,6 +137,7 @@ void CObject2D::Update(void)
 	// 頂点座標の更新
 	CObject2D::UpdateVertex();
 }
+
 //===================================================
 // 描画処理
 //===================================================
@@ -144,26 +146,15 @@ void CObject2D::Draw(void)
 	// デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
-	// テクスチャクラスの取得
-	CTextureManager* pTexture = CManager::GetTexture();
-
 	//頂点バッファをデータストリームに設定
 	pDevice->SetStreamSource(0, m_pVtxBuffer, 0, sizeof(VERTEX_2D));
 
 	// 頂点フォーマットの設定
 	pDevice->SetFVF(FVF_VERTEX_2D);
 
-	// テクスチャがあるなら
-	if (m_nTextureIdx != -1)
-	{
-		// テクスチャを設定
-		pDevice->SetTexture(0, pTexture->GetAdress(m_nTextureIdx));
-	}
-	else
-	{
-		// テクスチャがない
-		pDevice->SetTexture(0, NULL);
-	}
+	// テクスチャを設定
+	pDevice->SetTexture(0, CLoadTexture::GetTex(m_TexturePath));
+
 	// ポリゴンの描画
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2); // プリミティブの種類	
 }
@@ -276,15 +267,11 @@ void CObject2D::SetColor(const D3DXCOLOR col)
 //===================================================
 void CObject2D::SetTextureID(const char* pTextureName)
 {
-	// テクスチャクラスの取得
-	CTextureManager* pTexture = CManager::GetTexture();
-
-	// 省略用ファイルパス
+	// 省略用パス
 	string filePath = "data/TEXTURE/";
 
 	// 文字列の連結
 	filePath += pTextureName;
 
-	// テクスチャのIDの設定
-	m_nTextureIdx = pTexture->Register(filePath.c_str());
+	m_TexturePath = filePath;
 }

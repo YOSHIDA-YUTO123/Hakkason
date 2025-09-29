@@ -10,10 +10,14 @@
 //************************************************
 #include "shadow.h"
 #include "manager.h"
-#include"renderer.h"
-#include"math.h"
-#include"textureManager.h"
+#include "renderer.h"
+#include "math.h"
+#include "texmanager.h"
+#include <string>
 
+//************************************************
+// 名前空間
+//************************************************
 using namespace math; // 名前空間mathを使用
 using namespace std;  // 名前空間stdを使用
 using namespace Const;							// 名前空間Constを使用する
@@ -29,7 +33,6 @@ CShadow::CShadow()
 	m_Size = VEC3_NULL;
 	m_pVtxBuffer = nullptr;
 	D3DXMatrixIdentity(&m_mtxWorld);
-	m_nTextureIdx = -1;
 }
 
 //================================================
@@ -49,11 +52,8 @@ unique_ptr<CShadow> CShadow::Create(const D3DXVECTOR3 pos, const float fWidth, c
 
 	if (pShadow == nullptr) return nullptr;
 
-	// テクスチャクラスの取得
-	CTextureManager* pTexture = CManager::GetTexture();
-
 	// 影のテクスチャの設定
-	pShadow->m_nTextureIdx = pTexture->Register("data/TEXTURE/effect/effect000.jpg");
+	pShadow->m_TexturePath = "data/TEXTURE/effect/effect000.jpg";
 
 	// 位置、向き、大きさの設定
 	pShadow->m_pos = pos;
@@ -200,9 +200,6 @@ void CShadow::Draw(void)
 	pDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	pDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
 
-	// テクスチャクラスの取得
-	CTextureManager* pTexture = CManager::GetTexture();
-
 	// 計算用マトリックス
 	D3DXMATRIX mtxRot, mtxTrans;
 
@@ -230,7 +227,7 @@ void CShadow::Draw(void)
 	pDevice->SetFVF(FVF_VERTEX_3D);
 
 	// テクスチャ設定
-	pDevice->SetTexture(0, pTexture->GetAdress(m_nTextureIdx));
+	pDevice->SetTexture(0, CLoadTexture::GetTex(m_TexturePath));
 
 	// ポリゴンの描画
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);

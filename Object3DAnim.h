@@ -15,6 +15,7 @@
 // インクルードファイル
 //***************************************************
 #include "object.h"
+#include <string>
 
 //***************************************************
 // アニメーション3Dポリゴンクラスの定義
@@ -49,12 +50,12 @@ private:
 	D3DXVECTOR3 m_rot;						// 向き
 	D3DXVECTOR3 m_pos;						// 位置
 	D3DXVECTOR3 m_Size;						// 大きさ
+	std::string m_TexturePath;				// テクスチャのパス
 	int m_nSpeed;							// アニメーションのスピード
 	int m_nCounter;							// カウンター
 	int m_nPattern;							// パターン
 	int m_nDivU;							// 横の分割数
 	int m_nDivV;							// 縦の分割数
-	int m_nTextureIdx;						// テクスチャのインデックス
 	bool m_bLoop;							// ループするかどうか
 };
 

@@ -14,7 +14,8 @@
 //***************************************************
 // インクルードファイル
 //***************************************************
-#include"object.h"
+#include "object.h"
+#include <string>
 
 //***************************************************
 // オブジェクト2Dクラスの定義
@@ -53,9 +54,9 @@ private:
 	D3DXVECTOR3 m_pos;						// 位置
 	D3DXVECTOR3 m_rot;						// 向き
 	D3DXVECTOR2 m_Size;						// 大きさ
+	std::string m_TexturePath;				// テクスチャのパス
 	float m_fAngle;							// 角度
 	float m_Length;							// 長さ
-	int m_nTextureIdx;						// テクスチャのインデックス
 };
 
 #endif
