@@ -92,10 +92,6 @@ void CCamera::Update(void)
 	NormalizeRot(&m_rot.x);
 	NormalizeRot(&m_rot.y);
 	NormalizeRot(&m_rot.z);
-
-	CDebugProc::Print("視点の位置 = [ %.3f ] : [ %.3f ] : [ %.3f ]\n", m_posV.x, m_posV.y, m_posV.z);
-	CDebugProc::Print("注視点の位置 = [ %.3f ] : [ %.3f ] : [ %.3f ]\n", m_posR.x, m_posR.y, m_posR.z);
-	CDebugProc::Print("カメラの回転 = [ %.3f ] : [ %.3f ] : [ %.3f ]\n", m_rot.x, m_rot.y, m_rot.z);
 }
 
 //===================================================
@@ -135,6 +131,14 @@ void CCamera::SetCamera(void)
 
 	// プロジェクションマトリックスの設定
 	pDevice->SetTransform(D3DTS_PROJECTION, &m_mtxProjection);
+
+	// カメラの情報
+	CDebugProc::Print("********************************************\n");
+	CDebugProc::Print("                カメラ情報\n");
+	CDebugProc::Print("********************************************\n");
+	CDebugProc::Print("視点の位置 = [ %.3f ] : [ %.3f ] : [ %.3f ]\n", m_posV.x, m_posV.y, m_posV.z);
+	CDebugProc::Print("注視点の位置 = [ %.3f ] : [ %.3f ] : [ %.3f ]\n", m_posR.x, m_posR.y, m_posR.z);
+	CDebugProc::Print("カメラの回転 = [ %.3f ] : [ %.3f ] : [ %.3f ]\n", m_rot.x, m_rot.y, m_rot.z);
 }
 
 //===================================================
@@ -213,8 +217,8 @@ void CCamera::MouseView(void)
 	CCamera::MouseWheel();
 #endif
 
-	// ポーズ中かどうか
-	bool bPause = CPauseManager::GetPause();
+	//// ポーズ中かどうか
+	//bool bPause = CPauseManager::GetPause();
 
 	static POINT prevCursorPos = { (long)SCREEN_WIDTH / (long)2.0f,(long)SCREEN_HEIGHT / (long)2.0f };
 
@@ -229,7 +233,7 @@ void CCamera::MouseView(void)
 	X *= mouseSensitivity;
 	Y *= mouseSensitivity;
 
-	if (pMouse->OnMousePress(0) || bPause == false)
+	if (pMouse->OnMousePress(pMouse->LEFT))
 	{
 		//回転量を更新
 		m_rot.y += X;
@@ -255,7 +259,7 @@ void CCamera::MouseView(void)
 
 #ifdef _DEBUG
 
-	if (pMouse->OnMousePress(1))
+	if (pMouse->OnMousePress(pMouse->RIGHT))
 	{
 		// 回転量を更新
 		m_rot.y += X;

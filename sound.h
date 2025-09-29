@@ -26,7 +26,7 @@ public:
 	// サウンドの種類
 	typedef enum
 	{
-		SOUND_LABEL_ = 0,	// 
+		SOUND_LABEL_BGM = 0,	// 
 		SOUND_LABEL_MAX
 	} SOUND_LABEL;
 
@@ -58,7 +58,7 @@ private:
 	// サウンドの情報
 	SOUND_INFO m_aSoundInfo[SOUND_LABEL_MAX] = 
 	{
-		{"data/SE/parryParfect.wav", 0},  // パリィパーフェクト
+		{"data/BGM/bgm_title.wav", 0},  // BGM
 	};				
 };
 #endif

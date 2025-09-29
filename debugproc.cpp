@@ -50,7 +50,7 @@ HRESULT CDebugProc::Init(void)
 	LPDIRECT3DDEVICE9 pDevice = pRenderer->GetDevice();
 
 	// デバッグ表示用のフォントを設定
-	D3DXCreateFont(pDevice, 18, 0, FW_BOLD, 0,
+	D3DXCreateFont(pDevice, 18, 0, 0, 0,
 		FALSE,
 		DEFAULT_CHARSET,
 		OUT_DEFAULT_PRECIS,
@@ -87,7 +87,7 @@ void CDebugProc::Print(const char* fmt ...)
 	va_start(args, fmt);
 
 	// フォーマット済みの文字列をastringに保管
-	m_nIdx += vsnprintf(&m_aStr[m_nIdx], *fmt, fmt, args);
+	m_nIdx += vsnprintf(&m_aStr[m_nIdx], sizeof(m_aStr) - m_nIdx, fmt, args);
 
 	// 可変引数の処理を終了
 	va_end(args);

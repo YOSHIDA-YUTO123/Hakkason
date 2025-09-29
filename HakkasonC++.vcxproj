@@ -159,6 +159,7 @@
     <ClCompile Include="CharacterManager.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="score.cpp" />
     <ClCompile Include="debugproc.cpp" />
     <ClCompile Include="effect3d.cpp" />
     <ClCompile Include="fade.cpp" />
@@ -214,6 +215,7 @@
     <ClInclude Include="CharacterManager.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Collision.h" />
+    <ClInclude Include="score.h" />
     <ClInclude Include="debugproc.h" />
     <ClInclude Include="effect3d.h" />
     <ClInclude Include="fade.h" />

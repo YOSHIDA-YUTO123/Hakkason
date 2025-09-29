@@ -240,14 +240,17 @@
     <ClCompile Include="MeshCircle.cpp">
       <Filter>ソース ファイル\mesh</Filter>
     </ClCompile>
-    <ClCompile Include="MeshOrbit.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="effect3d.cpp">
       <Filter>ソース ファイル\billboard</Filter>
     </ClCompile>
     <ClCompile Include="particle3d.cpp">
       <Filter>ソース ファイル\billboard</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshOrbit.cpp">
+      <Filter>ソース ファイル\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="score.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -380,14 +383,17 @@
     <ClInclude Include="MeshCircle.h">
       <Filter>ヘッダー ファイル\mesh</Filter>
     </ClInclude>
-    <ClInclude Include="MeshOrbit.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="effect3d.h">
       <Filter>ヘッダー ファイル\billboard</Filter>
     </ClInclude>
     <ClInclude Include="particle3d.h">
       <Filter>ヘッダー ファイル\billboard</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshOrbit.h">
+      <Filter>ヘッダー ファイル\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="score.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

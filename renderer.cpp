@@ -364,6 +364,7 @@ void CRenderer::Update(void)
 	// すべてのオブジェクトの更新処理
 	CObject::UpdateAll();
 }
+
 //===================================================
 // 描画処理
 //===================================================
@@ -409,7 +410,6 @@ void CRenderer::Draw(const int fps)
 			(D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL),
 			D3DCOLOR_RGBA(0, 0, 0, 0), 1.0f, 0);
 		
-
 		// シーンの描画処理
 		CManager::DrawScene();
 
@@ -490,7 +490,9 @@ void CRenderer::Draw(const int fps)
 		
 
 #ifdef _DEBUG
-		CDebugProc::Print("FPS = %d\n", fps);
+
+		// デバッグ情報
+		Debug(fps);
 
 		CDebugProc::Draw();
 #endif // _DEBUG
@@ -592,4 +594,22 @@ void CRenderer::offEffect(void)
 {
 	m_bEffect = false;
 	m_fALv = 0.0f;
+}
+
+//===================================================
+// デバッグ情報
+//===================================================
+void CRenderer::Debug(const int nFps)
+{
+	// 現在のモードの取得
+	CScene::MODE mode = CManager::GetMode();
+
+	CDebugProc::Print("\n********************************************\n");
+	CDebugProc::Print("              デバッグ情報\n");
+	CDebugProc::Print("********************************************\n");
+	CDebugProc::Print("FPS =            : [ %d ]\n", nFps);
+	CDebugProc::Print("現在のシーン     : [ %d / %d ]\n", mode, CScene::MODE_MAX);
+	CDebugProc::Print("シーン遷移       : [ F9キー ]\n");
+	CDebugProc::Print("カメラ視点移動   : [ 右クリック ]\n");
+	CDebugProc::Print("カメラ注視点移動 : [ 左クリック ]\n");
 }

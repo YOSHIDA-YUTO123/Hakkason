@@ -122,6 +122,10 @@ private:
 class CInputMouse : public CInput
 {
 public:
+	static constexpr int LEFT = 0;   // 左クリック
+	static constexpr int RIGHT = 1;  // 右クリック
+	static constexpr int WHEEL = 2;  // ホイールクリック
+
 	CInputMouse();
 	~CInputMouse();
 
