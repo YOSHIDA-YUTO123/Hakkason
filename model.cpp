@@ -144,7 +144,7 @@ void CModel::Draw(void)
 	//マテリアルのデータへのポインタを取得
 	pMat = (D3DXMATERIAL*)pMapObject->modelinfo.pBuffMat->GetBufferPointer();
 
-	for (int nCntMat = 0; nCntMat < pMapObject->modelinfo.dwNumMat; nCntMat++)
+	for (int nCntMat = 0; nCntMat < (int)pMapObject->modelinfo.dwNumMat; nCntMat++)
 	{
 		//マテリアルの設定
 		pDevice->SetMaterial(&pMat[nCntMat].MatD3D);
@@ -221,7 +221,7 @@ void CModel::Draw(const float fAlv)
 	//マテリアルのデータへのポインタを取得
 	pMat = (D3DXMATERIAL*)pMapObject->modelinfo.pBuffMat->GetBufferPointer();
 
-	for (int nCntMat = 0; nCntMat < pMapObject->modelinfo.dwNumMat; nCntMat++)
+	for (int nCntMat = 0; nCntMat < (int)pMapObject->modelinfo.dwNumMat; nCntMat++)
 	{
 		// マテリアルの取得
 		D3DXMATERIAL Mat = pMat[nCntMat];
