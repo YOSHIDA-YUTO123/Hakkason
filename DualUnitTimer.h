@@ -25,6 +25,13 @@ public:
 	CDualUnitTimer();
 	~CDualUnitTimer();
 
+	/// <summary>
+	/// 生成処理
+	/// </summary>
+	/// <param name="位置"></param>
+	/// <param name="大きさ"></param>
+	/// <param name="時間"></param>
+	/// <returns>自分のインスタンス</returns>
 	static CDualUnitTimer* Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 Size, const int nTime);
 
 	HRESULT Init(void) override;
@@ -33,7 +40,7 @@ public:
 	void Draw(void) override;
 private:
 	CTimer* m_pMinute; // タイマークラスへのポインタ(分)
-	int m_nCounter;					       // カウンター
+	int m_nCounter;	   // カウンター
 };
 
 #endif
