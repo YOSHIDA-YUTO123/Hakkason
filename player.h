@@ -44,7 +44,7 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 private:
-
+	D3DXVECTOR3 m_move; // ˆÚ“®—Ê
 };
 
 #endif

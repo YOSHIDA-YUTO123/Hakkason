@@ -253,7 +253,7 @@ void CCamera::MouseView(void)
 		SetCursorPos((long)SCREEN_WIDTH / (long)2.0f, (long)SCREEN_HEIGHT / (long)2.0f);
 
 		// 視点の更新処理
-		UpdatePositionV();
+		//UpdatePositionV();
 	}
 
 
@@ -395,14 +395,17 @@ void CCamera::SetTracking(const D3DXVECTOR3 posVDest, const D3DXVECTOR3 posRDest
 	D3DXVECTOR3 posV = VEC3_NULL;
 
 	// Y軸の向きの取得
-	float rotY = CCamera::GetRotaition().y;
+	D3DXVECTOR3 rot = CCamera::GetRotaition();
 
-	// 距離の取得
-	float fDistance = CCamera::GetDistance();
+	// カメラの視点の更新
+	posV.x = posRDest.x - sinf(m_rot.x) * sinf(m_rot.y) * m_fDistance;
+	posV.y = posRDest.y - cosf(m_rot.x) * m_fDistance;
+	posV.z = posRDest.z - sinf(m_rot.x) * cosf(m_rot.y) * m_fDistance;
 
-	posV.x = posVDest.x - sinf(rotY) * fDistance;
-	posV.y = posVDest.y - cosf(rotY) * fDistance;
-	posV.z = posVDest.z - cosf(rotY) * fDistance;
+	// カメラの視点の更新
+	posR.x = posVDest.x + sinf(m_rot.x) * sinf(m_rot.y) * m_fDistance;
+	posR.y = posVDest.y + cosf(m_rot.x) * m_fDistance;
+	posR.z = posVDest.z + sinf(m_rot.x) * cosf(m_rot.y) * m_fDistance;
 
 	// カメラの位置の補間
 	CCamera::LerpPos(posR, posV, fcoef);

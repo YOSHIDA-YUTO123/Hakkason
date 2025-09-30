@@ -11,6 +11,8 @@
 #include "player.h"
 #include "manager.h"
 #include "camera.h"
+#include "input.h"
+#include "bullet.h"
 
 //*************************************************
 // 名前空間
@@ -98,23 +100,28 @@ void CPlayer::Update(void)
 	// 位置の取得
 	D3DXVECTOR3 pos = CCharacter3D::GetPosition();
 
-	if (pCamera != nullptr)
-	{
-		D3DXVECTOR3 posRDest;
-
-		posRDest.x = modelpos.x + sinf(rot.y) * 1.0f;
-		posRDest.y = (modelpos.y + 0.0f) + sinf(rot.y) * 1.0f;
-		posRDest.z = modelpos.z + cosf(rot.y) * 1.0f;
-
-		// カメラの追従
-		//pCamera->SetTracking(pos, pos, 0.01f);
-	}
+	// 角度の取得
+	float fRotY = CCharacter3D::GetRotation().y;
 
 	// モーションの更新処理
 	CCharacter3D::UpdateMotion();
 
 	// 更新処理
 	CCharacter3D::Update();
+
+	// キーボードの取得
+	CInputKeyboard* pKeyboard = CManager::GetInputKeyboard();
+
+	if (pCamera != nullptr)
+	{
+		// カメラの追従
+		pCamera->SetTracking(pos, pos, 0.1f);
+	}
+
+	if (pKeyboard->GetTrigger(DIK_1))
+	{
+		CBullet::Create(VEC3_NULL, D3DXVECTOR3(0.0f, fRotY, 0.0f), D3DXVECTOR3(0.0f, 0.5f, 0.0f), 2.0f);
+	}
 }
 
 //=================================================
