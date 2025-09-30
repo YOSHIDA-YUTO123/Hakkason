@@ -13,12 +13,14 @@
 class CEnemy : public CObjectX
 {
 public:
+	// コンストラクタ・デストラクタ
 	CEnemy();
 	~CEnemy();
 
-	HRESULT Init(void);
-	void Uninit(void);
-	void Update(void);
-	void Draw(void);
+	// メンバ関数
+	virtual HRESULT Init(void);
+	virtual void Uninit(void);
+	virtual void Update(void);
+	virtual void Draw(void);
 private:
 };
