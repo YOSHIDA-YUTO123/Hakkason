@@ -101,7 +101,7 @@ void CPlayer::Update(void)
 	if (pCamera != nullptr)
 	{
 		// カメラの追従
-		pCamera->SetTracking(pos, pos, 0.01f);
+		//pCamera->SetTracking(pos, pos, 0.01f);
 	}
 
 	// モーションの更新処理

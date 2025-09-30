@@ -62,7 +62,7 @@ HRESULT CShadowS::Init(void)
 	}
 
 	// ƒ‚ƒfƒ‹‚Ìƒ[ƒhˆ—
-	LoadModel("data/MODEL/ShadowS.x");
+	LoadModel("ShadowS.x");
 
 	return S_OK;
 }
