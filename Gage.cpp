@@ -100,6 +100,7 @@ CHpGage* CHpGage::Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 Size, const D3
 	// Ý’èˆ—
 	pGage->Init();
 	pGage->SetSize(Size.x, Size.x, Size.y, Size.y);
+	pGage->SetColor(col);
 
 	pGage->m_nLife = nLife;
 	pGage->m_nMaxLife = nLife;
@@ -107,11 +108,12 @@ CHpGage* CHpGage::Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 Size, const D3
 
 	pGage->m_pTemporary = new CTemporaryGage;
 
-	pGage->SetPosition(pos);
-	pGage->SetSize(Size);
+	pGage->m_pTemporary->SetPosition(pos);
+	pGage->m_pTemporary->SetSize(Size);
+
 	pGage->m_pTemporary->Init();
 	pGage->m_pTemporary->SetGage(Size, bDecRightToLeft);
-	pGage->SetColor(temporaryColor);
+	pGage->m_pTemporary->SetColor(temporaryColor);
 
 	return pGage;
 }
