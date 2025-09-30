@@ -1,15 +1,15 @@
 //================================================
 //
-// 球敵 [enemysphere.cpp]
+// 棘敵 [enemyneedle.cpp]
 // Author: KENSAKU HATORI
 //
 //================================================
 
 // インクルード
+#include "enemyneedle.h"
 #include "player.h"
 #include "game.h"
 #include "manager.h"
-#include "enemysphere.h"
 #include "Collision.h"
 #include "Collider.h"
 #include "bulletmanager.h"
@@ -17,21 +17,21 @@
 //================================================
 // コンストラクタ
 //================================================
-CEnemySphere::CEnemySphere()
+CEnemyNeedle::CEnemyNeedle()
 {
 }
 
 //================================================
 // デストラクタ
 //================================================
-CEnemySphere::~CEnemySphere()
+CEnemyNeedle::~CEnemyNeedle()
 {
 }
 
 //================================================
 // 初期化処理
 //================================================
-HRESULT CEnemySphere::Init(void)
+HRESULT CEnemyNeedle::Init(void)
 {
 	// 初期化処理
 	CEnemy::Init();
@@ -43,7 +43,7 @@ HRESULT CEnemySphere::Init(void)
 //================================================
 // 終了処理
 //================================================
-void CEnemySphere::Uninit(void)
+void CEnemyNeedle::Uninit(void)
 {
 	// 終了処理
 	CEnemy::Uninit();
@@ -52,7 +52,7 @@ void CEnemySphere::Uninit(void)
 //================================================
 // 更新処理
 //================================================
-void CEnemySphere::Update(void)
+void CEnemyNeedle::Update(void)
 {
 	// シーンがゲーム以外なら早期リターン
 	if (CManager::GetMode() != CScene::MODE_GAME) return;
@@ -99,7 +99,7 @@ void CEnemySphere::Update(void)
 //================================================
 // 描画処理
 //================================================
-void CEnemySphere::Draw(void)
+void CEnemyNeedle::Draw(void)
 {
 	// 描画処理
 	CEnemy::Draw();
@@ -108,13 +108,13 @@ void CEnemySphere::Draw(void)
 //================================================
 // 生成
 //================================================
-CEnemySphere* CEnemySphere::Create(D3DXVECTOR3 Pos)
+CEnemyNeedle* CEnemyNeedle::Create(D3DXVECTOR3 Pos)
 {
 	// メモリ確保するためのインスタンスを宣言
-	CEnemySphere* Instance = nullptr;
+	CEnemyNeedle* Instance = nullptr;
 
 	// 3Dオブジェクトの生成
-	Instance = new CEnemySphere;
+	Instance = new CEnemyNeedle;
 
 	// インスタンスが生成できなかったら
 	if (Instance == nullptr) return nullptr;
@@ -124,7 +124,7 @@ CEnemySphere* CEnemySphere::Create(D3DXVECTOR3 Pos)
 	Instance->SetPosition(Pos);
 
 	// モデルを読み込む
-	Instance->LoadModel("enemy_blue.x");
+	Instance->LoadModel("enemy_purple.x");
 
 	// インスタンスを返す
 	return Instance;

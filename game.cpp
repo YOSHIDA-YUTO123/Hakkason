@@ -25,6 +25,8 @@
 #include "meshfield.h"
 #include "player.h"
 #include "enemysphere.h"
+#include "enemyneedle.h"
+#include "DualUnitTimer.h"
 
 using namespace Const; // 名前空間Constを使用
 using namespace std; // 名前空間stdを使用
@@ -64,12 +66,13 @@ HRESULT CGame::Init(void)
 	pLight->SetDirectional(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f), D3DXVECTOR3(0.0f, -0.56f, 0.74f), D3DXVECTOR3(0.0f, 100.0f, 0.0f));
 	pLight->SetDirectional(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f), D3DXVECTOR3(0.0f, -0.56f, -0.74f), D3DXVECTOR3(0.0f, 100.0f, 0.0f));
 
-	CObject2D::Create(50.0f, 50.0f, CENTER_POS_2D)->SetTextureID("game.png");
-
 	CMeshField::Create(VEC3_NULL, 5, 5, { 3000.0f,3000.0f });
 
 	// ポーズマネージャーの生成
 	CPauseManager::Create();
+
+	// 分と秒のタイマーの生成
+	CDualUnitTimer::Create(D3DXVECTOR3(SCREEN_WIDTH - 50.0f, 50.0f, 0.0f), D3DXVECTOR2(50.0f, 25.0f), 60);
 
 	// プレイヤー生成
 	m_pPlayer = CPlayer::Create(VEC3_NULL, NULL);
@@ -146,6 +149,10 @@ void CGame::Update(void)
 	if (pKeyboard->GetTrigger(DIK_2))
 	{
 		CEnemySphere::Create(D3DXVECTOR3(0.0f, 50.0f, 200.0f));
+	}
+	if (pKeyboard->GetTrigger(DIK_3))
+	{
+		CEnemyNeedle::Create(D3DXVECTOR3(0.0f, 50.0f, 200.0f));
 	}
 #endif // _DEBUG
 }
