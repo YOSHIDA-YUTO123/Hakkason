@@ -169,7 +169,7 @@ void CCharacter3D::Update(void)
 	NormalizeDiffRot(Diff, &m_rot.y);
 
 	// –Ú“I‚ÌŠp“x‚É‹ß‚Ã‚¯‚é
-	m_rot.y += (m_rotDest.y - m_rot.y) * 0.1f;
+	m_rot.y += (m_rotDest.y - m_rot.y) * 0.3f;
 }
 
 //===================================================

@@ -18,6 +18,7 @@
 #include "renderer.h"
 #include "math.h"
 #include "bulletmanager.h"
+#include "enemymanager.h"
 
 //*************************************************
 // 名前空間
@@ -178,6 +179,61 @@ void CPlayer::Update(void)
 		PushPos.y = GetPosition().y;
 		// 位置を押し出し後の位置に設定
 		pos = PushPos;
+	}
+
+	float fDistanceNow = 0.0f;
+	float fDistanceStock = 0.0f;
+	float fDistance = 0.0f;
+
+	bool bFirst = true;
+
+	CEnemy* pNearEnemy = nullptr;
+
+	// 敵の取得
+	for (auto enemy = CEnemyManager::GetpvBullet().begin(); enemy != CEnemyManager::GetpvBullet().end(); enemy++)
+	{
+		// 敵の位置の取得
+		D3DXVECTOR3 enemyPos = (*enemy)->GetPosition();
+
+		// 距離を求める
+		float DisposX = enemyPos.x - pos.x;
+		float DisposY = enemyPos.y - pos.y;
+		float DisposZ = enemyPos.z - pos.z;
+
+		// 距離を求める
+		fDistanceNow = sqrtf((DisposX * DisposX) + (DisposY * DisposY) + (DisposZ * DisposZ));
+
+		// 最初だけ通す
+		if (bFirst)
+		{
+			fDistanceStock = fDistanceNow; // ストックに最初の値を入れておく
+			bFirst = false; // 最初しか通したくないのでfalse
+			pNearEnemy = (*enemy); // いちばん近い敵を保存
+		}
+		else
+		{
+			// 今の距離がストックされた距離より小さかったら
+			if (fDistanceNow < fDistanceStock)
+			{
+				fDistanceStock = fDistanceNow; // 距離を保存
+				pNearEnemy = (*enemy); // いちばん近い敵を保存
+			}
+		}
+	}
+
+	if (pNearEnemy != nullptr && nMotionType == MOTIONTYPE_ACTION)
+	{
+		// 距離を求める
+		fDistance = GetDistance(pNearEnemy->GetPosition() - pos);
+
+		if (fDistance <= 300.0f)
+		{
+			// いちばん近い敵の位置を求める
+			float fNearEnemyAngle = GetTargetAngle(pNearEnemy->GetPosition(), pos) + D3DX_PI;
+
+			// 目的の向きを設定
+			CCharacter3D::SetRotDest(D3DXVECTOR3(0.0f, fNearEnemyAngle, 0.0f));
+		}
 	}
 
 	// 角度の取得
