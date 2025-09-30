@@ -16,6 +16,7 @@
 #include "tutorial.h"
 #include "pause.h"
 #include "sound.h"
+#include "fade.h"
 
 // 規定値を設定
 const D3DXCOLOR CTitleMenu::Config::DefoultColor = { 1.0f,1.0f,1.0f,1.0f };
@@ -249,7 +250,7 @@ void CExit::Update(void)
 	D3DXVECTOR2 Dest = { CTitleManager::Config::Menu::DestWidth,CTitleManager::Config::Menu::DestHeight };
 
 	// 今選んでいるのがExitメニューだったら
-	if (CTitleManager::GetSingleton()->GetSelectMenu() == EXIT)
+	if (CTitleManager::GetSingleton()->GetSelectMenu() == EXIT && CManager::GetFade()->GetState() == CFade::FADE_NONE)
 	{
 		// アニメーションカウンターを進める
 		if (m_nAnimCounter < CTitleManager::Config::Menu::Frame)
