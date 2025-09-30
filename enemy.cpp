@@ -10,6 +10,8 @@
 #include "shadow.h"
 #include "particle3d.h"
 #include "effect3d.h"
+#include "sound.h"
+#include "manager.h"
 
 // ’è”éŒ¾
 constexpr int MAX_LIFE = 1; // ‘Ì—Í
@@ -113,6 +115,8 @@ void CEnemy::Update(void)
 
 		// ¶¬
 		CParticle3D::Create(FireInfo);
+
+		CManager::GetSound()->Play(CSound::SOUND_LABEL_DEADENEMY);
 
 		if (m_pShadow != nullptr)
 		{

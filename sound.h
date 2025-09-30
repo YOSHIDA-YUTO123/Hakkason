@@ -34,7 +34,7 @@ public:
 		SOUND_LABEL_ENTER,	// 
 		SOUND_LABEL_SHOT,	// 
 		SOUND_LABEL_DAMAGE,	// 
-		SOUND_LABEL_WALK,	// 
+		SOUND_LABEL_DEADENEMY,	// 
 		SOUND_LABEL_MAX
 	} SOUND_LABEL;
 
@@ -74,7 +74,7 @@ private:
 		{"data/SE/select_se.wav", 0},  // BGM
 		{"data/SE/shot_se.wav", 0},  // BGM
 		{"data/SE/damage_se.wav", 0},  // BGM
-		{"data/SE/walk_se.wav", 0},  // BGM
+		{"data/SE/dead enemy.wav", 0},  // BGM
 	};				
 };
 #endif
