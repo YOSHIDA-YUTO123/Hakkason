@@ -12,6 +12,7 @@
 #include "effect3d.h"
 #include "sound.h"
 #include "manager.h"
+#include "game.h"
 
 // ’è”éŒ¾
 constexpr int MAX_LIFE = 1; // ‘Ì—Í
@@ -131,6 +132,15 @@ void CEnemy::Update(void)
 		if (m_pShadow != nullptr)
 		{
 			m_pShadow->Uninit();
+		}
+
+		if (m_type != TYPE_ONE)
+		{
+			CGame::AddScore(4649);
+		}
+		else
+		{
+			CGame::AddScore(114514);
 		}
 	}
 }

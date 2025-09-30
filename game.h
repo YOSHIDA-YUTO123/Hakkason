@@ -58,14 +58,19 @@ public:
 
 	// セッター
 	static void SetState(const STATE state) { m_state = state; }
+
 	// ゲッター
 	static CPlayer* GetPlayer(void) { return m_pPlayer; }
 	static STATE GetState(void) { return m_state; }
+	static void AddScore(const int nScore) { m_nScore += nScore; }
+
 private:
+	void SaveScore(void);
+
 	static CPlayer* m_pPlayer;			// プレイヤーのインスタンス
 	static CDualUnitTimer* m_pTimer;	// タイマーのインスタンス
 	static STATE m_state;				// ゲームの状態
-	int m_nScore;				// スコア
+	static int m_nScore;				// スコア
 	int m_nCounterState;				// 状態カウンター
 };
 
