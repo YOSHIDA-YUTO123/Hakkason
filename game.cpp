@@ -46,6 +46,7 @@ using namespace std; // 名前空間stdを使用
 CGame::STATE CGame::m_state = STATE_NORMAL;	// ゲームの状態
 CPlayer* CGame::m_pPlayer = NULL;			// プレイヤー
 CDualUnitTimer* CGame::m_pTimer = NULL;		// タイマー
+int CGame::m_nScore = NULL;					// スコア
 
 //===================================================
 // コンストラクタ
@@ -60,7 +61,7 @@ CGame::CGame() : CScene(MODE_GAME)
 //===================================================
 CGame::~CGame()
 {
-
+	m_nScore = NULL;
 }
 
 //===================================================
@@ -223,4 +224,24 @@ void CGame::Update(void)
 //===================================================
 void CGame::Draw(void)
 {
+}
+
+//===================================================
+// スコアのセーブ
+//===================================================
+void CGame::SaveScore(void)
+{
+	// ファイルを開く
+	ofstream file("data/TXT/result_score.txt");
+
+	if (file.is_open())
+	{
+
+	}
+	else
+	{
+		file.clear();
+		MessageBox(NULL, "エラー", "SaveScore()", MB_OK);
+		return;
+	}
 }
