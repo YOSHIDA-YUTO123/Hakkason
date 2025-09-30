@@ -13,7 +13,7 @@
 #include "math_T.h"
 #include "input.h"
 #include "fade.h"
-#include "game.h"
+#include "tutorial.h"
 #include "pause.h"
 
 // ‹K’è’l‚ðÝ’è
@@ -177,7 +177,7 @@ void CStart::Update(void)
 			}
 			else
 			{
-				CManager::GetFade()->SetFade(std::make_unique<CGame>());
+				CManager::GetFade()->SetFade(std::make_unique<CTutorial>());
 				CPauseManager::GetInstance()->EnablePause(false);
 			}
 		}
