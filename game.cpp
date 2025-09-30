@@ -26,6 +26,7 @@
 #include "player.h"
 #include "enemysphere.h"
 #include "enemyneedle.h"
+#include "DualUnitTimer.h"
 
 using namespace Const; // 名前空間Constを使用
 using namespace std; // 名前空間stdを使用
@@ -69,6 +70,9 @@ HRESULT CGame::Init(void)
 
 	// ポーズマネージャーの生成
 	CPauseManager::Create();
+
+	// 分と秒のタイマーの生成
+	CDualUnitTimer::Create(D3DXVECTOR3(SCREEN_WIDTH - 50.0f, 50.0f, 0.0f), D3DXVECTOR2(50.0f, 25.0f), 60);
 
 	// プレイヤー生成
 	m_pPlayer = CPlayer::Create(VEC3_NULL, NULL);
