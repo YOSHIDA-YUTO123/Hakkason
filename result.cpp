@@ -47,8 +47,11 @@ HRESULT CResultWin::Init(void)
 	// スコアのロード
 	int nScore = LoadScore();
 
+	// 2Dポリゴンの生成
+	CObject2D::Create(300.0f,100.0f,D3DXVECTOR3(640.0f,200.0f,0.0f))->SetTextureID("clear.png");
+
 	// スコアの生成
-	CScore::Create(CENTER_POS_2D, D3DXVECTOR2(300.0f, 100.0f), nScore);
+	CScore::Create(D3DXVECTOR3(640.0f,400.0f,0.0f), D3DXVECTOR2(300.0f, 100.0f), nScore);
 
 	return S_OK;
 }
@@ -141,6 +144,9 @@ CResultLose::~CResultLose()
 //===================================================
 HRESULT CResultLose::Init(void)
 {
+	// 2Dポリゴンの生成
+	CObject2D::Create(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, CENTER_POS_2D)->SetTextureID("game over.png");
+
 	return S_OK;
 }
 
