@@ -7,9 +7,14 @@
 
 #include "enemy.h"
 #include "enemymanager.h"
+#include "shadow.h"
 
 // ’è”éŒ¾
 constexpr int MAX_LIFE = 1; // ‘Ì—Í
+constexpr float SHADOW_WIDTH = 10.0f;  // ‰e‚Ì‰¡•
+constexpr float SHADOW_HEIGHT = 10.0f; // ‰e‚Ìc•
+constexpr float SHADOW_MAX_HEIGHT = 250.0f; // ‰e‚ªŒ©‚¦‚éÅ‘å‚Ì‚‚³
+constexpr float SHADOW_A_LEVEL = 0.8f; // ‰e‚Ì‰e‚ÌÅ‘å‚ÌƒAƒ‹ƒtƒ@’l
 
 //================================================
 // ƒRƒ“ƒXƒgƒ‰ƒNƒ^
@@ -32,6 +37,13 @@ CEnemy::~CEnemy()
 HRESULT CEnemy::Init(void)
 {
 	CObjectX::Init();
+
+	// ˆÊ’u‚ÌŽæ“¾
+	D3DXVECTOR3 pos = CObjectX::GetPosition();
+
+	// ‰e‚Ì¶¬
+	m_pShadow = CShadow::Create(pos, SHADOW_WIDTH, SHADOW_HEIGHT, D3DXCOLOR(0.2f, 0.2f, 0.2f, 0.8f));
+
 	return E_NOTIMPL;
 }
 
@@ -63,11 +75,21 @@ void CEnemy::Update(void)
 	// XV
 	CObjectX::Update();
 
+	if (m_pShadow != nullptr)
+	{
+		m_pShadow->Update(D3DXVECTOR3(myPos.x, 0.0f, myPos.z), D3DXVECTOR3(myPos.x, 0.0f, myPos.z), SHADOW_WIDTH, SHADOW_HEIGHT, SHADOW_MAX_HEIGHT, SHADOW_A_LEVEL);
+	}
+
 	// Ž€‚ñ‚¾‚ç”jŠü
 	if (m_nLife <= 0)
 	{
 		// Ž©•ª‚ðƒŠƒXƒg‚©‚çŠO‚·
 		CEnemyManager::Erase(this);
+
+		if (m_pShadow != nullptr)
+		{
+			m_pShadow->Uninit();
+		}
 	}
 }
 
@@ -76,5 +98,10 @@ void CEnemy::Update(void)
 //================================================
 void CEnemy::Draw(void)
 {
+	if (m_pShadow != nullptr)
+	{
+		m_pShadow->Draw();
+	}
+
 	CObjectX::Draw();
 }
