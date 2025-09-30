@@ -23,11 +23,11 @@ class CCamera
 {
 public:
 	CCamera();
-	virtual ~CCamera();
+	~CCamera();
 
-	virtual HRESULT Init(void);
-	virtual void Uninit(void);
-	virtual void Update(void);
+	HRESULT Init(void);
+	void Uninit(void);
+	void Update(void);
 
 	void SetCamera(void);
 	void SetCamera(const D3DXVECTOR3 posV, const D3DXVECTOR3 posR, const D3DXVECTOR3 rot);
@@ -42,10 +42,17 @@ public:
 	D3DXVECTOR3 GetPosOld(void) const { return m_posVOld; }
 	void LerpPos(const D3DXVECTOR3 posRDest, const D3DXVECTOR3 posVDest, const float fCoef);	// 位置を目的の位置に近づける
 
+	/// <summary>
+	/// カメラの追従処理(追従する側で呼ぶ)
+	/// </summary>
+	/// <param name="posVDest"></param>
+	/// <param name="posRDest"></param>
+	/// <param name="fcoef"></param>
+	void SetTracking(const D3DXVECTOR3 posVDest, const D3DXVECTOR3 posRDest, const float fcoef);
+
 	// セッター
 	void SetRot(const D3DXVECTOR3 rot) { m_rot = rot; }
 	void SetPosV(const D3DXVECTOR3 posV) { m_posV = posV; }
-protected:
 
 	// ゲッター
 	D3DXVECTOR3 GetDestPosV(void) const { return m_posVDest; }

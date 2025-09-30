@@ -9,6 +9,8 @@
 // インクルードファイル
 //*************************************************
 #include "player.h"
+#include "manager.h"
+#include "camera.h"
 
 //*************************************************
 // 名前空間
@@ -71,7 +73,7 @@ HRESULT CPlayer::Init(void)
 	CCharacter3D::SetCharacter(10, 5.0f, SHADOW_SCAL, PLAYER_SIZE);
 
 	// モーションの読み込み
-	CCharacter3D::LoadMotion("", MOTIONTYPE_MAX);
+	CCharacter3D::LoadMotion("motion.txt", MOTIONTYPE_MAX);
 
 	return S_OK;
 }
@@ -90,6 +92,18 @@ void CPlayer::Uninit(void)
 //=================================================
 void CPlayer::Update(void)
 {
+	// カメラの取得
+	CCamera* pCamera = CManager::GetCamera();
+
+	// 位置の取得
+	D3DXVECTOR3 pos = CCharacter3D::GetPosition();
+
+	if (pCamera != nullptr)
+	{
+		// カメラの追従
+		pCamera->SetTracking(pos, pos, 0.01f);
+	}
+
 	// モーションの更新処理
 	CCharacter3D::UpdateMotion();
 
