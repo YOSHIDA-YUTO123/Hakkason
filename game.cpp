@@ -75,7 +75,7 @@ HRESULT CGame::Init(void)
 	CMeshDome::Create(VEC3_NULL, 10, 10, 5500.0f, -1500.0f);
 
 
-	CMeshField::Create(VEC3_NULL, 5, 5, { 3000.0f,3000.0f });
+	CMeshField::Create(VEC3_NULL, 5, 5, { 4000.0f,4000.0f });
 
 	// ポーズマネージャーの生成
 	CPauseManager::Create();

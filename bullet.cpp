@@ -91,7 +91,7 @@ CBullet* CBullet::Create(const D3DXVECTOR3 Pos, const D3DXVECTOR3 Rot, const D3D
 	Instance->m_Move = Dir * Speed;
 
 	// モデルを読み込む
-	Instance->LoadModel("Bullet.x");
+	Instance->LoadModel("shotgun ammo.x");
 
 	// インスタンスを返す
 	return Instance;
