@@ -18,6 +18,7 @@
 #include "renderer.h"
 #include "math.h"
 #include "bulletmanager.h"
+#include "sound.h"
 #include "enemymanager.h"
 
 //*************************************************
@@ -325,6 +326,8 @@ void CPlayer::Hit(const int nDamage)
 {
 	if (CCharacter3D::GetState() != STATE_DAMAGE)
 	{
+		CManager::GetSound()->Play(CSound::SOUND_LABEL_DAMAGE);
+
 		// ダメージを受けた
 		CCharacter3D::Hit(nDamage);
 
@@ -569,6 +572,8 @@ void CPlayer::UpdateShotBullet(CMotion* pMotion,CInputKeyboard *pKeyboard,CInput
 	// フレームの判定
 	if (pMotion->IsEventFrame(6, 6, MOTIONTYPE_ACTION))
 	{
+		CManager::GetSound()->Play(CSound::SOUND_LABEL_SHOT);
+
 		// クールダウンの設定
 		m_nCoolDown = SHOT_COOLDOWN;
 

@@ -370,6 +370,8 @@ void CManager::SetMode(unique_ptr<CScene> pNewScene)
 		m_pScene.reset();
 		m_pScene = nullptr;
 
+		m_pSound->StopSound();
+
 		// すべてのオブジェクトの破棄
 		CObject::ReleaseAll();
 	}

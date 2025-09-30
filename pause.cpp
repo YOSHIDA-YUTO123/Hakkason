@@ -18,6 +18,7 @@
 #include "game.h"
 #include "sound.h"
 #include "title.h"
+#include "sound.h"
 
 using namespace Const; // 名前空間Constを使用
 using namespace std; // 名前空間stdを使用
@@ -205,6 +206,8 @@ void CPauseContinue::Update(void)
 		// ENTERキーが押されたら || Aボタンが押されたら
 		if (pKeyboard->GetTrigger(DIK_RETURN) || pJoyPad->GetTrigger(pJoyPad->JOYKEY_A))
 		{
+			CManager::GetSound()->Play(CSound::SOUND_LABEL_ENTER);
+
 			// ポーズをオフ
 			pPauseManager->EnablePause(false);
 		}
@@ -323,6 +326,8 @@ void CPauseRetry::Update(void)
 		// ENTERキーが押されたら
 		if (pKeyboard->GetTrigger(DIK_RETURN) || pJoyPad->GetTrigger(pJoyPad->JOYKEY_A))
 		{
+			CManager::GetSound()->Play(CSound::SOUND_LABEL_ENTER);
+
 			// フェードの取得
 			CFade* pFade = CManager::GetFade();
 
@@ -442,6 +447,8 @@ void CPauseQuit::Update(void)
 		// ENTERキーが押されたら
 		if (pKeyboard->GetTrigger(DIK_RETURN) || pJoyPad->GetTrigger(pJoyPad->JOYKEY_A))
 		{
+			CManager::GetSound()->Play(CSound::SOUND_LABEL_ENTER);
+
 			// フェードの取得
 			CFade* pFade = CManager::GetFade();
 
@@ -572,12 +579,14 @@ void CPauseManager::SelectMenu(void)
 		// 上が押されたら
 		if (pKeyboard->GetTrigger(DIK_UP) || pJoyPad->GetTrigger(pJoyPad->JOYKEY_UP))
 		{
+			CManager::GetSound()->Play(CSound::SOUND_LABEL_SELECT);
 			// 次の項目へ
 			m_SelectMenu = static_cast<CPause::TYPE>(m_SelectMenu - 1);
 		}
 		// 下が押されたら
 		else if (pKeyboard->GetTrigger(DIK_DOWN) || pJoyPad->GetTrigger(pJoyPad->JOYKEY_DOWN))
 		{
+			CManager::GetSound()->Play(CSound::SOUND_LABEL_SELECT);
 			// 前の項目へ
 			m_SelectMenu = static_cast<CPause::TYPE>(m_SelectMenu + 1);
 		}

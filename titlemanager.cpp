@@ -11,6 +11,7 @@
 #include "math_T.h"
 #include "sound.h"
 #include "input.h"
+#include "sound.h"
 
 // ‹K’è’l‚ðÝ’è
 const D3DXVECTOR3 CTitleManager::Config::Menu::Bace = { 650.0f,500.0f,0.0f };
@@ -70,11 +71,13 @@ void CTitleManager::Update(void)
 	if (CManager::GetInputKeyboard()->GetTrigger(DIK_W) == true || CManager::GetInputMouse()->GetMouseWeel() < 0 ||
 		CManager::GetInputJoypad()->GetTrigger(CInputJoypad::JOYKEY_UP) == true)
 	{
+		CManager::GetSound()->Play(CSound::SOUND_LABEL_SELECT);
 		m_SelectMenu = (CTitleMenu::Menu)Wrap(m_SelectMenu - 1, 0, (int)CTitleMenu::MAX - 1);
 	}
 	else if (CManager::GetInputKeyboard()->GetTrigger(DIK_S) == true || CManager::GetInputMouse()->GetMouseWeel() > 0 ||
 		CManager::GetInputJoypad()->GetTrigger(CInputJoypad::JOYKEY_DOWN) == true)
 	{
+		CManager::GetSound()->Play(CSound::SOUND_LABEL_SELECT);
 		m_SelectMenu = (CTitleMenu::Menu)Wrap(m_SelectMenu + 1, 0, (int)CTitleMenu::MAX - 1);
 	}
 }

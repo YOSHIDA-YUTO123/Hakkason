@@ -12,6 +12,7 @@
 #include "manager.h"
 #include "fade.h"
 #include "game.h"
+#include "sound.h"
 
 //***************************************
 // コンストラクタ
@@ -35,6 +36,8 @@ HRESULT CTutorial::Init(void)
 	CObject2D* LocalTutorial = CObject2D::Create(SCREEN_WIDTH * 0.5f, SCREEN_HEIGHT * 0.5f, { SCREEN_WIDTH * 0.5f ,SCREEN_HEIGHT * 0.5f ,0.0f });
 	LocalTutorial->SetTextureID("ttutorial.png");
 
+	CManager::GetSound()->Play(CSound::SOUND_LABEL_TUTORIALBGM);
+
 	return S_OK;
 }
 
@@ -53,6 +56,7 @@ void CTutorial::Update(void)
 
 		if (pFade != nullptr)
 		{
+			CManager::GetSound()->Play(CSound::SOUND_LABEL_ENTER);
 			// シーンの遷移
 			pFade->SetFade(std::make_unique<CGame>());
 		}
