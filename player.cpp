@@ -489,10 +489,10 @@ void CPlayer::UpdateShotBullet(CMotion* pMotion,CInputKeyboard *pKeyboard,CInput
 
 		// íeÇÃê∂ê¨
 		CBulletManager::PushBackBullet(shotGunPos, VEC3_NULL,
-			D3DXVECTOR3(sinf(fAngleY + D3DX_PI * 0.90f), 0.0f, cosf(fAngleY + D3DX_PI * 0.90f)), BULLET_MOVE, BULLET_LIFE);
+			D3DXVECTOR3(sinf(fAngleY + D3DX_PI * 1.05f), 0.0f, cosf(fAngleY + D3DX_PI * 1.05f)), BULLET_MOVE, BULLET_LIFE);
 
 		// íeÇÃê∂ê¨
 		CBulletManager::PushBackBullet(shotGunPos, VEC3_NULL,
-			D3DXVECTOR3(sinf(fAngleY - D3DX_PI * 0.90f), 0.0f, cosf(fAngleY - D3DX_PI * 0.90f)), BULLET_MOVE, BULLET_LIFE);
+			D3DXVECTOR3(sinf(fAngleY - D3DX_PI * 1.05f), 0.0f, cosf(fAngleY - D3DX_PI * 1.05f)), BULLET_MOVE, BULLET_LIFE);
 	}
 }
