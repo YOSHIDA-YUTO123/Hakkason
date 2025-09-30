@@ -39,4 +39,20 @@ public:
 private:
 };
 
+//***************************************************
+// リザルト(敗北)クラスの定義
+//***************************************************
+class CResultLose : public CScene
+{
+public:
+
+	CResultLose();
+	~CResultLose();
+
+	HRESULT Init(void);
+	void Uninit(void);
+	void Update(void);
+	void Draw(void);
+private:
+};
 #endif

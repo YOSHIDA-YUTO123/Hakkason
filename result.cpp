@@ -61,7 +61,10 @@ void CResultWin::Update(void)
 	// キーボードの取得
 	CInputKeyboard* pKeyboard = CManager::GetInputKeyboard();
 
-	if (pKeyboard != nullptr && pKeyboard->GetTrigger(DIK_F9))
+	// ジョイパッドの取得
+	CInputJoypad* pJoypad = CManager::GetInputJoypad();
+
+	if ((pKeyboard != nullptr && pJoypad != nullptr) && pKeyboard->GetTrigger(DIK_F9) || pJoypad->GetTrigger(pJoypad->JOYKEY_A))
 	{
 		CFade* pFade = CManager::GetFade();
 
@@ -77,5 +80,65 @@ void CResultWin::Update(void)
 // 描画処理
 //===================================================
 void CResultWin::Draw(void)
+{
+}
+
+//===================================================
+// コンストラクタ
+//===================================================
+CResultLose::CResultLose() : CScene(MODE_RESULT)
+{
+
+}
+
+//===================================================
+// デストラクタ
+//===================================================
+CResultLose::~CResultLose()
+{
+}
+
+//===================================================
+// 初期化処理
+//===================================================
+HRESULT CResultLose::Init(void)
+{
+	return S_OK;
+}
+
+//===================================================
+// 終了処理
+//===================================================
+void CResultLose::Uninit(void)
+{
+}
+
+//===================================================
+// 更新処理
+//===================================================
+void CResultLose::Update(void)
+{
+	// キーボードの取得
+	CInputKeyboard* pKeyboard = CManager::GetInputKeyboard();
+
+	// ジョイパッドの取得
+	CInputJoypad* pJoypad = CManager::GetInputJoypad();
+
+	if ((pKeyboard != nullptr && pJoypad != nullptr) && pKeyboard->GetTrigger(DIK_F9) || pJoypad->GetTrigger(pJoypad->JOYKEY_A))
+	{
+		CFade* pFade = CManager::GetFade();
+
+		if (pFade != nullptr)
+		{
+			// 新しいモードの設定
+			pFade->SetFade(make_unique<CTitle>());
+		}
+	}
+}
+
+//===================================================
+// 描画処理
+//===================================================
+void CResultLose::Draw(void)
 {
 }

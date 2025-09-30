@@ -296,6 +296,7 @@ void CPlayer::Debug(CInputKeyboard* pKeyboard)
 	{
 
 	}
+
 #endif // _DEBUG
 
 }
