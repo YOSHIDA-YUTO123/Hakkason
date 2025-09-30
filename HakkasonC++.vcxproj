@@ -166,6 +166,7 @@
     <ClCompile Include="DualUnitTimer.cpp" />
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="enemybonus.cpp" />
+    <ClCompile Include="enemymanager.cpp" />
     <ClCompile Include="enemyneedle.cpp" />
     <ClCompile Include="enemyshot.cpp" />
     <ClCompile Include="enemysphere.cpp" />
@@ -234,6 +235,7 @@
     <ClInclude Include="DualUnitTimer.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="enemybonus.h" />
+    <ClInclude Include="enemymanager.h" />
     <ClInclude Include="enemyneedle.h" />
     <ClInclude Include="enemyshot.h" />
     <ClInclude Include="enemysphere.h" />

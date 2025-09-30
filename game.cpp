@@ -32,6 +32,7 @@
 #include "enemyshot.h"
 #include "dome.h"
 #include "math.h"
+#include "enemymanager.h"
 
 using namespace Const; // 名前空間Constを使用
 using namespace std; // 名前空間stdを使用
@@ -165,23 +166,7 @@ void CGame::Update(void)
 			D3DXVECTOR3 SetPos = m_pPlayer->GetPosition();
 			SetPos.x += sinf(Angle) * 300.0f;
 			SetPos.z += cosf(Angle) * 300.0f;
-			switch (Type)
-			{
-			case 0:
-				CEnemySphere::Create(SetPos);
-				break;
-			case 1:
-				CEnemyNeedle::Create(SetPos);
-				break;
-			case 2:
-				CEnemyBonus::Create(SetPos);
-				break;
-			case 3:
-				CEnemyShot::Create(SetPos);
-				break;
-			default:
-				break;
-			}
+			CEnemyManager::PushBackBullet(SetPos, Type);
 		}
 	}
 #ifdef _DEBUG

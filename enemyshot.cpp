@@ -13,6 +13,7 @@
 #include "Collision.h"
 #include "Collider.h"
 #include "bulletmanager.h"
+#include "enemymanager.h"
 
 //===================================================
 // コンストラクタ
@@ -69,8 +70,7 @@ void CEnemyShot::Update(void)
 		// 当たったら
 		if (CCollisionSphere::Collision(&EnemyCollider, &BulletCollider) == true)
 		{
-			// 自分自身を破棄
-			Uninit();
+			CEnemyManager::Erase(this);
 
 			// 弾の連結を解除
 			CBulletManager::Erase((*Bullets));

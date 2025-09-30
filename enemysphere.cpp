@@ -13,6 +13,7 @@
 #include "Collision.h"
 #include "Collider.h"
 #include "bulletmanager.h"
+#include "enemymanager.h"
 
 //================================================
 // ƒRƒ“ƒXƒgƒ‰ƒNƒ^
@@ -69,8 +70,7 @@ void CEnemySphere::Update(void)
 		// “–‚½‚Á‚½‚ç
 		if (CCollisionSphere::Collision(&EnemyCollider, &BulletCollider) == true)
 		{
-			// Ž©•ªŽ©g‚ð”jŠü
-			Uninit();
+			CEnemyManager::Erase(this);
 
 			// ’e‚Ì”jŠü
 			(*Bullets)->Uninit();
