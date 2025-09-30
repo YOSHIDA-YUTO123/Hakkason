@@ -29,6 +29,7 @@ class CPauseManager;
 class CGameCamera;
 class CLoadManager;
 class CEnemy;
+class CPlayer;
 
 //***************************************************
 // ゲームクラスの定義
@@ -54,9 +55,13 @@ public:
 	void Update(void);
 	void Draw(void);
 
+	// セッター
 	static void SetState(const STATE state) { m_state = state; }
+	// ゲッター
+	static CPlayer* GetPlayer(void) { return m_pPlayer; }
 	static STATE GetState(void) { return m_state; }
 private:
+	static CPlayer* m_pPlayer;			// プレイヤーのインスタンス
 	static STATE m_state;				// ゲームの状態
 	int m_nCounterState;				// 状態カウンター
 };

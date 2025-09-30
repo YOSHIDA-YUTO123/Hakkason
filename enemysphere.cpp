@@ -6,6 +6,9 @@
 //================================================
 
 // インクルード
+#include "game.h"
+#include "player.h"
+#include "manager.h"
 #include "enemysphere.h"
 
 //================================================
@@ -48,6 +51,23 @@ void CEnemySphere::Uninit(void)
 //================================================
 void CEnemySphere::Update(void)
 {
+	// シーンがゲーム以外なら早期リターン
+	if (CManager::GetMode() != CScene::MODE_GAME) return;
+	// プレイヤーが生成されていなかったら早期リターン
+	if (CGame::GetPlayer() == NULL) return;
+
+	// プレイヤーまでのベクトルを引く
+	D3DXVECTOR3 pVec = CGame::GetPlayer()->GetPosition() - GetPosition();
+
+	// 正規化
+	D3DXVec3Normalize(&pVec, &pVec);
+
+	// スピードをかける
+	pVec *= 2.0f;
+
+	// 設定
+	SetMove(pVec);
+
 	// 更新処理
 	CEnemy::Update();
 }
