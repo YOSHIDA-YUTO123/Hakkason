@@ -14,6 +14,8 @@
 #include "Collider.h"
 #include "bulletmanager.h"
 #include "enemymanager.h"
+#include "effect3d.h"
+#include "particle3d.h"
 
 //===================================================
 // コンストラクタ
@@ -84,6 +86,29 @@ void CEnemyBonus::Update(void)
 
 	// 設定
 	SetMove(pVec);
+
+	// 火の情報を設定
+	CParticle3D::DefoultEffectInfo FireInfo;
+	FireInfo.Bece.Col = { 1.0f,0.89f,0.0f,1.0f };
+	FireInfo.Bece.fMaxSpeed = 1.0f;
+	FireInfo.Bece.fMinSpeed = 1.0f;
+	FireInfo.Bece.MaxDir = { 0.1f,0.5f,0.1f };
+	FireInfo.Bece.MinDir = { -0.1f,0.5f,-0.1f };
+	FireInfo.Bece.nLife = 1;
+	FireInfo.Bece.nMaxLife = 30;
+	FireInfo.Bece.nMinLife = 30;
+	FireInfo.Bece.nNumEffect = 1;
+	FireInfo.Bece.Pos = { GetPosition().x,GetPosition().y ,GetPosition().z };
+	FireInfo.MaxRadius = 3.8f;
+	FireInfo.MinRadius = 2.8f;
+	FireInfo.Bece.bLoop = false;
+	FireInfo.Bece.nCoolDown = 2;
+	FireInfo.Bece.Gravity = 0.03f;
+	FireInfo.Bece.FilePath = CEffect3D::Config::Sphere;
+	FireInfo.Bece.nPriority = 5;
+
+	// 生成
+	CParticle3D::Create(FireInfo);
 
 	// 更新処理
 	CEnemy::Update();
