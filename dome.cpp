@@ -12,8 +12,10 @@
 #include "manager.h"
 #include "renderer.h"
 #include "texmanager.h"
-#include <string>
 
+//************************************************
+// 名前空間
+//************************************************
 using namespace std;
 using namespace Const; // 名前空間Constを使用
 
@@ -130,7 +132,7 @@ HRESULT CMeshDome::Init(void)
 	SetDome(m_nSegH, m_nSegV, m_fRadius, m_fHeight);
 
 	// テクスチャのIDの設定
-	SetTextureID("sky.jpg");
+	SetTextureID("sky.png");
 
 	return S_OK;
 }
@@ -407,7 +409,7 @@ void CMeshDome::SetDome(const int nSegH, const int nSegV, const float fRadius, c
 void CMeshDome::SetTextureID(const char* pTextureName)
 {
 	// ファイルパス
-	string filePath = "data/TEXTURE/sky/";
+	string filePath = "data/TEXTURE/";
 
 	// 文字列の連結
 	filePath += pTextureName;

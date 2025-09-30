@@ -28,6 +28,7 @@
 #include "enemyneedle.h"
 #include "DualUnitTimer.h"
 #include "mapmanager.h"
+#include "dome.h"
 
 using namespace Const; // 名前空間Constを使用
 using namespace std; // 名前空間stdを使用
@@ -66,6 +67,13 @@ HRESULT CGame::Init(void)
 	// ライトの設定処理
 	pLight->SetDirectional(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f), D3DXVECTOR3(0.0f, -0.56f, 0.74f), D3DXVECTOR3(0.0f, 100.0f, 0.0f));
 	pLight->SetDirectional(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f), D3DXVECTOR3(0.0f, -0.56f, -0.74f), D3DXVECTOR3(0.0f, 100.0f, 0.0f));
+
+	// ドームの生成
+	CMeshDome::Create(VEC3_NULL, 10, 10, 5500.0f, 1500.0f);
+
+	// ドームの生成
+	CMeshDome::Create(VEC3_NULL, 10, 10, 5500.0f, -1500.0f);
+
 
 	CMeshField::Create(VEC3_NULL, 5, 5, { 3000.0f,3000.0f });
 
