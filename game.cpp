@@ -78,11 +78,10 @@ HRESULT CGame::Init(void)
 	pLight->SetDirectional(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f), D3DXVECTOR3(0.0f, -0.56f, -0.74f), D3DXVECTOR3(0.0f, 100.0f, 0.0f));
 
 	// ドームの生成
-	CMeshDome::Create(VEC3_NULL, 10, 10, 5500.0f, 1500.0f);
+	CMeshDome::Create(VEC3_NULL, 10, 10, 6500.0f, 2500.0f);
 
 	// ドームの生成
-	CMeshDome::Create(VEC3_NULL, 10, 10, 5500.0f, -1500.0f);
-
+	CMeshDome::Create(VEC3_NULL, 10, 10, 6500.0f, -2500.0f);
 
 	CMeshField::Create(VEC3_NULL, 5, 5, { 4000.0f,4000.0f });
 
@@ -181,9 +180,11 @@ void CGame::Update(void)
 	// キーボードの取得
 	CInputKeyboard* pKeyboard = CManager::GetInputKeyboard();
 
+	CInputJoypad* pJoypad = CManager::GetInputJoypad();
+
 	CPauseManager::GetInstance()->SelectMenu();
 
-	if (pKeyboard != nullptr && pKeyboard->GetTrigger(DIK_P))
+	if ((pKeyboard != nullptr && pJoypad != nullptr) && pKeyboard->GetTrigger(DIK_P) || pJoypad->GetTrigger(pJoypad->JOYKEY_START))
 	{
 		if (pPauseManager != nullptr)
 		{
