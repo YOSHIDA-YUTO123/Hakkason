@@ -122,6 +122,13 @@ void CGame::Update(void)
 	// フェードの取得
 	CFade* pFade = CManager::GetFade();
 
+	int nPlayerLife = m_pPlayer->GetLife();
+
+	if (nPlayerLife <= 0 || m_pTimer->GetTime() <= 0)
+	{
+		m_state = STATE_END;
+	}
+
 	switch (m_state)
 	{
 	case STATE_NORMAL:
@@ -131,7 +138,14 @@ void CGame::Update(void)
 
 		if (m_nCounterState <= 0)
 		{
-
+			if (nPlayerLife <= 0)
+			{
+				pFade->SetFade(make_unique<CResultLose>());
+			}
+			else if (m_pTimer->GetTime() <= 0)
+			{
+				pFade->SetFade(make_unique<CResultWin>());
+			}
 		}
 		break;
 	default:
