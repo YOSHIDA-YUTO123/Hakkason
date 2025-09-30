@@ -145,9 +145,7 @@ void CModelManager::Load(std::string LoadFilePath)
 
 		if (FilePath[0] != NULL && Category[0] != NULL)
 		{
-			string filePath = "data/MODEL/";
-
-			GetModelInfo(filePath += FilePath);
+			GetModelInfo(FilePath);
 		}
 
 		if (line.find("#") != string::npos)

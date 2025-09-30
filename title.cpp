@@ -21,6 +21,7 @@
 #include "score.h"
 #include "NormalTimer.h"
 #include "DualUnitTimer.h"
+#include "player.h"
 
 using namespace Const;	// 名前空間Constの使用
 using namespace std;	// 名前空間stdの使用
@@ -67,6 +68,8 @@ HRESULT CTitle::Init(void)
 
 	// 分と秒のタイマーの生成
 	CDualUnitTimer::Create(D3DXVECTOR3(640.0f, 500.0f, 0.0f), D3DXVECTOR2(100.0f, 50.0f), 5);
+
+	CPlayer::Create(VEC3_NULL, 0.0f);
 
 	//// メッシュシリンダーの生成
 	//CMeshCylinder::Create(VEC3_NULL, -500.0f, 500.0f, 10, 10);

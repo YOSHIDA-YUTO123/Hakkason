@@ -124,6 +124,8 @@ HRESULT CManager::Init(HINSTANCE hInstance,HWND hWnd, BOOL bWindow)
 	m_pFade.reset(CFade::Create());
 	SetMode(make_unique<CTitle>());
 
+	// ÉXÉçÅ[ÇÃê∂ê¨
+	m_pSlow = make_unique<CSlow>();
 #ifdef _DEBUG
 
 #else

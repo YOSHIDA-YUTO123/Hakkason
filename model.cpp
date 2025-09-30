@@ -51,7 +51,7 @@ CModel::~CModel()
 HRESULT CModel::Init(const char* pModelName)
 {
 	// マップのオブジェクトの取得
-	CModelManager::MapObject* pMapObject = CModelManager::GetModelInfo(m_aModelName);
+	CModelManager::MapObject* pMapObject = CModelManager::GetModelInfo(pModelName);
 
 	// 取得できなかったら処理しない
 	if (pMapObject == nullptr)
