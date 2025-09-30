@@ -20,6 +20,8 @@
 #include "bulletmanager.h"
 #include "sound.h"
 #include "enemymanager.h"
+#include "particle3d.h"
+#include "effect3d.h"
 
 //*************************************************
 // 名前空間
@@ -573,6 +575,29 @@ void CPlayer::UpdateShotBullet(CMotion* pMotion,CInputKeyboard *pKeyboard,CInput
 	if (pMotion->IsEventFrame(6, 6, MOTIONTYPE_ACTION))
 	{
 		CManager::GetSound()->Play(CSound::SOUND_LABEL_SHOT);
+
+		// 火の情報を設定
+		CParticle3D::DefoultEffectInfo FireInfo;
+		FireInfo.Bece.Col = { 1.0f,0.5f,0.0f,1.0f };
+		FireInfo.Bece.fMaxSpeed = 1.0f;
+		FireInfo.Bece.fMinSpeed = 1.0f;
+		FireInfo.Bece.MaxDir = { 1.0f,1.0f,1.0f };
+		FireInfo.Bece.MinDir = { -1.0f,1.0f,-1.0f };
+		FireInfo.Bece.nLife = 1;
+		FireInfo.Bece.nMaxLife = 30;
+		FireInfo.Bece.nMinLife = 30;
+		FireInfo.Bece.nNumEffect = 5;
+		FireInfo.Bece.Pos = { GetModelPos(MODEL_SHOTGUN).x,GetModelPos(MODEL_SHOTGUN).y ,GetModelPos(MODEL_SHOTGUN).z };
+		FireInfo.MaxRadius = 1.0f;
+		FireInfo.MinRadius = 1.0f;
+		FireInfo.Bece.bLoop = false;
+		FireInfo.Bece.nCoolDown = 2;
+		FireInfo.Bece.Gravity = 0.0f;
+		FireInfo.Bece.FilePath = CEffect3D::Config::Smoke;
+		FireInfo.Bece.nPriority = 5;
+
+		// 生成
+		CParticle3D::Create(FireInfo);
 
 		// クールダウンの設定
 		m_nCoolDown = SHOT_COOLDOWN;
