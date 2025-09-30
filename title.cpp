@@ -23,6 +23,8 @@
 #include "DualUnitTimer.h"
 #include "player.h"
 #include "titlemanager.h"
+#include "mapmanager.h"
+#include "dome.h"
 
 using namespace Const;	// 名前空間Constの使用
 using namespace std;	// 名前空間stdの使用
@@ -57,24 +59,24 @@ HRESULT CTitle::Init(void)
 	pLight->SetDirectional(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f), D3DXVECTOR3(0.0f, -0.56f, 0.74f), D3DXVECTOR3(0.0f, 100.0f, 0.0f));
 	pLight->SetDirectional(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f), D3DXVECTOR3(0.0f, -0.56f, -0.74f), D3DXVECTOR3(0.0f, 100.0f, 0.0f));
 
-	// メッシュフィールドの生成
-	CMeshField::Create(VEC3_NULL, 10, 10, D3DXVECTOR2(500.0f, 500.0f));
+	// ドームの生成
+	CMeshDome::Create(VEC3_NULL, 10, 10, 5500.0f, 1500.0f);
 
-	// スコアの表示
-	CScore::Create(D3DXVECTOR3(1000.0f,100.0f,0.0f), D3DXVECTOR2(50.0f, 50.0f), 4649);
+	// ドームの生成
+	CMeshDome::Create(VEC3_NULL, 10, 10, 5500.0f, -1500.0f);
 
-	// 普通のタイマーの生成
-	CNormalTimer::Create(D3DXVECTOR3(640.0f, 100.0f, 0.0f), D3DXVECTOR2(100.0f, 50.0f), 60);
 
-	// 分と秒のタイマーの生成
-	CDualUnitTimer::Create(D3DXVECTOR3(640.0f, 500.0f, 0.0f), D3DXVECTOR2(100.0f, 50.0f), 5);
+	CMeshField::Create(VEC3_NULL, 5, 5, { 4000.0f,4000.0f });
+
+	// インスタンスを取得->読み込み
+	CMapManager::Instance()->Load("data\\TXT\\Stage000.json");
+
+	// プレイヤー生成
+	CPlayer::Create(VEC3_NULL, NULL);
 
 	CPlayer::Create(VEC3_NULL, 0.0f);
 
 	m_pTitleManager = CTitleManager::CreateSingleton();
-
-	//// メッシュシリンダーの生成
-	//CMeshCylinder::Create(VEC3_NULL, -500.0f, 500.0f, 10, 10);
 
 	return S_OK;
 }
