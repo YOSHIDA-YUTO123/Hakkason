@@ -21,8 +21,19 @@ class CShadow;
 class CEnemy : public CObjectX
 {
 public:
+
+	typedef enum
+	{
+		TYPE_ONE = 0,
+		TYPE_TWO,
+		TYPE_THREE,
+		TYPE_FOUR,
+		TYPE_MAX
+	}TYPE;
+
 	// コンストラクタ・デストラクタ
 	CEnemy();
+	CEnemy(const TYPE type);
 	~CEnemy();
 
 	// メンバ関数
@@ -41,6 +52,7 @@ public:
 private:
 	std::unique_ptr<CShadow> m_pShadow; // 影のクラスへのポインタ
 	D3DXVECTOR3 m_Move;	// 移動量
+	TYPE m_type;		// 種類
 	int m_nLife;		// 体力
 };
 #endif // !_ENEMY_H_

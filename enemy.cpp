@@ -25,6 +25,16 @@ constexpr float SHADOW_A_LEVEL = 0.8f; // 影の影の最大のアルファ値
 //================================================
 CEnemy::CEnemy()
 {
+	m_type = TYPE_ONE;
+	m_nLife = MAX_LIFE;
+}
+
+//================================================
+// 種類の設定
+//================================================
+CEnemy::CEnemy(const TYPE type)
+{
+	m_type = type;
 	m_nLife = MAX_LIFE;
 }
 
