@@ -74,7 +74,7 @@ CCharacter3D::~CCharacter3D()
 HRESULT CCharacter3D::Init(void)
 {
 	// âeÇÃê∂ê¨
-	m_pShadowS = CShadowS::Create(m_pos);
+	m_pShadowS = CShadowS::Create(m_pos,m_ShadowScal);
 
 	return S_OK;
 }
