@@ -29,6 +29,7 @@
 #include "DualUnitTimer.h"
 #include "mapmanager.h"
 #include "dome.h"
+#include "math.h"
 
 using namespace Const; // 名前空間Constを使用
 using namespace std; // 名前空間stdを使用
@@ -38,6 +39,7 @@ using namespace std; // 名前空間stdを使用
 //***************************************************
 CGame::STATE CGame::m_state = STATE_NORMAL;					   // ゲームの状態
 CPlayer* CGame::m_pPlayer = NULL;
+CDualUnitTimer* CGame::m_pTimer = NULL;
 
 //===================================================
 // コンストラクタ
@@ -81,7 +83,7 @@ HRESULT CGame::Init(void)
 	CPauseManager::Create();
 
 	// 分と秒のタイマーの生成
-	CDualUnitTimer::Create(D3DXVECTOR3(SCREEN_WIDTH - 50.0f, 50.0f, 0.0f), D3DXVECTOR2(50.0f, 25.0f), 60);
+	m_pTimer = CDualUnitTimer::Create(D3DXVECTOR3(SCREEN_WIDTH - 50.0f, 50.0f, 0.0f), D3DXVECTOR2(50.0f, 25.0f), 60);
 
 	// インスタンスを取得->読み込み
 	CMapManager::Instance()->Load("data\\TXT\\StageInfo.json");
@@ -146,6 +148,24 @@ void CGame::Update(void)
 		}
 	}
 
+	static int ntimer = 0;
+	if (CPauseManager::GetPause() == false)
+	{
+		ntimer = Wrap(ntimer + 1, 0, 600);
+	}
+
+	if ((ntimer % 600) == 0 && ntimer != 0)
+	{
+		for (int nCnt = 0; nCnt < 5; nCnt++)
+		{
+			int Type = rand() % 4 + 1;
+			float Angle = math::Randf(D3DX_PI * 2, 0.1f);
+			D3DXVECTOR3 SetPos = m_pPlayer->GetPosition();
+			SetPos.x += sinf(Angle) * 300.0f;
+			SetPos.z += cosf(Angle) * 300.0f;
+			CEnemyNeedle::Create(SetPos);
+		}
+	}
 #ifdef _DEBUG
 
 
