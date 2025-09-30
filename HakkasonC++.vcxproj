@@ -175,6 +175,9 @@
     <ClCompile Include="modelmanager.cpp" />
     <ClCompile Include="NormalTimer.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="ranking.cpp" />
+    <ClCompile Include="RankingManager.cpp" />
+    <ClCompile Include="RankingScore.cpp" />
     <ClCompile Include="score.cpp" />
     <ClCompile Include="debugproc.cpp" />
     <ClCompile Include="effect3d.cpp" />
@@ -251,6 +254,9 @@
     <ClInclude Include="modelmanager.h" />
     <ClInclude Include="NormalTimer.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="ranking.h" />
+    <ClInclude Include="RankingManager.h" />
+    <ClInclude Include="RankingScore.h" />
     <ClInclude Include="score.h" />
     <ClInclude Include="debugproc.h" />
     <ClInclude Include="effect3d.h" />

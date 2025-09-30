@@ -20,6 +20,7 @@
 #include "object2D.h"
 #include <fstream>
 #include "score.h"
+#include "ranking.h"
 
 using namespace Const; // 名前空間Constを使用
 using namespace std; // 名前空間stdを使用
@@ -77,7 +78,7 @@ void CResultWin::Update(void)
 		if (pFade != nullptr)
 		{
 			// 新しいモードの設定
-			pFade->SetFade(make_unique<CTitle>());
+			pFade->SetFade(make_unique<CRanking>());
 		}
 	}
 }
