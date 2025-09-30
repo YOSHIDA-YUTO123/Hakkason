@@ -63,8 +63,8 @@ public:
 	virtual void Update(void) override;
 	virtual void Draw(void) override;
 	void Draw(const float fAvl);
-	void DrawMT(void);
-	
+	void Draw(const D3DXCOLOR col);
+
 	TYPE GetType(void) const { return m_type; }
 	CMotion* LoadMotion(const char *pFileName, const int nNumMotion);
 

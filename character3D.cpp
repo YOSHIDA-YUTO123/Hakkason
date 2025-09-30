@@ -251,6 +251,45 @@ void CCharacter3D::Draw(const float fAvl)
 }
 
 //===================================================
+// 描画処理(色設定)
+//===================================================
+void CCharacter3D::Draw(const D3DXCOLOR col)
+{
+	// デバイスの取得
+	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
+
+	//計算用のマトリックス
+	D3DXMATRIX mtxRot, mtxTrans, mtxScal;
+
+	//ワールドマトリックスの初期化
+	D3DXMatrixIdentity(&m_mtxWorld);
+
+	// 向きの取得
+	D3DXVECTOR3 rot = m_rot;
+
+	//向きを反映
+	D3DXMatrixRotationYawPitchRoll(&mtxRot, rot.y, rot.x, rot.z);
+	D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxRot);
+
+	//位置を反映
+	D3DXMatrixTranslation(&mtxTrans, m_pos.x, m_pos.y, m_pos.z);
+	D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxTrans);
+
+	//ワールドマトリックスの設定
+	pDevice->SetTransform(D3DTS_WORLD, &m_mtxWorld);
+
+	// モデルの描画
+	for (int nCnt = 0; nCnt < m_nNumModel; nCnt++)
+	{
+		if (m_apModel[nCnt] != nullptr)
+		{
+			// 描画処理
+			m_apModel[nCnt]->Draw(col);
+		}
+	}
+}
+
+//===================================================
 // モーションのロード
 //===================================================
 CMotion* CCharacter3D::LoadMotion(const char* pFileName,const int nNumMotion)

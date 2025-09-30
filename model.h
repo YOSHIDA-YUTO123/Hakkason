@@ -32,6 +32,7 @@ public:
 	void Update(void);
 	void Draw(void);
 	void Draw(const float fAlv);
+	void Draw(const D3DXCOLOR col);
 	void DrawShadow(void);
 
 	D3DXVECTOR3 GetPosition(void) const { return m_pos; }
