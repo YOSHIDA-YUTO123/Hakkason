@@ -44,7 +44,7 @@ template <class T> T NormalizeRot(T* value)
 	{
 		(*value) += D3DX_PI * 2.0f;
 	}
-	else if ((*value) >D3DX_PI)
+	else if ((*value) > D3DX_PI)
 	{
 		(*value) += -D3DX_PI * 2.0f;
 	}
