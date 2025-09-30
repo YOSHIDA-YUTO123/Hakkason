@@ -255,32 +255,32 @@
     <ClCompile Include="NormalTimer.cpp">
       <Filter>ソース ファイル\number</Filter>
     </ClCompile>
-    <ClCompile Include="DualUnitTimer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="player.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="enemy.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="bullet.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="enemysphere.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\objectX</Filter>
     </ClCompile>
     <ClCompile Include="bulletmanager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="enemyneedle.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="mapmanager.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\manager</Filter>
     </ClCompile>
     <ClCompile Include="dome.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="DualUnitTimer.cpp">
+      <Filter>ソース ファイル\object2D</Filter>
+    </ClCompile>
+    <ClCompile Include="enemy.cpp">
+      <Filter>ソース ファイル\objectX</Filter>
+    </ClCompile>
+    <ClCompile Include="enemyneedle.cpp">
+      <Filter>ソース ファイル\objectX</Filter>
+    </ClCompile>
+    <ClCompile Include="enemysphere.cpp">
+      <Filter>ソース ファイル\objectX</Filter>
+    </ClCompile>
+    <ClCompile Include="mapmanager.cpp">
+      <Filter>ソース ファイル\manager</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>ソース ファイル\character</Filter>
     </ClCompile>
     <ClCompile Include="enemybonus.cpp">
       <Filter>ソース ファイル</Filter>
@@ -434,35 +434,35 @@
     <ClInclude Include="NormalTimer.h">
       <Filter>ヘッダー ファイル\number</Filter>
     </ClInclude>
-    <ClInclude Include="DualUnitTimer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="player.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="enemy.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="bullet.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="enemysphere.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="bulletmanager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="enemyneedle.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="mapmanager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="json.hpp">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="bullet.h">
+      <Filter>ヘッダー ファイル\objectX</Filter>
+    </ClInclude>
+    <ClInclude Include="bulletmanager.h">
+      <Filter>ヘッダー ファイル\manager</Filter>
+    </ClInclude>
     <ClInclude Include="dome.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="DualUnitTimer.h">
+      <Filter>ヘッダー ファイル\object2D</Filter>
+    </ClInclude>
+    <ClInclude Include="enemy.h">
+      <Filter>ヘッダー ファイル\objectX</Filter>
+    </ClInclude>
+    <ClInclude Include="enemyneedle.h">
+      <Filter>ヘッダー ファイル\objectX</Filter>
+    </ClInclude>
+    <ClInclude Include="enemysphere.h">
+      <Filter>ヘッダー ファイル\objectX</Filter>
+    </ClInclude>
+    <ClInclude Include="mapmanager.h">
+      <Filter>ヘッダー ファイル\manager</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>ヘッダー ファイル\character</Filter>
     </ClInclude>
     <ClInclude Include="enemybonus.h">
       <Filter>ヘッダー ファイル</Filter>
