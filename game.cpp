@@ -22,6 +22,7 @@
 #include "sound.h"
 #include "Object2DAnimMT.h"
 #include "billboardAnim.h"
+#include "meshfield.h"
 
 using namespace Const; // 名前空間Constを使用
 using namespace std; // 名前空間stdを使用
@@ -61,6 +62,8 @@ HRESULT CGame::Init(void)
 	pLight->SetDirectional(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f), D3DXVECTOR3(0.0f, -0.56f, -0.74f), D3DXVECTOR3(0.0f, 100.0f, 0.0f));
 
 	CObject2D::Create(50.0f, 50.0f, CENTER_POS_2D)->SetTextureID("game.png");
+
+	CMeshField::Create(VEC3_NULL, 5, 5, { 3000.0f,3000.0f });
 
 	// ポーズマネージャーの生成
 	CPauseManager::Create();
