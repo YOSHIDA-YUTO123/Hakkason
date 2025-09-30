@@ -49,7 +49,7 @@ void CTutorial::Update(void)
 	// キーボードの取得
 	CInputKeyboard* pKeyboard = CManager::GetInputKeyboard();
 
-	if (pKeyboard != nullptr && pKeyboard->GetTrigger(DIK_RETURN))
+	if (pKeyboard != nullptr && pKeyboard->GetTrigger(DIK_RETURN) || CManager::GetInputJoypad()->GetTrigger(CInputJoypad::JOYKEY_START) == true)
 	{
 		// フェードの取得
 		CFade* pFade = CManager::GetFade();
