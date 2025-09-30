@@ -398,7 +398,7 @@ void CCamera::SetTracking(const D3DXVECTOR3 posVDest, const D3DXVECTOR3 posRDest
 	float rotY = CCamera::GetRotaition().y;
 
 	// ‹——£‚ÌŽæ“¾
-	float fDistance = CCamera::GetDistance();
+	float fDistance = m_fDistance;
 
 	posV.x = posVDest.x - sinf(rotY) * fDistance;
 	posV.y = posVDest.y - cosf(rotY) * fDistance;

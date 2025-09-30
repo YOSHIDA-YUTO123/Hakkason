@@ -98,23 +98,26 @@ void CPlayer::Update(void)
 	// 位置の取得
 	D3DXVECTOR3 pos = CCharacter3D::GetPosition();
 
-	if (pCamera != nullptr)
-	{
-		D3DXVECTOR3 posRDest;
-
-		posRDest.x = modelpos.x + sinf(rot.y) * 1.0f;
-		posRDest.y = (modelpos.y + 0.0f) + sinf(rot.y) * 1.0f;
-		posRDest.z = modelpos.z + cosf(rot.y) * 1.0f;
-
-		// カメラの追従
-		//pCamera->SetTracking(pos, pos, 0.01f);
-	}
+	// 角度の取得
+	float fRotY = CCharacter3D::GetRotation().y;
 
 	// モーションの更新処理
 	CCharacter3D::UpdateMotion();
 
 	// 更新処理
 	CCharacter3D::Update();
+
+	if (pCamera != nullptr)
+	{
+		D3DXVECTOR3 posRDest;
+
+		posRDest.x = pos.x + sinf(fRotY) * 1.0f;
+		posRDest.y = (pos.y) + sinf(fRotY) * 1.0f;
+		posRDest.z = pos.z + cosf(fRotY) * 1.0f;
+
+		// カメラの追従
+		pCamera->SetTracking(pos, posRDest, 0.01f);
+	}
 }
 
 //=================================================
