@@ -23,6 +23,7 @@
 #include "Object2DAnimMT.h"
 #include "billboardAnim.h"
 #include "meshfield.h"
+#include "player.h"
 
 using namespace Const; // 名前空間Constを使用
 using namespace std; // 名前空間stdを使用

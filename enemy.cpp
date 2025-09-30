@@ -43,6 +43,16 @@ void CEnemy::Uninit(void)
 //================================================
 void CEnemy::Update(void)
 {
+	// 位置を取得
+	D3DXVECTOR3 myPos = GetPosition();
+
+	// 位置をずらす
+	myPos += m_Move;
+
+	// 位置を設定
+	SetPosition(myPos);
+
+	// 更新
 	CObjectX::Update();
 }
 
