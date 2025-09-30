@@ -114,7 +114,7 @@ HRESULT CManager::Init(HINSTANCE hInstance,HWND hWnd, BOOL bWindow)
 	// ƒJƒƒ‰‚Ì¶¬
 	m_pCamera = make_unique<CCamera>();
 	m_pCamera->Init();
-	m_pCamera->SetCamera(D3DXVECTOR3(0.0f, 250.0f, -350.0f), VEC3_NULL, D3DXVECTOR3(D3DX_PI * 0.65f, 0.0f, 0.0f));
+	m_pCamera->SetCamera(D3DXVECTOR3(0.0f, 650.0f, 0.0f), VEC3_NULL, D3DXVECTOR3(D3DX_PI * 0.80f, 0.0f, 0.0f));
 
 	// ƒ‰ƒCƒg‚Ì¶¬
 	m_pLight = make_unique<CLight>();
