@@ -11,6 +11,9 @@
 #include "enemyneedle.h"
 #include "enemyshot.h"
 #include "enemysphere.h"
+#include "Collision.h"
+#include "Collider.h"
+#include "bulletmanager.h"
 
 // 静的メンバ変数
 std::vector<CEnemy*> CEnemyManager::m_pvEnemy;
@@ -71,4 +74,34 @@ void CEnemyManager::PushBackBullet(const D3DXVECTOR3 Pos, int Type)
 	}
 	// 配列に連結
 	m_pvEnemy.push_back(LocalEnemy);
+}
+
+//===================================================
+// 当たり判定
+//===================================================
+void CEnemyManager::CollisionBullet(void)
+{
+	// オブジェクトのリストから選択されているオブジェクトを探す
+	for (auto Enemeys = m_pvEnemy.begin(); Enemeys != m_pvEnemy.end(); Enemeys++)
+	{
+		// 弾の可変長配列にアクセス
+		for (auto Bullets = CBulletManager::GetpvBullet().begin(); Bullets != CBulletManager::GetpvBullet().end(); Bullets++)
+		{
+			// 敵と弾の球の当たり判定を作る
+			CColliderSphere EnemyCollider = CColliderSphere::CreateCollider((*Enemeys)->GetPosition(), 10.0f);
+			CColliderSphere BulletCollider = CColliderSphere::CreateCollider((*Bullets)->GetPosition(), 10.0f);
+
+			// 当たったら
+			if (CCollisionSphere::Collision(&EnemyCollider, &BulletCollider) == true)
+			{
+				(*Enemeys)->SetDamage(1);
+
+				// 弾の連結を解除
+				CBulletManager::Erase((*Bullets));
+
+				// 処理を切り上げる
+				return;
+			}
+		}
+	}
 }

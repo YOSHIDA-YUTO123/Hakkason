@@ -6,12 +6,17 @@
 //================================================
 
 #include "enemy.h"
+#include "enemymanager.h"
+
+// 定数宣言
+constexpr int MAX_LIFE = 1; // 体力
 
 //================================================
 // コンストラクタ
 //================================================
 CEnemy::CEnemy()
 {
+	m_nLife = MAX_LIFE;
 }
 
 //================================================
@@ -52,8 +57,18 @@ void CEnemy::Update(void)
 	// 位置を設定
 	SetPosition(myPos);
 
+	// 弾との当たり判定
+	CEnemyManager::CollisionBullet();
+
 	// 更新
 	CObjectX::Update();
+
+	// 死んだら破棄
+	if (m_nLife <= 0)
+	{
+		// 自分をリストから外す
+		CEnemyManager::Erase(this);
+	}
 }
 
 //================================================

@@ -10,6 +10,9 @@
 
 #include "enemy.h"
 
+// 前方宣言
+class CColliderSphere;
+
 class CEnemyManager
 {
 public:
@@ -24,6 +27,8 @@ public:
 	static void Erase(CEnemy* Instance);
 	// 生成
 	static void PushBackBullet(const D3DXVECTOR3 Pos, int Type);
+
+	static void CollisionBullet(void);
 private:
 	// コンストラクタ
 	CEnemyManager() {};
