@@ -24,7 +24,7 @@ class CShadowS : public CObjectX
 public:
 	CShadowS(int nPriority = 3);
 	~CShadowS();
-	static CShadowS* Create(const D3DXVECTOR3 pos);
+	static CShadowS* Create(const D3DXVECTOR3 pos, const D3DXVECTOR3 Scal);
 
 	HRESULT Init(void) override;
 	void Uninit(void) override;
@@ -32,6 +32,7 @@ public:
 	void Draw(void) override;
 private:
 	LPDIRECT3DVERTEXBUFFER9 m_pVtxBuffer; // 頂点バッファへのポインタ
+	D3DXVECTOR3 m_Scal;					  // 影のスケール
 };
 
 #endif

@@ -28,7 +28,7 @@ using namespace math;  // 名前空間mathの使用
 //*************************************************
 // 定数宣言
 //*************************************************
-const D3DXVECTOR3 SHADOW_SCAL = { 1.0f,1.0f,1.0f };		// 影のモデルの拡大率
+const D3DXVECTOR3 SHADOW_SCAL = { 2.0f,2.0f,2.0f };		// 影のモデルの拡大率
 const D3DXVECTOR3 PLAYER_SIZE = { 10.0f,100.0f,10.0f };	// プレイヤーの大きさ
 constexpr float INERTIA = 0.25f;						// 移動慣性
 constexpr float BULLET_MOVE = 5.0f;						// 弾の速度
@@ -78,14 +78,14 @@ CPlayer* CPlayer::Create(const D3DXVECTOR3 pos, const float fAngle)
 //=================================================
 HRESULT CPlayer::Init(void)
 {
+	// キャラクターの設定
+	CCharacter3D::SetCharacter(10, 1.5f, SHADOW_SCAL, PLAYER_SIZE);
+
 	// 初期化処理
 	if (FAILED(CCharacter3D::Init()))
 	{
 		return E_FAIL;
 	}
-
-	// キャラクターの設定
-	CCharacter3D::SetCharacter(10, 1.5f, SHADOW_SCAL, PLAYER_SIZE);
 
 	// モーションの読み込み
 	CCharacter3D::LoadMotion("player.txt", MOTIONTYPE_MAX);
@@ -489,10 +489,10 @@ void CPlayer::UpdateShotBullet(CMotion* pMotion,CInputKeyboard *pKeyboard,CInput
 
 		// 弾の生成
 		CBulletManager::PushBackBullet(shotGunPos, VEC3_NULL,
-			D3DXVECTOR3(sinf(fAngleY + D3DX_PI * 0.75f), 0.0f, cosf(fAngleY + D3DX_PI * 0.75f)), BULLET_MOVE, BULLET_LIFE);
+			D3DXVECTOR3(sinf(fAngleY + D3DX_PI * 0.90f), 0.0f, cosf(fAngleY + D3DX_PI * 0.90f)), BULLET_MOVE, BULLET_LIFE);
 
 		// 弾の生成
 		CBulletManager::PushBackBullet(shotGunPos, VEC3_NULL,
-			D3DXVECTOR3(sinf(fAngleY - D3DX_PI * 0.75f), 0.0f, cosf(fAngleY - D3DX_PI * 0.75f)), BULLET_MOVE, BULLET_LIFE);
+			D3DXVECTOR3(sinf(fAngleY - D3DX_PI * 0.90f), 0.0f, cosf(fAngleY - D3DX_PI * 0.90f)), BULLET_MOVE, BULLET_LIFE);
 	}
 }
