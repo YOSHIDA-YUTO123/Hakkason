@@ -46,6 +46,7 @@ CCharacter3D::CCharacter3D() : CObject(4)
 //===================================================
 CCharacter3D::CCharacter3D(const TYPE type) : CObject(4)
 {
+	m_rotDest = VEC3_NULL;
 	m_type = type;
 	m_Size = VEC3_NULL;
 	m_nNumModel = NULL;
@@ -160,6 +161,15 @@ void CCharacter3D::Update(void)
 	{
 		m_pShadowS->SetPosition(m_pos);
 	}
+
+	// ·•ª
+	float Diff = m_rotDest.y - m_rot.y;
+
+	// Šp“x‚Ì³‹K‰»
+	NormalizeDiffRot(Diff, &m_rot.y);
+
+	// –Ú“I‚ÌŠp“x‚É‹ß‚Ã‚¯‚é
+	m_rot.y += (m_rotDest.y - m_rot.y) * 0.1f;
 }
 
 //===================================================
@@ -487,14 +497,6 @@ void CCharacter3D::SetCharacter(void)
 			m_apModel[nCnt]->SetParent(nullptr, nParentIdx);
 		}
 	}
-}
-
-//===================================================
-// –Ú“I‚ÌŠp“x‚É‹ß‚Ã‚¯‚é
-//===================================================
-void CCharacter3D::SetSmoothAngle(const float fcoef)
-{
-
 }
 
 //===================================================
