@@ -22,6 +22,7 @@ using namespace std;   // –¼‘O‹óŠÔstd‚Ìg—p
 //=================================================
 CDualUnitTimer::CDualUnitTimer()
 {
+    m_nCurrentTime = NULL;
     m_nCounter = NULL;
     m_pMinute = nullptr;
 }
@@ -174,6 +175,8 @@ void CDualUnitTimer::Update(void)
             nSecond = 0; // 0‚É‚·‚é
         }
     }
+
+    m_nCurrentTime = nSecond + (nMinute * FRAME);
 
     // •b‚Ìİ’è
     CTimer::SetTime(nSecond);
