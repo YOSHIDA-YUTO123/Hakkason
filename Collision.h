@@ -122,7 +122,7 @@ public:
 	* @param 相手の最近点
 	* @return 判定の結果
 	*/
-	bool Collision(CColliderCapsule* myCapsule, CColliderCapsule* otherCapsule, D3DXVECTOR3* NearPos1 = nullptr, D3DXVECTOR3* NearPos2 = nullptr);
+	static bool Collision(CColliderCapsule* myCapsule, CColliderCapsule* otherCapsule, D3DXVECTOR3* NearPos1 = nullptr, D3DXVECTOR3* NearPos2 = nullptr);
 
 	/**
 	* @brief カプセルvs円
@@ -130,10 +130,10 @@ public:
 	* @param 相手の円
 	* @return 判定の結果
 	*/
-	bool CollisionSphere(CColliderCapsule* pCapsule, CColliderSphere* pSphere);
+	static bool CollisionSphere(CColliderCapsule* pCapsule, CColliderSphere* pSphere);
 private:
 	CCollisionCapsule();
-	float ClosestPtSegmentSegment(D3DXVECTOR3 Start1, D3DXVECTOR3 End1, D3DXVECTOR3 Start2, D3DXVECTOR3 End2, float* pParam1, float* pParam2, D3DXVECTOR3* c1osestPos1, D3DXVECTOR3* c1osestPos2);
+	static float ClosestPtSegmentSegment(D3DXVECTOR3 Start1, D3DXVECTOR3 End1, D3DXVECTOR3 Start2, D3DXVECTOR3 End2, float* pParam1, float* pParam2, D3DXVECTOR3* c1osestPos1, D3DXVECTOR3* c1osestPos2);
 };
 
 #endif

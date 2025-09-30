@@ -12,6 +12,7 @@
 
 // 前方宣言
 class CColliderSphere;
+class CPlayer;
 
 class CEnemyManager
 {
@@ -29,6 +30,9 @@ public:
 	static void PushBackBullet(const D3DXVECTOR3 Pos, int Type);
 
 	static void CollisionBullet(void);
+
+	static void CollisionPlayer(void);
+
 private:
 	// コンストラクタ
 	CEnemyManager() {};

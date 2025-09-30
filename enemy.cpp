@@ -72,6 +72,9 @@ void CEnemy::Update(void)
 	// 弾との当たり判定
 	CEnemyManager::CollisionBullet();
 
+	// プレイヤーの当たり判定
+	CEnemyManager::CollisionPlayer();
+
 	// 更新
 	CObjectX::Update();
 
