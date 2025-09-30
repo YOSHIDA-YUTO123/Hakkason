@@ -22,7 +22,12 @@ public:
 	~CBulletManager();
 
 	// 静的メンバ関数
+	// ゲッター
+	static std::vector<CBullet*>& GetpvBullet(void) { return m_pvBullet; }
+	// セッター
+	// 生成
 	static void PushBackBullet(const D3DXVECTOR3 Pos, const D3DXVECTOR3 Rot, const D3DXVECTOR3 Dir, const float Speed);
+protected:
 private:
 	// コンストラクタ
 	CBulletManager() {};

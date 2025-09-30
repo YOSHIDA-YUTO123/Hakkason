@@ -10,6 +10,9 @@
 #include "player.h"
 #include "manager.h"
 #include "enemysphere.h"
+#include "Collision.h"
+#include "Collider.h"
+#include "bulletmanager.h"
 
 //================================================
 // コンストラクタ
@@ -55,6 +58,27 @@ void CEnemySphere::Update(void)
 	if (CManager::GetMode() != CScene::MODE_GAME) return;
 	// プレイヤーが生成されていなかったら早期リターン
 	if (CGame::GetPlayer() == NULL) return;
+
+	// 弾の可変長配列にアクセス
+	for (auto Bullets = CBulletManager::GetpvBullet().begin(); Bullets != CBulletManager::GetpvBullet().end(); Bullets++)
+	{
+		// 敵と弾の球の当たり判定を作る
+		CColliderSphere EnemyCollider = CColliderSphere::CreateCollider(GetPosition(), 10.0f);
+		CColliderSphere BulletCollider = CColliderSphere::CreateCollider((*Bullets)->GetPosition(), 10.0f);
+
+		// 当たったら
+		if (CCollisionSphere::Collision(&EnemyCollider, &BulletCollider) == true)
+		{
+			// 自分自身を破棄
+			Uninit();
+
+			// 弾の破棄
+			(*Bullets)->Uninit();
+
+			// 処理を切り上げる
+			return;
+		}
+	}
 
 	// プレイヤーまでのベクトルを引く
 	D3DXVECTOR3 pVec = CGame::GetPlayer()->GetPosition() - GetPosition();
