@@ -203,6 +203,8 @@ void CCamera::MouseWheel(void)
 //===================================================
 void CCamera::MouseView(void)
 {
+#ifdef _DEBUG
+
 	// マウスの取得
 	CInputMouse* pMouse = CManager::GetInputMouse();
 
@@ -212,10 +214,8 @@ void CCamera::MouseView(void)
 
 	//D3DXVECTOR2 fAngle = Move - MoveOld;
 
-#ifdef _DEBUG
 	// マウスホイール
 	CCamera::MouseWheel();
-#endif
 
 	//// ポーズ中かどうか
 	//bool bPause = CPauseManager::GetPause();
@@ -256,9 +256,6 @@ void CCamera::MouseView(void)
 		//UpdatePositionV();
 	}
 
-
-#ifdef _DEBUG
-
 	if (pMouse->OnMousePress(pMouse->RIGHT))
 	{
 		// 回転量を更新
@@ -280,7 +277,8 @@ void CCamera::MouseView(void)
 		// 注視点の更新処理
 		UpdatePositionR();
 	}
-#endif // _DEBUG
+#endif
+
 }
 
 //===================================================

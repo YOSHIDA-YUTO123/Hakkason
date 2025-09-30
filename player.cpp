@@ -15,11 +15,15 @@
 #include "bullet.h"
 #include "motion.h"
 #include "debugproc.h"
+#include "renderer.h"
+#include "math.h"
+#include "bulletmanager.h"
 
 //*************************************************
 // 名前空間
 //*************************************************
 using namespace Const; // 名前空間Constの使用
+using namespace math;  // 名前空間mathの使用
 
 //*************************************************
 // 定数宣言
@@ -33,6 +37,8 @@ constexpr float INERTIA = 0.25f;						// 移動慣性
 //=================================================
 CPlayer::CPlayer()
 {
+	D3DXMatrixIdentity(&m_ShotMtx);
+
 	m_move = VEC3_NULL;
 }
 
@@ -141,6 +147,17 @@ void CPlayer::Update(void)
 	// 角度の取得
 	float fRotY = CCharacter3D::GetRotation().y;
 
+	if (pKeyboard->GetRepeat(DIK_RETURN, 60))
+	{
+		// 発射地点の取得
+		D3DXVECTOR3 shotGunPos = GetPositionFromMatrix(m_ShotMtx);
+
+		// 弾の発射
+		CBulletManager::PushBackBullet(shotGunPos, VEC3_NULL,
+			D3DXVECTOR3(sinf(fRotY + D3DX_PI), 0.0f, cosf(fRotY + D3DX_PI)), 10.0f);
+
+		pMotion->SetMotion(MOTIONTYPE_ACTION, true, 10);
+	}
 	// モーションの更新処理
 	CCharacter3D::UpdateMotion();
 
@@ -154,11 +171,6 @@ void CPlayer::Update(void)
 	{
 		// カメラの追従
 		pCamera->SetTracking(pos, pos, 0.1f);
-	}
-
-	if (pKeyboard->GetTrigger(DIK_1))
-	{
-		CBullet::Create(VEC3_NULL, D3DXVECTOR3(0.0f, fRotY, 0.0f), D3DXVECTOR3(0.0f, 0.5f, 0.0f), 2.0f);
 	}
 
 #ifdef _DEBUG
@@ -176,6 +188,38 @@ void CPlayer::Draw(void)
 {
 	// 描画処理
 	CCharacter3D::Draw();
+
+	// デバイスの取得
+	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
+
+	//計算用のマトリックス
+	D3DXMATRIX mtxRot, mtxTrans, mtxParent;
+
+	//ワールドマトリックスの初期化
+	D3DXMatrixIdentity(&m_ShotMtx);
+
+	// 親の位置、向きの設定
+	D3DXVECTOR3 ParentRot = CCharacter3D::GetModelRot(MODEL_SHOTGUN);
+
+	//向きを反映
+	D3DXMatrixRotationYawPitchRoll(&mtxRot, ParentRot.y, ParentRot.x, ParentRot.z);
+	D3DXMatrixMultiply(&m_ShotMtx, &m_ShotMtx, &mtxRot);
+
+	// 大きさの取得
+	D3DXVECTOR3 ParentSize = CCharacter3D::GetModelSize(MODEL_SHOTGUN);
+
+	//位置を反映
+	D3DXMatrixTranslation(&mtxTrans, ParentSize.x, 0.0f, 0.0f);
+	D3DXMatrixMultiply(&m_ShotMtx, &m_ShotMtx, &mtxTrans);
+
+	// 親のマトリックスの取得
+	mtxParent = CCharacter3D::GetParent(MODEL_SHOTGUN);
+
+	// 親のワールドマトリックスと掛け合わせる
+	D3DXMatrixMultiply(&m_ShotMtx, &m_ShotMtx, &mtxParent);
+
+	// ワールドマトリックスの設定
+	pDevice->SetTransform(D3DTS_WORLD, &m_ShotMtx);
 }
 
 //=================================================

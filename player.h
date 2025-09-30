@@ -29,6 +29,22 @@ class CPlayer : public CCharacter3D
 {
 public:
 
+	// プレイヤーのモデル
+	typedef enum
+	{
+		MODEL_BODY = 0, // 胸
+		MODEL_HEAD,		// 頭
+		MODEL_ARMR,		// 右腕
+		MODEL_HANDR,	// 右手
+		MODEL_ARML,		// 左腕
+		MODEL_HANDL,	// 左手
+		MODEL_LEGR,		// 右太もも
+		MODEL_FOOTR,	// 右足
+		MODEL_LEGL,		// 左太もも
+		MODEL_FOOTL,	// 左足
+		MODEL_SHOTGUN,	// 銃
+		MODEL_MAX
+	}MODEL;
 	// モーションの種類
 	typedef enum
 	{
@@ -53,7 +69,8 @@ private:
 	void Debug(CInputKeyboard* pKeyboard);
 	bool MoveKeyboard(CInputKeyboard* pKeyboard, CCamera* pCamera);
 
-	D3DXVECTOR3 m_move; // 移動量
+	D3DXVECTOR3 m_move;		// 移動量
+	D3DXMATRIX m_ShotMtx;	// 発射地点のマトリックス
 };
 
 #endif
