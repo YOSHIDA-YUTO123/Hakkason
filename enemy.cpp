@@ -8,6 +8,8 @@
 #include "enemy.h"
 #include "enemymanager.h"
 #include "shadow.h"
+#include "particle3d.h"
+#include "effect3d.h"
 
 // ’è”éŒ¾
 constexpr int MAX_LIFE = 1; // ‘Ì—Í
@@ -85,6 +87,29 @@ void CEnemy::Update(void)
 	{
 		// ©•ª‚ğƒŠƒXƒg‚©‚çŠO‚·
 		CEnemyManager::Erase(this);
+
+		// ‰Î‚Ìî•ñ‚ğİ’è
+		CParticle3D::DefoultEffectInfo FireInfo;
+		FireInfo.Bece.Col = { 0.6f,0.0f,1.0f,1.0f };
+		FireInfo.Bece.fMaxSpeed = 1.0f;
+		FireInfo.Bece.fMinSpeed = 1.0f;
+		FireInfo.Bece.MaxDir = { 0.54f,1.0f,0.5f };
+		FireInfo.Bece.MinDir = { -0.54f,1.0f,-0.5f };
+		FireInfo.Bece.nLife = 1;
+		FireInfo.Bece.nMaxLife = 30;
+		FireInfo.Bece.nMinLife = 30;
+		FireInfo.Bece.nNumEffect = 5;
+		FireInfo.Bece.Pos = { myPos.x,myPos.y ,myPos.z };
+		FireInfo.MaxRadius = 9.8f;
+		FireInfo.MinRadius = 4.2f;
+		FireInfo.Bece.bLoop = false;
+		FireInfo.Bece.nCoolDown = 2;
+		FireInfo.Bece.Gravity = 0.14f;
+		FireInfo.Bece.FilePath = CEffect3D::Config::Sphere;
+		FireInfo.Bece.nPriority = 5;
+
+		// ¶¬
+		CParticle3D::Create(FireInfo);
 
 		if (m_pShadow != nullptr)
 		{
