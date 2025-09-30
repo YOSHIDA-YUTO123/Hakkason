@@ -50,6 +50,7 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 private:
+	void Debug(CInputKeyboard* pKeyboard);
 	bool MoveKeyboard(CInputKeyboard* pKeyboard, CCamera* pCamera);
 
 	D3DXVECTOR3 m_move; // ˆÚ“®—Ê

@@ -81,13 +81,14 @@ public:
 	CMotion* GetMotion(void) { return m_pMotion.get(); } // モーションの取得
 	float GetSpeed(void) { return m_fSpeed; }
 	int GetLife(void) const { return m_nLife; }
-
+	D3DXVECTOR3 GetRotDest(void) const { return m_rotDest; }
 
 	// セッター
 	void SetPosition(const D3DXVECTOR3 pos) { m_pos = pos; }
 	void SetRotation(const D3DXVECTOR3 rot) { m_rot = rot; }
 	void SetCharacter(const int nLife, const float fSpeed, const D3DXVECTOR3 ShadowScal, const D3DXVECTOR3 Size);
 	void Copy(CCharacter3D* pCharacter);
+	void SetRotDest(const D3DXVECTOR3 rot) { m_rotDest = rot; }
 
 	bool GetAlive(void);		// 生きているか
 
@@ -100,7 +101,6 @@ public:
 
 protected:
 	void SetCharacter(void);
-	void SetSmoothAngle(const float fcoef);
 private:
 
 	std::unique_ptr<CMotion> m_pMotion;		// モーションのクラスへのポインタ
