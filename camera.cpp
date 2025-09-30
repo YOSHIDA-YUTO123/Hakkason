@@ -385,3 +385,25 @@ void CCamera::LerpPos(const D3DXVECTOR3 posRDest, const D3DXVECTOR3 posVDest, co
 	m_posV.y += (m_posVDest.y - m_posV.y) * fCoef;
 	m_posV.z += (m_posVDest.z - m_posV.z) * fCoef;
 }
+
+//===================================================
+// ’Ç]ˆ—
+//===================================================
+void CCamera::SetTracking(const D3DXVECTOR3 posVDest, const D3DXVECTOR3 posRDest, const float fcoef)
+{
+	D3DXVECTOR3 posR = posRDest * 1.0f;
+	D3DXVECTOR3 posV = VEC3_NULL;
+
+	// Y²‚ÌŒü‚«‚Ìæ“¾
+	float rotY = CCamera::GetRotaition().y;
+
+	// ‹——£‚Ìæ“¾
+	float fDistance = CCamera::GetDistance();
+
+	posV.x = posVDest.x - sinf(rotY) * fDistance;
+	posV.y = posVDest.y - cosf(rotY) * fDistance;
+	posV.z = posVDest.z - cosf(rotY) * fDistance;
+
+	// ƒJƒƒ‰‚ÌˆÊ’u‚Ì•âŠÔ
+	CCamera::LerpPos(posR, posV, fcoef);
+}
