@@ -81,7 +81,7 @@ void CEnemyNeedle::Update(void)
 	}
 
 	// プレイヤーまでのベクトルを引く
-	D3DXVECTOR3 pVec = CGame::GetPlayer()->GetPosition() - GetPosition();
+	D3DXVECTOR3 pVec = CGame::GetPlayer()->GetModelPos(1) - GetPosition();
 
 	// 正規化
 	D3DXVec3Normalize(&pVec, &pVec);
