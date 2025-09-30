@@ -5,6 +5,10 @@
 //
 //================================================
 
+// 二重インクルード防止
+#ifndef _ENEMY_H_
+#define _ENEMY_H_
+
 // インクルード
 #include "objectX.h"
 #include <string>
@@ -30,3 +34,4 @@ public:
 private:
 	D3DXVECTOR3 m_Move;	// 移動量
 };
+#endif // !_ENEMY_H_

@@ -5,6 +5,10 @@
 //
 //================================================
 
+// 二重インクルード防止
+#ifndef _ENEMTSPHERE_H_
+#define _ENEMTSPHERE_H_
+
 // インクルード
 #include "enemy.h"
 
@@ -26,3 +30,4 @@ public:
 	static CEnemySphere* Create(D3DXVECTOR3 Pos);
 private:
 };
+#endif // !_ENEMTSPHERE_H_
