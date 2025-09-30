@@ -40,9 +40,9 @@ using namespace std; // 名前空間stdを使用
 //***************************************************
 // 静的メンバ変数宣言
 //***************************************************
-CGame::STATE CGame::m_state = STATE_NORMAL;					   // ゲームの状態
-CPlayer* CGame::m_pPlayer = NULL;
-CDualUnitTimer* CGame::m_pTimer = NULL;
+CGame::STATE CGame::m_state = STATE_NORMAL;	// ゲームの状態
+CPlayer* CGame::m_pPlayer = NULL;			// プレイヤー
+CDualUnitTimer* CGame::m_pTimer = NULL;		// タイマー
 
 //===================================================
 // コンストラクタ

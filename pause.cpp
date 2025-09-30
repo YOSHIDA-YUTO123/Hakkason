@@ -143,7 +143,7 @@ HRESULT CPauseContinue::Init(void)
 	}
 
 	// テクスチャの設定
-	SetTextureID("data/TEXTURE/pause/pause_continue.png");
+	SetTextureID("continuation.png");
 
 	return S_OK;
 }
@@ -261,7 +261,7 @@ HRESULT CPauseRetry::Init(void)
 	}
 
 	// テクスチャの設定
-	SetTextureID("data/TEXTURE/pause/pause_retry.png");
+	SetTextureID("return.png");
 
 	return S_OK;
 }
