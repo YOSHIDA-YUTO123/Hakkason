@@ -507,8 +507,6 @@ void CPauseManager::Create(void)
 		// 自分の生成
 		m_pInstance.reset(new CPauseManager);
 
-		CPauseNow::Create(D3DXVECTOR3(80.0f,660.0f, 0.0f), D3DXVECTOR2(60.0f, 50.0f));
-
 		// ポーズの選択メニュー分
 		for (int nCnt = CPause::TYPE_CONTINUE; nCnt <= CPause::TYPE_QUIT; nCnt++)
 		{
@@ -594,94 +592,4 @@ void CPauseManager::SelectMenu(void)
 
 	// 範囲内をループする
 	m_SelectMenu = Wrap(m_SelectMenu, CPause::TYPE_CONTINUE, CPause::TYPE_QUIT);
-}
-
-//================================================
-// コンストラクタ(ポーズ中)
-//================================================
-CPauseNow::CPauseNow()
-{
-	m_BaseSize = VEC2_NULL;
-	m_fCounter = NULL;
-}
-
-//================================================
-// デストラクタ(ポーズ中)
-//================================================
-CPauseNow::~CPauseNow()
-{
-}
-
-//================================================
-// 生成処理
-//================================================
-CPauseNow* CPauseNow::Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 Size)
-{
-	// ポーズ中の生成
-	CPauseNow* pPause = new CPauseNow;
-
-	pPause->SetPosition(pos);
-	pPause->SetSize(Size);
-	pPause->Init();
-	pPause->m_BaseSize = Size;
-
-	return pPause;
-}
-
-//================================================
-// 初期化処理(ポーズ中)
-//================================================
-HRESULT CPauseNow::Init(void)
-{
-	// 初期化処理
-	if (FAILED(CObject2D::Init()))
-	{
-		return E_FAIL;
-	}
-
-	// 種類の設定
-	CObject::SetType(TYPE_PAUSE);
-
-	// テクスチャのIDの設定
-	CObject2D::SetTextureID("data/TEXTURE/pause/pausenow.png");
-
-	return S_OK;
-}
-
-//================================================
-// 終了処理(ポーズ中)
-//================================================
-void CPauseNow::Uninit(void)
-{
-	// 終了処理
-	CObject2D::Uninit();
-}
-
-//================================================
-// 更新処理(ポーズ中)
-//================================================
-void CPauseNow::Update(void)
-{
-	m_fCounter += COUNTER;
-
-	D3DXVECTOR2 Size = VEC2_NULL;
-
-	// 大きさを求める
-	Size.x = fabsf(sinf(m_fCounter) * (m_BaseSize.x * 0.2f)) + m_BaseSize.x;
-	Size.y = fabsf(sinf(m_fCounter) * (m_BaseSize.y * 0.2f)) + m_BaseSize.x;
-
-	// 大きさを計算
-	CObject2D::SetSize(Size);
-
-	// 2Dオブジェクトの更新
-	CObject2D::Update();
-}
-
-//================================================
-// 描画処理(ポーズ中)
-//================================================
-void CPauseNow::Draw(void)
-{
-	// 描画処理
-	CObject2D::Draw();
 }

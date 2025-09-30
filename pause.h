@@ -124,23 +124,4 @@ private:
 	static std::unique_ptr<CPauseManager> m_pInstance; // 自分のインスタンス
 	static bool m_bPause; // ポーズ状態かどうか
 };
-
-//************************************************
-// ポーズ(ポーズ中)のクラスの定義
-//************************************************
-class CPauseNow : public CObject2D
-{
-public:
-	CPauseNow();
-	~CPauseNow();
-
-	static CPauseNow* Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 Size);
-	HRESULT Init(void) override;
-	void Uninit(void) override;
-	void Update(void) override;
-	void Draw(void) override;
-private:
-	D3DXVECTOR2 m_BaseSize;	// 元の大きさ
-	float m_fCounter;		// カウンター
-};
 #endif
