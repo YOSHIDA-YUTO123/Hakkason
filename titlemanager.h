@@ -25,9 +25,9 @@ public:
 			static const D3DXVECTOR3 Bace;				// ロゴの基準となる位置
 			static constexpr float OffSet = 100.0f;		// メニューの隙間
 			static constexpr float Width = 100.0f;		// 横幅
-			static constexpr float Height = 100.0f;		// 立幅
-			static constexpr float DestWidth = 150.0f;	// 横幅
-			static constexpr float DestHeight = 150.0f;	// 立幅
+			static constexpr float Height = 25.0f;		// 立幅
+			static constexpr float DestWidth = 125.0f;	// 横幅
+			static constexpr float DestHeight = 50.0f;	// 立幅
 			static constexpr int Frame = 30;			// フレーム
 		};
 		// ロゴの規定値を設定
@@ -36,7 +36,7 @@ public:
 			static const D3DXVECTOR3 Dest;													// 目標
 			static const D3DXVECTOR2 Size;													// 大きさ
 			static constexpr int AnimFrame = 60;											// アニメーションフレーム
-			static constexpr const char* FilePath = "data\\TEXTURE\\Title\\TitleLogo.png";	// テクスチャのパス
+			static constexpr const char* FilePath = "title000.png";	// テクスチャのパス
 		};
 	};
 

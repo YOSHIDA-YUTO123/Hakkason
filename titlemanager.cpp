@@ -13,10 +13,10 @@
 #include "input.h"
 
 // 規定値を設定
-const D3DXVECTOR3 CTitleManager::Config::Menu::Bace = { 250.0f,400.0f,0.0f };
-const D3DXVECTOR3 CTitleManager::Config::Logo::Apper = { 250.0f,0.0f,0.0f };
-const D3DXVECTOR3 CTitleManager::Config::Logo::Dest = { 250.0f,200.0f,0.0f };
-const D3DXVECTOR2 CTitleManager::Config::Logo::Size = { 200.0f,200.0f };
+const D3DXVECTOR3 CTitleManager::Config::Menu::Bace = { 650.0f,500.0f,0.0f };
+const D3DXVECTOR3 CTitleManager::Config::Logo::Apper = { 650.0f,0.0f,0.0f };
+const D3DXVECTOR3 CTitleManager::Config::Logo::Dest = { 650.0f,200.0f,0.0f };
+const D3DXVECTOR2 CTitleManager::Config::Logo::Size = { 450.0f,200.0f };
 
 // シングルトンを宣言
 CTitleManager* CTitleManager::m_Singleton = NULL;
