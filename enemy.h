@@ -12,6 +12,10 @@
 // インクルード
 #include "objectX.h"
 #include <string>
+#include <memory>
+
+// 前方宣言
+class CShadow;
 
 // 敵の基底クラスを定義
 class CEnemy : public CObjectX
@@ -35,6 +39,7 @@ public:
 	// ゲッター
 	D3DXVECTOR3 GetMove(void) { return m_Move; }
 private:
+	std::unique_ptr<CShadow> m_pShadow; // 影のクラスへのポインタ
 	D3DXVECTOR3 m_Move;	// 移動量
 	int m_nLife;		// 体力
 };
