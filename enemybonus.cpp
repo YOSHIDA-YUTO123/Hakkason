@@ -63,6 +63,8 @@ void CEnemyBonus::Update(void)
 	// プレイヤーが生成されていなかったら早期リターン
 	if (CGame::GetPlayer() == NULL) return;
 
+	m_nTimer++;
+
 	// プレイヤーまでのベクトルを引く
 	D3DXVECTOR3 pVec = CGame::GetPlayer()->GetModelPos(1) - GetPosition();
 
@@ -112,6 +114,11 @@ void CEnemyBonus::Update(void)
 
 	// 更新処理
 	CEnemy::Update();
+
+	if (m_nTimer > 300)
+	{
+		CEnemyManager::Erase(this);
+	}
 }
 
 //===================================================
