@@ -5,6 +5,10 @@
 //
 //================================================
 
+// 二重インクルード防止
+#ifndef _BULLET_H_
+#define _BULLET_H_
+
 // インクルード
 #include "objectX.h"
 
@@ -27,3 +31,4 @@ public:
 private:
 	D3DXVECTOR3 m_Move;		// 移動量
 };
+#endif // !_BULLET_H_

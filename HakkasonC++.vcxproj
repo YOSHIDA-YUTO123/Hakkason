@@ -156,6 +156,7 @@
     <ClCompile Include="billboard.cpp" />
     <ClCompile Include="billboardAnim.cpp" />
     <ClCompile Include="bullet.cpp" />
+    <ClCompile Include="bulletmanager.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="character3D.cpp" />
     <ClCompile Include="CharacterManager.cpp" />
@@ -218,6 +219,7 @@
     <ClInclude Include="billboard.h" />
     <ClInclude Include="billboardAnim.h" />
     <ClInclude Include="bullet.h" />
+    <ClInclude Include="bulletmanager.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="character3D.h" />
     <ClInclude Include="CharacterManager.h" />
