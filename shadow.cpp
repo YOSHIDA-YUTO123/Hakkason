@@ -40,6 +40,12 @@ CShadow::CShadow()
 //================================================
 CShadow::~CShadow()
 {
+	// 頂点バッファの破棄
+	if (m_pVtxBuffer != nullptr)
+	{
+		m_pVtxBuffer->Release();
+		m_pVtxBuffer = nullptr;
+	}
 }
 
 //================================================

@@ -28,7 +28,7 @@ public:
 	// 連結解除
 	static void Erase(CBullet* Instance);
 	// 生成
-	static void PushBackBullet(const D3DXVECTOR3 Pos, const D3DXVECTOR3 Rot, const D3DXVECTOR3 Dir, const float Speed);
+	static void PushBackBullet(const D3DXVECTOR3 Pos, const D3DXVECTOR3 Rot, const D3DXVECTOR3 Dir, const float Speed,const int nLife);
 protected:
 private:
 	// コンストラクタ

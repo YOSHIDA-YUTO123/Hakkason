@@ -31,7 +31,9 @@ using namespace math;  // 名前空間mathの使用
 const D3DXVECTOR3 SHADOW_SCAL = { 1.0f,1.0f,1.0f };		// 影のモデルの拡大率
 const D3DXVECTOR3 PLAYER_SIZE = { 10.0f,100.0f,10.0f };	// プレイヤーの大きさ
 constexpr float INERTIA = 0.25f;						// 移動慣性
+constexpr float BULLET_MOVE = 5.0f;						// 弾の速度
 constexpr int SHOT_COOLDOWN = 60;						// 発射クールダウン
+constexpr int BULLET_LIFE = 60;							// 弾の寿命
 
 //=================================================
 // コンストラクタ
@@ -129,7 +131,7 @@ void CPlayer::Update(void)
 	// モーションの種類の取得
 	int nMotionType = pMotion->GetBlendType();
 
-	// キーボードの移動
+	// キーボード,パッドの移動
 	if ((MoveKeyboard(pKeyboard, pCamera) || MoveJoyPad(pJoypad,pCamera)) && nMotionType != MOTIONTYPE_ACTION)
 	{
 		// 移動モーションにする
@@ -481,8 +483,16 @@ void CPlayer::UpdateShotBullet(CMotion* pMotion,CInputKeyboard *pKeyboard,CInput
 		// 発射地点の取得
 		D3DXVECTOR3 shotGunPos = GetPositionFromMatrix(m_ShotMtx);
 
-		// 弾の発射
+		// 弾の生成
 		CBulletManager::PushBackBullet(shotGunPos, VEC3_NULL,
-			D3DXVECTOR3(sinf(fAngleY + D3DX_PI), 0.0f, cosf(fAngleY + D3DX_PI)), 10.0f);
+			D3DXVECTOR3(sinf(fAngleY + D3DX_PI), 0.0f, cosf(fAngleY + D3DX_PI)), BULLET_MOVE, BULLET_LIFE);
+
+		// 弾の生成
+		CBulletManager::PushBackBullet(shotGunPos, VEC3_NULL,
+			D3DXVECTOR3(sinf(fAngleY + D3DX_PI * 0.75f), 0.0f, cosf(fAngleY + D3DX_PI * 0.75f)), BULLET_MOVE, BULLET_LIFE);
+
+		// 弾の生成
+		CBulletManager::PushBackBullet(shotGunPos, VEC3_NULL,
+			D3DXVECTOR3(sinf(fAngleY - D3DX_PI * 0.75f), 0.0f, cosf(fAngleY - D3DX_PI * 0.75f)), BULLET_MOVE, BULLET_LIFE);
 	}
 }

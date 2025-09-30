@@ -43,8 +43,8 @@ void CBulletManager::Erase(CBullet* Instance)
 //=================================================
 // íeÇê∂ê¨
 //=================================================
-void CBulletManager::PushBackBullet(const D3DXVECTOR3 Pos, const D3DXVECTOR3 Rot, const D3DXVECTOR3 Dir, const float Speed)
+void CBulletManager::PushBackBullet(const D3DXVECTOR3 Pos, const D3DXVECTOR3 Rot, const D3DXVECTOR3 Dir, const float Speed,const int nLife)
 {
 	// îzóÒÇ…òAåã
-	m_pvBullet.push_back(CBullet::Create(Pos, Rot, Dir, Speed));
+	m_pvBullet.push_back(CBullet::Create(Pos, Rot, Dir, Speed,nLife));
 }
