@@ -144,6 +144,31 @@ void CPlayer::Update(void)
 	// 移動量の更新
 	pos += m_move;
 
+	// 中心点からプレイヤーまでのベクトルを引く
+	D3DXVECTOR3 CircleVec = GetPosition() - VEC3_NULL;
+
+	// 円の大きさを設定
+	float Radius = 1500.0f;
+
+	// 当たり判定
+	if (D3DXVec3Length(&CircleVec) > Radius)
+	{
+		// 中心点までのベクトル、方向ベクトル
+		D3DXVECTOR3 PushPos, Dir;
+		Dir = VEC3_NULL - GetPosition();
+		// 埋まった分を計算
+		float VecLength = D3DXVec3Length(&Dir);
+		// 方向ベクトルを計算
+		D3DXVec3Normalize(&Dir, &Dir);
+		float FillDist = VecLength - Radius;
+		// 押し戻す位置を計算
+		PushPos = GetPosition() + (Dir * FillDist);
+		// 高さは考慮しない
+		PushPos.y = GetPosition().y;
+		// 位置を押し出し後の位置に設定
+		pos = PushPos;
+	}
+
 	// 角度の取得
 	float fRotY = CCharacter3D::GetRotation().y;
 
