@@ -26,7 +26,15 @@ public:
 	// サウンドの種類
 	typedef enum
 	{
-		SOUND_LABEL_BGM = 0,	// 
+		SOUND_LABEL_TITLEBGM = 0,	// 
+		SOUND_LABEL_TUTORIALBGM,	// 
+		SOUND_LABEL_GAMEBGM,	// 
+		SOUND_LABEL_BGM,	// 
+		SOUND_LABEL_SELECT,	// 
+		SOUND_LABEL_ENTER,	// 
+		SOUND_LABEL_SHOT,	// 
+		SOUND_LABEL_DAMAGE,	// 
+		SOUND_LABEL_WALK,	// 
 		SOUND_LABEL_MAX
 	} SOUND_LABEL;
 
@@ -58,7 +66,15 @@ private:
 	// サウンドの情報
 	SOUND_INFO m_aSoundInfo[SOUND_LABEL_MAX] = 
 	{
-		{"data/BGM/bgm_title.wav", 0},  // BGM
+		{"data/BGM/title_bgm.wav", -1},  // BGM
+		{"data/BGM/tutorial_bgm.wav", -1},  // BGM
+		{"data/BGM/game_bgm.wav", -1},  // BGM
+		{"data/BGM/ranking_bgm.wav", -1},  // BGM
+		{"data/SE/cursor_se.wav", 0},  // BGM
+		{"data/SE/select_se.wav", 0},  // BGM
+		{"data/SE/shot_se.wav", 0},  // BGM
+		{"data/SE/damage_se.wav", 0},  // BGM
+		{"data/SE/walk_se.wav", 0},  // BGM
 	};				
 };
 #endif

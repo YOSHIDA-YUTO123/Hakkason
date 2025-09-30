@@ -25,6 +25,7 @@
 #include "titlemanager.h"
 #include "mapmanager.h"
 #include "dome.h"
+#include "sound.h"
 
 using namespace Const;	// 名前空間Constの使用
 using namespace std;	// 名前空間stdの使用
@@ -75,6 +76,8 @@ HRESULT CTitle::Init(void)
 	CPlayer::Create(VEC3_NULL, NULL);
 
 	CPlayer::Create(VEC3_NULL, 0.0f);
+
+	CManager::GetSound()->Play(CSound::SOUND_LABEL_TITLEBGM);
 
 	m_pTitleManager = CTitleManager::CreateSingleton();
 

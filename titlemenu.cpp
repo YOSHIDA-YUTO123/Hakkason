@@ -15,6 +15,7 @@
 #include "fade.h"
 #include "tutorial.h"
 #include "pause.h"
+#include "sound.h"
 
 // ‹K’è’l‚ðÝ’è
 const D3DXCOLOR CTitleMenu::Config::DefoultColor = { 1.0f,1.0f,1.0f,1.0f };
@@ -171,6 +172,8 @@ void CStart::Update(void)
 		if (CManager::GetInputKeyboard()->GetTrigger(DIK_RETURN) == true || CManager::GetInputMouse()->OnMouseTriggerDown(0) == true ||
 			CManager::GetInputJoypad()->GetTrigger(CInputJoypad::JOYKEY_A) == true || CManager::GetInputJoypad()->GetTrigger(CInputJoypad::JOYKEY_START) == true)
 		{
+			CManager::GetSound()->Play(CSound::SOUND_LABEL_ENTER);
+
 			if (CTitleManager::GetLower() == false)
 			{
 				CTitleManager::GetSingleton()->GetTitleLogo()->Lower();
@@ -268,6 +271,8 @@ void CExit::Update(void)
 		if (CManager::GetInputKeyboard()->GetTrigger(DIK_RETURN) == true || CManager::GetInputMouse()->OnMouseTriggerDown(0) == true ||
 			CManager::GetInputJoypad()->GetTrigger(CInputJoypad::JOYKEY_A) == true || CManager::GetInputJoypad()->GetTrigger(CInputJoypad::JOYKEY_START) == true)
 		{
+			CManager::GetSound()->Play(CSound::SOUND_LABEL_ENTER);
+
 			if (CTitleManager::GetLower() == false)
 			{
 				CTitleManager::GetSingleton()->GetTitleLogo()->Lower();

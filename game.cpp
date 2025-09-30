@@ -34,6 +34,7 @@
 #include "math.h"
 #include "enemymanager.h"
 #include "pause.h"
+#include "sound.h"
 
 using namespace Const; // 名前空間Constを使用
 using namespace std; // 名前空間stdを使用
@@ -91,6 +92,8 @@ HRESULT CGame::Init(void)
 
 	// インスタンスを取得->読み込み
 	CMapManager::Instance()->Load("data\\TXT\\Stage000.json");
+
+	CManager::GetSound()->Play(CSound::SOUND_LABEL_GAMEBGM);
 
 	// プレイヤー生成
 	m_pPlayer = CPlayer::Create(VEC3_NULL, NULL);
