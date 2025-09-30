@@ -24,6 +24,7 @@
 #include "billboardAnim.h"
 #include "meshfield.h"
 #include "player.h"
+#include "enemysphere.h"
 
 using namespace Const; // 名前空間Constを使用
 using namespace std; // 名前空間stdを使用
@@ -140,6 +141,11 @@ void CGame::Update(void)
 			// シーンの遷移
 			pFade->SetFade(make_unique<CResultWin>());
 		}
+	}
+
+	if (pKeyboard->GetTrigger(DIK_2))
+	{
+		CEnemySphere::Create(D3DXVECTOR3(0.0f, 50.0f, 200.0f));
 	}
 #endif // _DEBUG
 }

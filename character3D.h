@@ -100,6 +100,7 @@ public:
 
 protected:
 	void SetCharacter(void);
+	void SetSmoothAngle(const float fcoef);
 private:
 
 	std::unique_ptr<CMotion> m_pMotion;		// モーションのクラスへのポインタ
@@ -111,6 +112,7 @@ private:
 	D3DXVECTOR3 m_pos;						// 位置
 	D3DXVECTOR3 m_ShadowScal;				// 影の大きさ
 	D3DXVECTOR3 m_Size;						// 大きさ
+	D3DXVECTOR3 m_rotDest;					// 目的の角度
 	D3DXMATRIX m_mtxWorld;					// ワールドマトリックス
 	float m_fSpeed;							// 足の速さ
 	int m_nNumModel;						// モデルの最大数

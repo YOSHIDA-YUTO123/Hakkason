@@ -17,6 +17,12 @@
 #include "character3D.h"
 
 //*************************************************
+// 前方宣言
+//*************************************************
+class CInputKeyboard;
+class CCamera;
+
+//*************************************************
 // プレイヤークラスの定義
 //*************************************************
 class CPlayer : public CCharacter3D
@@ -44,6 +50,8 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 private:
+	bool MoveKeyboard(CInputKeyboard* pKeyboard, CCamera* pCamera);
+
 	D3DXVECTOR3 m_move; // 移動量
 };
 

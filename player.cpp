@@ -121,6 +121,8 @@ void CPlayer::Update(void)
 	// 更新処理
 	CCharacter3D::Update();
 
+	// 位置の設定
+	CCharacter3D::SetPosition(pos);
 
 	if (pCamera != nullptr)
 	{
@@ -142,3 +144,122 @@ void CPlayer::Draw(void)
 	// 描画処理
 	CCharacter3D::Draw();
 }
+
+////=================================================
+//// キーボードの移動
+////=================================================
+//bool CPlayer::MoveKeyboard(CInputKeyboard* pKeyboard, CCamera* pCamera)
+//{
+//	bool bMove = false;
+//
+//	// 取得できなかったら処理しない
+//	if (pCamera == nullptr) return false;
+//
+//	// 移動速度の取得
+//	float fSpeed = CCharacter3D::GetSpeed();
+//
+//	float fDestRotY = 
+//	// カメラの向き
+//	D3DXVECTOR3 cameraRot = pCamera->GetRotaition();
+//
+//	// ジョイパッドの取得
+//	CInputJoypad* pJoyPad = CManager::GetInputJoypad();
+//
+//	if (pJoyPad->GetJoyStickL())
+//	{
+//		return false;
+//	}
+//
+//	if (pKeyboard->GetPress(DIK_A))
+//	{
+//		//プレイヤーの移動(上)
+//		if (pKeyboard->GetPress(DIK_W) == true)
+//		{
+//			m_move.x += sinf(cameraRot.y - D3DX_PI * 0.25f) * fSpeed;
+//			m_move.z += cosf(cameraRot.y - D3DX_PI * 0.25f) * fSpeed;
+//
+//			*pRotDest = cameraRot.y + D3DX_PI * 0.75f;
+//
+//			bMove = true;
+//		}
+//		//プレイヤーの移動(下)
+//		else if (pKeyboard->GetPress(DIK_S))
+//		{
+//			move.x += sinf(cameraRot.y - D3DX_PI * 0.75f) * fSpeed;
+//			move.z += cosf(cameraRot.y - D3DX_PI * 0.75f) * fSpeed;
+//
+//			*pRotDest = cameraRot.y + D3DX_PI * 0.25f;
+//
+//			bMove = true;
+//		}
+//		// プレイヤーの移動(左)
+//		else
+//		{
+//			move.z += sinf(cameraRot.y) * fSpeed;
+//			move.x -= cosf(cameraRot.y) * fSpeed;
+//
+//			*pRotDest = cameraRot.y + D3DX_PI * 0.5f;
+//
+//			bMove = true;
+//		}
+//	}
+//	//プレイヤーの移動(右)
+//	else if (pKeyboard->GetPress(DIK_D))
+//	{
+//		//プレイヤーの移動(上)
+//		if (pKeyboard->GetPress(DIK_W))
+//		{
+//			move.x += sinf(cameraRot.y + D3DX_PI * 0.25f) * fSpeed;
+//			move.z += cosf(cameraRot.y + D3DX_PI * 0.25f) * fSpeed;
+//
+//			*pRotDest = cameraRot.y - D3DX_PI * 0.75f;
+//
+//			bMove = true;
+//		}
+//		//プレイヤーの移動(下)
+//		else if (pKeyboard->GetPress(DIK_S))
+//		{
+//			move.x += sinf(cameraRot.y + D3DX_PI * 0.75f) * fSpeed;
+//			move.z += cosf(cameraRot.y + D3DX_PI * 0.75f) * fSpeed;
+//
+//			*pRotDest = cameraRot.y - D3DX_PI * 0.25f;
+//
+//			bMove = true;
+//		}
+//		// プレイヤーの移動(右)
+//		else
+//		{
+//			move.z -= sinf(cameraRot.y) * fSpeed;
+//			move.x += cosf(cameraRot.y) * fSpeed;
+//
+//			*pRotDest = cameraRot.y - D3DX_PI * 0.5f;
+//
+//			bMove = true;
+//		}
+//	}
+//	//プレイヤーの移動(上)
+//	else if (pKeyboard->GetPress(DIK_W) == true)
+//	{
+//		move.x += sinf(cameraRot.y) * fSpeed;
+//		move.z += cosf(cameraRot.y) * fSpeed;
+//
+//		*pRotDest = cameraRot.y + D3DX_PI;
+//
+//		bMove = true;
+//	}
+//	//プレイヤーの移動(下)
+//	else if (pKeyboard->GetPress(DIK_S) == true)
+//	{
+//		move.x -= sinf(cameraRot.y) * fSpeed;
+//		move.z -= cosf(cameraRot.y) * fSpeed;
+//
+//		*pRotDest = cameraRot.y;
+//
+//		bMove = true;
+//	}
+//
+//	// 移動量の設定
+//	m_pMove->Set(move);
+//
+//	return bMove;
+//}

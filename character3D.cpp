@@ -38,6 +38,7 @@ CCharacter3D::CCharacter3D() : CObject(4)
 	m_fSpeed = NULL;
 	m_ShadowScal = D3DXVECTOR3(2.0f,1.0f,2.0f);
 	m_nHitStopTime = NULL;
+	m_rotDest = VEC3_NULL;
 }
 
 //===================================================
@@ -153,6 +154,7 @@ void CCharacter3D::Update(void)
 	default:
 		break;
 	}
+
 
 	if (m_pShadowS != nullptr)
 	{
@@ -485,6 +487,14 @@ void CCharacter3D::SetCharacter(void)
 			m_apModel[nCnt]->SetParent(nullptr, nParentIdx);
 		}
 	}
+}
+
+//===================================================
+// –Ú“I‚ÌŠp“x‚É‹ß‚Ã‚¯‚é
+//===================================================
+void CCharacter3D::SetSmoothAngle(const float fcoef)
+{
+
 }
 
 //===================================================
