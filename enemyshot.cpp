@@ -88,6 +88,7 @@ void CEnemyShot::Update(void)
 
 	// スピードをかける
 	pVec *= 2.0f;
+	pVec.y = 0.0f;
 
 	// 設定
 	SetMove(pVec);

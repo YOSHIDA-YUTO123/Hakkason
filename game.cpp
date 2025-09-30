@@ -165,6 +165,7 @@ void CGame::Update(void)
 			float Angle = math::Randf(D3DX_PI * 2, 0.1f);
 			D3DXVECTOR3 SetPos = m_pPlayer->GetPosition();
 			SetPos.x += sinf(Angle) * 300.0f;
+			SetPos.y += 50.0f;
 			SetPos.z += cosf(Angle) * 300.0f;
 			CEnemyManager::PushBackBullet(SetPos, Type);
 		}

@@ -91,6 +91,7 @@ void CEnemyNeedle::Update(void)
 
 	// İ’è
 	SetMove(pVec);
+	pVec.y = 0.0f;
 
 	// XVˆ—
 	CEnemy::Update();

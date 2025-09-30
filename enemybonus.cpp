@@ -83,11 +83,23 @@ void CEnemyBonus::Update(void)
 	// プレイヤーまでのベクトルを引く
 	D3DXVECTOR3 pVec = CGame::GetPlayer()->GetModelPos(1) - GetPosition();
 
+	float Speed = 2.0f;
+
+	if (D3DXVec3Length(&pVec) < 300.0f)
+	{
+		Speed = 0.0f;
+	}
+	if (D3DXVec3Length(&pVec) > 0.0f)
+	{
+		Speed = -2.0f;
+	}
+
 	// 正規化
 	D3DXVec3Normalize(&pVec, &pVec);
 
 	// スピードをかける
-	pVec *= 2.0f;
+	pVec *= Speed;
+	pVec.y = 0.0f;
 
 	// 設定
 	SetMove(pVec);
