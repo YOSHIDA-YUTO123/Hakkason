@@ -170,6 +170,7 @@
     <ClCompile Include="enemyneedle.cpp" />
     <ClCompile Include="enemyshot.cpp" />
     <ClCompile Include="enemysphere.cpp" />
+    <ClCompile Include="Gage.cpp" />
     <ClCompile Include="mapmanager.cpp" />
     <ClCompile Include="modelmanager.cpp" />
     <ClCompile Include="NormalTimer.cpp" />
@@ -243,6 +244,7 @@
     <ClInclude Include="enemyneedle.h" />
     <ClInclude Include="enemyshot.h" />
     <ClInclude Include="enemysphere.h" />
+    <ClInclude Include="Gage.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="mapmanager.h" />
     <ClInclude Include="math_T.h" />

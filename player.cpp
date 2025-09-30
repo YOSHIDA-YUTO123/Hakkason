@@ -32,7 +32,7 @@ using namespace math;  // 名前空間mathの使用
 const D3DXVECTOR3 SHADOW_SCAL = { 2.0f,2.0f,2.0f };		// 影のモデルの拡大率
 const D3DXVECTOR3 PLAYER_SIZE = { 10.0f,100.0f,10.0f };	// プレイヤーの大きさ
 constexpr float INERTIA = 0.25f;						// 移動慣性
-constexpr float BULLET_MOVE = 5.0f;						// 弾の速度
+constexpr float BULLET_MOVE = 10.0f;					// 弾の速度
 constexpr int SHOT_COOLDOWN = 60;						// 発射クールダウン
 constexpr int BULLET_LIFE = 60;							// 弾の寿命
 
