@@ -25,6 +25,8 @@ public:
 	// ゲッター
 	static std::vector<CBullet*>& GetpvBullet(void) { return m_pvBullet; }
 	// セッター
+	// 連結解除
+	static void Erase(CBullet* Instance);
 	// 生成
 	static void PushBackBullet(const D3DXVECTOR3 Pos, const D3DXVECTOR3 Rot, const D3DXVECTOR3 Dir, const float Speed);
 protected:

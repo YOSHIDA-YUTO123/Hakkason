@@ -72,8 +72,8 @@ void CEnemyNeedle::Update(void)
 			// ©•ª©g‚ğ”jŠü
 			Uninit();
 
-			// ’e‚Ì”jŠü
-			(*Bullets)->Uninit();
+			// ’e‚Ì˜AŒ‹‚ğ‰ğœ
+			CBulletManager::Erase((*Bullets));
 
 			// ˆ—‚ğØ‚èã‚°‚é
 			return;
