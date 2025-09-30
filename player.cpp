@@ -31,6 +31,7 @@ using namespace math;  // 名前空間mathの使用
 const D3DXVECTOR3 SHADOW_SCAL = { 1.0f,1.0f,1.0f };		// 影のモデルの拡大率
 const D3DXVECTOR3 PLAYER_SIZE = { 10.0f,100.0f,10.0f };	// プレイヤーの大きさ
 constexpr float INERTIA = 0.25f;						// 移動慣性
+constexpr int SHOT_COOLDOWN = 60;						// 発射クールダウン
 
 //=================================================
 // コンストラクタ
@@ -38,7 +39,7 @@ constexpr float INERTIA = 0.25f;						// 移動慣性
 CPlayer::CPlayer()
 {
 	D3DXMatrixIdentity(&m_ShotMtx);
-
+	m_nCoolDown = NULL;
 	m_move = VEC3_NULL;
 }
 
@@ -113,6 +114,9 @@ void CPlayer::Update(void)
 	// キーボードの取得
 	CInputKeyboard* pKeyboard = CManager::GetInputKeyboard();
 
+	// ジョイパッドの取得
+	CInputJoypad* pJoypad = CManager::GetInputJoypad();
+
 	// モーションの取得
 	CMotion* pMotion = CCharacter3D::GetMotion();
 
@@ -126,7 +130,7 @@ void CPlayer::Update(void)
 	int nMotionType = pMotion->GetBlendType();
 
 	// キーボードの移動
-	if (MoveKeyboard(pKeyboard, pCamera))
+	if ((MoveKeyboard(pKeyboard, pCamera) || MoveJoyPad(pJoypad,pCamera)) && nMotionType != MOTIONTYPE_ACTION)
 	{
 		// 移動モーションにする
 		pMotion->SetMotion(MOTIONTYPE_MOVE, true, 10);
@@ -172,21 +176,8 @@ void CPlayer::Update(void)
 	// 角度の取得
 	float fRotY = CCharacter3D::GetRotation().y;
 
-	if (pKeyboard->GetRepeat(DIK_RETURN, 30))
-	{
-		pMotion->SetMotion(MOTIONTYPE_ACTION, true, 5);
-	}
-
-	// フレームの判定
-	if (pMotion->IsEventFrame(8, 8, MOTIONTYPE_ACTION))
-	{
-		// 発射地点の取得
-		D3DXVECTOR3 shotGunPos = GetPositionFromMatrix(m_ShotMtx);
-
-		// 弾の発射
-		CBulletManager::PushBackBullet(shotGunPos, VEC3_NULL,
-			D3DXVECTOR3(sinf(fRotY + D3DX_PI), 0.0f, cosf(fRotY + D3DX_PI)), 10.0f);
-	}
+	// 弾の発射の更新処理
+	UpdateShotBullet(pMotion, pKeyboard, pJoypad, fRotY);
 
 	// モーションの更新処理
 	CCharacter3D::UpdateMotion();
@@ -398,4 +389,100 @@ bool CPlayer::MoveKeyboard(CInputKeyboard* pKeyboard, CCamera* pCamera)
 	CCharacter3D::SetRotDest(D3DXVECTOR3(0.0f, fDestRotY, 0.0f));
 
 	return bMove;
+}
+
+//=================================================
+// パッドの移動処理
+//=================================================
+bool CPlayer::MoveJoyPad(CInputJoypad* pJoypad, CCamera* pCamera)
+{
+	bool bMove = false;
+
+	XINPUT_STATE* pStick;
+
+	pStick = pJoypad->GetJoyStickAngle();
+
+	// 取得できなかったら処理しない
+	if (pCamera == nullptr) return false;
+
+	// カメラの向き
+	D3DXVECTOR3 cameraRot = pCamera->GetRotaition();
+
+	// Lスティックの角度
+	float LStickAngleY = pStick->Gamepad.sThumbLY;
+	float LStickAngleX = pStick->Gamepad.sThumbLX;
+
+	// デッドゾーン
+	float deadzone = 32767.0f * 0.25f;
+
+	// スティックの傾けた角度を求める
+	float magnitude = sqrtf((LStickAngleX * LStickAngleX) + (LStickAngleY * LStickAngleY));
+
+	// 移動速度の取得
+	float fSpeed = CCharacter3D::GetSpeed();
+
+	// 現在の目的の角度の取得
+	float fDestRotY = CCharacter3D::GetRotDest().y;
+
+	// 動かせる
+	if (magnitude > deadzone)
+	{
+		bMove = true;
+
+		// アングルを正規化
+		float normalizeX = (LStickAngleX / magnitude);
+		float normalizeY = (LStickAngleY / magnitude);
+
+		// プレイヤーの移動量
+		float moveX = normalizeX * cosf(-cameraRot.y) - normalizeY * sinf(-cameraRot.y);
+		float moveZ = normalizeX * sinf(-cameraRot.y) + normalizeY * cosf(-cameraRot.y);
+
+		// 移動量をスティックの角度によって変更
+		float speedWk = fSpeed * ((magnitude - deadzone) / (32767.0f - deadzone));
+
+		// プレイヤーの移動
+		m_move.x += moveX * speedWk;
+		m_move.z += moveZ * speedWk;
+
+		// プレイヤーの角度を移動方向にする
+		fDestRotY = atan2f(-moveX, -moveZ);
+	}
+
+	// 目的の角度の設定
+	CCharacter3D::SetRotDest(D3DXVECTOR3(0.0f, fDestRotY, 0.0f));
+
+	return bMove;
+}
+
+//=================================================
+// 弾の発射の更新処理
+//=================================================
+void CPlayer::UpdateShotBullet(CMotion* pMotion,CInputKeyboard *pKeyboard,CInputJoypad *pJoypad,const float fAngleY)
+{
+	// クールダウンが無かったら発射できる
+	if (m_nCoolDown <= 0)
+	{
+		if (pKeyboard->GetPress(DIK_RETURN) || pJoypad->GetTriggerPress(pJoypad->JOYKEY_R2))
+		{
+			pMotion->SetMotion(MOTIONTYPE_ACTION, true, 5);
+		}
+	}
+	else
+	{
+		m_nCoolDown--;
+	}
+
+	// フレームの判定
+	if (pMotion->IsEventFrame(6, 6, MOTIONTYPE_ACTION))
+	{
+		// クールダウンの設定
+		m_nCoolDown = SHOT_COOLDOWN;
+
+		// 発射地点の取得
+		D3DXVECTOR3 shotGunPos = GetPositionFromMatrix(m_ShotMtx);
+
+		// 弾の発射
+		CBulletManager::PushBackBullet(shotGunPos, VEC3_NULL,
+			D3DXVECTOR3(sinf(fAngleY + D3DX_PI), 0.0f, cosf(fAngleY + D3DX_PI)), 10.0f);
+	}
 }
