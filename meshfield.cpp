@@ -141,6 +141,9 @@ HRESULT CMeshField::Init(void)
 	// 頂点バッファをロック
 	m_pVtxBuffer->Lock(0, 0, (void**)&pVtx, 0);
 
+	// テクスチャパスを設定
+	SetTextureID("sand2.jpg");
+
 	for (int nCntV = 0; nCntV <= m_nSegV; nCntV++)
 	{
 		for (int nCntH = 0; nCntH <= m_nSegH; nCntH++)
