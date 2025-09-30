@@ -147,7 +147,7 @@ void CPlayer::Update(void)
 	// 角度の取得
 	float fRotY = CCharacter3D::GetRotation().y;
 
-	if (pKeyboard->GetRepeat(DIK_RETURN, 60))
+	if (pKeyboard->GetRepeat(DIK_RETURN,30))
 	{
 		// 発射地点の取得
 		D3DXVECTOR3 shotGunPos = GetPositionFromMatrix(m_ShotMtx);
@@ -209,7 +209,7 @@ void CPlayer::Draw(void)
 	D3DXVECTOR3 ParentSize = CCharacter3D::GetModelSize(MODEL_SHOTGUN);
 
 	//位置を反映
-	D3DXMatrixTranslation(&mtxTrans, ParentSize.x, 0.0f, 0.0f);
+	D3DXMatrixTranslation(&mtxTrans, ParentSize.x * 0.5f, 0.0f, 0.0f);
 	D3DXMatrixMultiply(&m_ShotMtx, &m_ShotMtx, &mtxTrans);
 
 	// 親のマトリックスの取得
