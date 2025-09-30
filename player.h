@@ -1,6 +1,6 @@
 //================================================
 //
-// 分と秒を扱うタイマーのクラスの処理 [DualUnitTimer.h]
+// プレイヤークラス [player.h]
 // Author:YUTO YOSHIDA
 //
 //=================================================
@@ -22,12 +22,29 @@
 class CPlayer : public CCharacter3D
 {
 public:
+
+	// モーションの種類
+	typedef enum
+	{
+		MOTIONTYPE_NEUTRAL = 0, // ニュートラル
+		MOTIONTYPE_MOVE,		// 移動
+		MOTIONTYPE_ACTION,		// 攻撃
+		MOTIONTYPE_JUMP,		// ジャンプ
+		MOTIONTYPE_LANDING,		// 着地モーション
+		MOTIONTYPE_MAX
+	}MOTIONTYPE;
+
 	CPlayer();
 	~CPlayer();
 
-	static CPlayer* Create(const D3DXVECTOR3 pos);
+	static CPlayer* Create(const D3DXVECTOR3 pos, const float fAngle);
 
+	HRESULT Init(void) override;
+	void Uninit(void) override;
+	void Update(void) override;
+	void Draw(void) override;
 private:
+
 };
 
 #endif
