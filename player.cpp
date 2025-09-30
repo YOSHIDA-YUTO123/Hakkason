@@ -82,7 +82,7 @@ HRESULT CPlayer::Init(void)
 	}
 
 	// キャラクターの設定
-	CCharacter3D::SetCharacter(10, 5.0f, SHADOW_SCAL, PLAYER_SIZE);
+	CCharacter3D::SetCharacter(10, 1.5f, SHADOW_SCAL, PLAYER_SIZE);
 
 	// モーションの読み込み
 	CCharacter3D::LoadMotion("player.txt", MOTIONTYPE_MAX);
