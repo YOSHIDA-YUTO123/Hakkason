@@ -244,6 +244,91 @@ void CModel::Draw(const float fAlv)
 }
 
 //===================================================
+// 描画設定
+//===================================================
+void CModel::Draw(const D3DXCOLOR col)
+{
+	// デバイスの取得
+	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
+
+	//計算用のマトリックス
+	D3DXMATRIX mtxRot, mtxTrans, mtxScal, mtxParent;
+
+	D3DMATERIAL9 matDef;//現在のマテリアル保存用
+
+	D3DXMATERIAL* pMat;//マテリアルデータへのポインタ
+
+	//ワールドマトリックスの初期化
+	D3DXMatrixIdentity(&m_mtxWorld);
+
+	//向きを反映
+	D3DXMatrixRotationYawPitchRoll(&mtxRot, m_rot.y, m_rot.x, m_rot.z);
+	D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxRot);
+
+	//位置を反映
+	D3DXMatrixTranslation(&mtxTrans, m_pos.x + m_offpos.x, m_pos.y + m_offpos.y, m_pos.z + m_offpos.z);
+	D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxTrans);
+
+	if (m_pParent != nullptr)
+	{ // 親が存在している
+		// 親モデルのマトリックスの取得
+		mtxParent = m_pParent->GetMatrixWorld();
+	}
+	else
+	{
+		// ワールドマトリックスの取得
+		pDevice->GetTransform(D3DTS_WORLD, &mtxParent);
+	}
+
+	// 親のワールドマトリックスと掛け合わせる
+	D3DXMatrixMultiply(&m_mtxWorld, &m_mtxWorld, &mtxParent);
+
+	//ワールドマトリックスの設定
+	pDevice->SetTransform(D3DTS_WORLD, &m_mtxWorld);
+
+	//現在のマテリアルを取得
+	pDevice->GetMaterial(&matDef);
+
+	// モデルの情報の取得
+	CModelManager::MapObject* pMapObject = CModelManager::GetModelInfo(m_aModelName);
+
+	// 取得できなかったら処理しない
+	if (pMapObject == nullptr)
+	{
+		//保存していたマテリアルを元に戻す
+		pDevice->SetMaterial(&matDef);
+
+		return;
+	}
+
+	//マテリアルのデータへのポインタを取得
+	pMat = (D3DXMATERIAL*)pMapObject->modelinfo.pBuffMat->GetBufferPointer();
+
+	for (int nCntMat = 0; nCntMat < (int)pMapObject->modelinfo.dwNumMat; nCntMat++)
+	{
+		// マテリアルの取得
+		D3DXMATERIAL Mat = pMat[nCntMat];
+
+		Mat.MatD3D.Diffuse.r = col.r;
+		Mat.MatD3D.Diffuse.g = col.g;
+		Mat.MatD3D.Diffuse.b = col.b;
+		Mat.MatD3D.Diffuse.a = col.a;
+
+		//マテリアルの設定
+		pDevice->SetMaterial(&Mat.MatD3D);
+
+		//テクスチャの設定
+		pDevice->SetTexture(0, CLoadTexture::GetTex(m_aTexturePath));
+
+		//モデル(パーツ)の描画
+		pMapObject->modelinfo.pMesh->DrawSubset(nCntMat);
+	}
+
+	//保存していたマテリアルを元に戻す
+	pDevice->SetMaterial(&matDef);
+}
+
+//===================================================
 // 影の描画処理
 //===================================================
 void CModel::DrawShadow(void)

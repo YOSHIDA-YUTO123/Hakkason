@@ -40,6 +40,8 @@ constexpr int BULLET_LIFE = 60;							// 弾の寿命
 //=================================================
 CPlayer::CPlayer()
 {
+	m_col = WHITE;
+	m_fFlashTime = NULL;
 	D3DXMatrixIdentity(&m_ShotMtx);
 	m_nCoolDown = NULL;
 	m_move = VEC3_NULL;
@@ -212,9 +214,21 @@ void CPlayer::Update(void)
 //=================================================
 void CPlayer::Draw(void)
 {
-	// 描画処理
-	CCharacter3D::Draw();
+	if (CCharacter3D::GetState() != STATE_DAMAGE)
+	{
+		// 描画処理
+		CCharacter3D::Draw();
+	}
+	else
+	{
+		m_fFlashTime += 0.1f;
 
+		m_col.g = 1.0f - fabsf(sinf(m_fFlashTime));
+		m_col.b = 1.0f - fabsf(sinf(m_fFlashTime));
+
+		// 色の設定
+		CCharacter3D::Draw(m_col);
+	}
 	// デバイスの取得
 	LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();
 
@@ -249,6 +263,21 @@ void CPlayer::Draw(void)
 }
 
 //=================================================
+// 敵に当たった
+//=================================================
+void CPlayer::Hit(const int nDamage)
+{
+	if (CCharacter3D::GetState() != STATE_DAMAGE)
+	{
+		// ダメージを受けた
+		CCharacter3D::Hit(nDamage);
+
+		// 状態の変更
+		CCharacter3D::SetState(STATE_DAMAGE, 60);
+	}
+}
+
+//=================================================
 // デバッグ情報
 //=================================================
 void CPlayer::Debug(CInputKeyboard* pKeyboard)
@@ -261,6 +290,7 @@ void CPlayer::Debug(CInputKeyboard* pKeyboard)
 	CDebugProc::Print("              プレイヤー情報\n");
 	CDebugProc::Print("********************************************\n");
 	CDebugProc::Print("プレイヤーの位置 = [ %.2f ] [ %.2f ] [ %.2f ]\n", pos.x, pos.y, pos.z);
+	CDebugProc::Print("プレイヤーの体力 = [ %d ]\n",CCharacter3D::GetLife());
 
 	if (pKeyboard->GetTrigger(DIK_TAB))
 	{

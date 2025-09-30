@@ -67,6 +67,7 @@ public:
 	void Uninit(void) override;
 	void Update(void) override;
 	void Draw(void) override;
+	void Hit(const int nDamage);
 private:
 	void Debug(CInputKeyboard* pKeyboard);
 	bool MoveKeyboard(CInputKeyboard* pKeyboard, CCamera* pCamera);
@@ -75,6 +76,8 @@ private:
 
 	D3DXVECTOR3 m_move;		// 移動量
 	D3DXMATRIX m_ShotMtx;	// 発射地点のマトリックス
+	D3DXCOLOR m_col;		// 色
+	float m_fFlashTime;		// 点滅カウンター
 	int m_nCoolDown;		// 発射のクールダウン
 };
 
