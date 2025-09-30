@@ -161,7 +161,7 @@ void CResultLose::Update(void)
 	// ジョイパッドの取得
 	CInputJoypad* pJoypad = CManager::GetInputJoypad();
 
-	if ((pKeyboard != nullptr && pJoypad != nullptr) && pKeyboard->GetTrigger(DIK_F9) || pJoypad->GetTrigger(pJoypad->JOYKEY_A))
+	if ((pKeyboard != nullptr && pJoypad != nullptr) && pKeyboard->GetTrigger(DIK_RETURN) || pJoypad->GetTrigger(pJoypad->JOYKEY_A))
 	{
 		CFade* pFade = CManager::GetFade();
 

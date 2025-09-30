@@ -29,5 +29,6 @@ public:
 	// Ã“Iƒƒ“ƒoŠÖ”
 	static CEnemyBonus* Create(D3DXVECTOR3 Pos);
 private:
+	int m_nTimer;	// ¶‘¶ŠÔ
 };
 #endif // !_ENEMYNEEDLE_H_
