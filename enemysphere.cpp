@@ -63,8 +63,8 @@ void CEnemySphere::Update(void)
 	for (auto Bullets = CBulletManager::GetpvBullet().begin(); Bullets != CBulletManager::GetpvBullet().end(); Bullets++)
 	{
 		// 敵と弾の球の当たり判定を作る
-		CColliderSphere EnemyCollider = CColliderSphere::CreateCollider(GetPosition(), 10.0f);
-		CColliderSphere BulletCollider = CColliderSphere::CreateCollider((*Bullets)->GetPosition(), 10.0f);
+		CColliderSphere EnemyCollider = CColliderSphere::CreateCollider(GetPosition(), 100.0f);
+		CColliderSphere BulletCollider = CColliderSphere::CreateCollider((*Bullets)->GetPosition(), 100.0f);
 
 		// 当たったら
 		if (CCollisionSphere::Collision(&EnemyCollider, &BulletCollider) == true)
@@ -81,7 +81,7 @@ void CEnemySphere::Update(void)
 	}
 
 	// プレイヤーまでのベクトルを引く
-	D3DXVECTOR3 pVec = CGame::GetPlayer()->GetPosition() - GetPosition();
+	D3DXVECTOR3 pVec = CGame::GetPlayer()->GetModelPos(1) - GetPosition();
 
 	// 正規化
 	D3DXVec3Normalize(&pVec, &pVec);
