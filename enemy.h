@@ -22,5 +22,11 @@ public:
 	virtual void Uninit(void);
 	virtual void Update(void);
 	virtual void Draw(void);
+
+	// セッター
+	void SetMove(D3DXVECTOR3 Move) { m_Move = Move; }
+	// ゲッター
+	D3DXVECTOR3 GetMove(void) { return m_Move; }
 private:
+	D3DXVECTOR3 m_Move;	// 移動量
 };
