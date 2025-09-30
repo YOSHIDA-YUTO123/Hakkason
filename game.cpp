@@ -101,6 +101,8 @@ HRESULT CGame::Init(void)
 
 	CHpGage::Create(D3DXVECTOR3(20.0f, 80.0f, 0.0f), D3DXVECTOR2(200.0f, 20.0f), D3DXCOLOR(0.4f, 1.0f, 0.4f, 1.0f), D3DXCOLOR(1.0f, 0.3f, 0.3f, 1.0f), m_pPlayer->GetLife(), true);
 
+	CEnemyManager::Reset();
+
 	return S_OK;
 }
 

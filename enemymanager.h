@@ -24,6 +24,7 @@ public:
 	// ゲッター
 	static std::vector<CEnemy*>& GetpvBullet(void) { return m_pvEnemy; }
 	// セッター
+	static void Reset(void) { m_pvEnemy.clear(); }
 	// 連結解除
 	static void Erase(CEnemy* Instance);
 	// 生成
