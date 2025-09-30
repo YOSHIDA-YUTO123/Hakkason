@@ -15,6 +15,7 @@
 // インクルードファイル
 //*************************************************
 #include "object.h"
+#include <memory>
 
 //*************************************************
 // 前方宣言
@@ -48,12 +49,12 @@ public:
 private:
 	static constexpr int MAX_DIGIT = 8; // スコアの桁数
 
-	CNumber* m_apNumber[MAX_DIGIT];		// ナンバークラスへのポインタ
-	D3DXVECTOR3 m_pos;					// 位置
-	D3DXVECTOR2 m_Size;					// 大きさ
-	int m_nScore;						// スコア
-	int m_nDigit;						// 桁数
-	bool m_bShowZero;					// いらない0が見えるかどうか
+	std::unique_ptr<CNumber> m_apNumber[MAX_DIGIT];		// ナンバークラスへのポインタ
+	D3DXVECTOR3 m_pos;									// 位置
+	D3DXVECTOR2 m_Size;									// 大きさ
+	int m_nScore;										// スコア
+	int m_nDigit;										// 桁数
+	bool m_bShowZero;									// いらない0が見えるかどうか
 };
 
 #endif

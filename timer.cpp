@@ -1,6 +1,6 @@
 //================================================
 //
-// スコアを表示する処理 [score.cpp]
+// タイマーを表示する処理 [timer.cpp]
 // Author:YUTO YOSHIDA
 //
 //=================================================
@@ -8,27 +8,24 @@
 //*************************************************
 // インクルードファイル
 //*************************************************
-#include "score.h"
+#include "timer.h"
 #include "number.h"
-#include "math.h"
+#include <cassert>
 
 //*************************************************
 // 名前空間
 //*************************************************
 using namespace Const; // 名前空間Constの使用
-using namespace math;  // 名前空間mathの使用
 using namespace std;   // 名前空間stdの使用
 
 //=================================================
 // コンストラクタ
 //=================================================
-CScore::CScore()
+CTimer::CTimer()
 {
-	m_bShowZero = false;
-	m_nDigit = NULL;
+	m_nTime = NULL;
 	m_pos = VEC3_NULL;
 	m_Size = VEC2_NULL;
-	m_nScore = NULL;
 
 	// 桁数分回す
 	for (int nCnt = 0; nCnt < MAX_DIGIT; nCnt++)
@@ -40,67 +37,15 @@ CScore::CScore()
 //=================================================
 // デストラクタ
 //=================================================
-CScore::~CScore()
+CTimer::~CTimer()
 {
-}
-
-//=================================================
-// 生成処理
-//=================================================
-CScore* CScore::Create(const D3DXVECTOR3 pos, const D3DXVECTOR2 Size, const int nScore, const bool bShowZero)
-{
-	// スコアの生成
-	CScore* pScore = new CScore;
-
-	pScore->m_pos = pos;
-	pScore->m_Size = Size;
-	pScore->m_nScore = nScore;
-	pScore->m_bShowZero = bShowZero;
-
-	// 初期化処理
-	if (FAILED(pScore->Init()))
-	{
-		pScore->Uninit();
-		pScore = nullptr;
-		return nullptr;
-	}
-
-	return pScore;
 }
 
 //=================================================
 // 初期化処理
 //=================================================
-HRESULT CScore::Init(void)
+HRESULT CTimer::Init(void)
 {
-	// 計算用
-	int nScoreWk = m_nScore;
-
-	// スコアがあるなら
-	if (nScoreWk != 0)
-	{
-		// 桁数を求める
-		while (nScoreWk != 0)
-		{
-			nScoreWk /= 10;
-			m_nDigit++;
-		}
-	}
-	else
-	{
-		// スコアが0だったら桁にする
-		m_nDigit++;
-	}
-
-	// 桁数の制限
-	m_nDigit = Clamp(m_nDigit, 0, MAX_DIGIT);
-
-	// ゼロを表示するなら
-	if (m_bShowZero)
-	{
-		// 桁数を最大にする
-		m_nDigit = MAX_DIGIT;
-	}
 	// 横幅の割合を求める
 	float fWidth = m_Size.x / MAX_DIGIT;
 
@@ -108,7 +53,7 @@ HRESULT CScore::Init(void)
 	float fOffPosX = fWidth * 2.0f;
 
 	// 桁数分回す
-	for (int nCnt = 0; nCnt < m_nDigit; nCnt++)
+	for (int nCnt = 0; nCnt < MAX_DIGIT; nCnt++)
 	{
 		// ナンバークラスの生成
 		m_apNumber[nCnt] = make_unique<CNumber>();
@@ -121,9 +66,6 @@ HRESULT CScore::Init(void)
 		{
 			return E_FAIL;
 		}
-
-		// テクスチャの読み込み
-		m_apNumber[nCnt]->SetTextureID("number000.png");
 	}
 
 	return S_OK;
@@ -132,7 +74,7 @@ HRESULT CScore::Init(void)
 //=================================================
 // 終了処理
 //=================================================
-void CScore::Uninit(void)
+void CTimer::Uninit(void)
 {
 	// 桁数分回す
 	for (int nCnt = 0; nCnt < MAX_DIGIT; nCnt++)
@@ -152,10 +94,10 @@ void CScore::Uninit(void)
 //=================================================
 // 更新処理
 //=================================================
-void CScore::Update(void)
+void CTimer::Update(void)
 {
 	// 桁数分回す
-	for (int nCnt = 0; nCnt < m_nDigit; nCnt++)
+	for (int nCnt = 0; nCnt < MAX_DIGIT; nCnt++)
 	{
 		// nullなら処理しない
 		if (m_apNumber[nCnt] == nullptr) continue;
@@ -170,19 +112,25 @@ void CScore::Update(void)
 		int nDivi = (int)pow((double)nData, (double)nCnt);
 
 		// テクスチャ座標を求める
-		int nNumber = m_nScore / nDivi % 10;
+		int nNumber = m_nTime / nDivi % 10;
 
 		m_apNumber[nCnt]->SetUV(nNumber);
+
+		// 制限
+		if (m_nTime <= 0)
+		{
+			m_nTime = 0;
+		}
 	}
 }
 
 //=================================================
 // 描画処理
 //=================================================
-void CScore::Draw(void)
+void CTimer::Draw(void)
 {
 	// 桁数分回す
-	for (int nCnt = 0; nCnt < m_nDigit; nCnt++)
+	for (int nCnt = 0; nCnt < MAX_DIGIT; nCnt++)
 	{
 		// nullなら処理しない
 		if (m_apNumber[nCnt] == nullptr) continue;
@@ -190,4 +138,34 @@ void CScore::Draw(void)
 		// 描画処理
 		m_apNumber[nCnt]->Draw();
 	}
+}
+
+//=================================================
+// テクスチャのパスの設定
+//=================================================
+void CTimer::SetTexture(const char* pTexturePath)
+{
+	// 桁数分回す
+	for (int nCnt = 0; nCnt < MAX_DIGIT; nCnt++)
+	{
+		// nullなら処理しない
+		if (m_apNumber[nCnt] == nullptr) continue;
+
+		// テクスチャのパスの設定
+		m_apNumber[nCnt]->SetTextureID(pTexturePath);
+	}
+}
+
+//=================================================
+// ナンバークラスの取得
+//=================================================
+CNumber* CTimer::GetNumber(const int nIdx)
+{
+	// 超えていたら
+	if (nIdx < 0 || nIdx > MAX_DIGIT)
+	{
+		assert(false && "タイマー配列オーバー");
+	}
+
+	return m_apNumber[nIdx].get();
 }
