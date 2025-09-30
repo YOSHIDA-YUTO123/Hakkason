@@ -35,6 +35,7 @@
 #include "enemymanager.h"
 #include "pause.h"
 #include "sound.h"
+#include "Gage.h"
 
 using namespace Const; // 名前空間Constを使用
 using namespace std; // 名前空間stdを使用
@@ -97,6 +98,8 @@ HRESULT CGame::Init(void)
 
 	// プレイヤー生成
 	m_pPlayer = CPlayer::Create(VEC3_NULL, NULL);
+
+	CHpGage::Create(D3DXVECTOR3(20.0f, 80.0f, 0.0f), D3DXVECTOR2(200.0f, 20.0f), D3DXCOLOR(0.4f, 1.0f, 0.4f, 1.0f), D3DXCOLOR(1.0f, 0.3f, 0.3f, 1.0f), m_pPlayer->GetLife(), true);
 
 	return S_OK;
 }
