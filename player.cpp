@@ -588,8 +588,8 @@ void CPlayer::UpdateShotBullet(CMotion* pMotion,CInputKeyboard *pKeyboard,CInput
 		FireInfo.Bece.nMinLife = 30;
 		FireInfo.Bece.nNumEffect = 5;
 		FireInfo.Bece.Pos = { GetModelPos(MODEL_SHOTGUN).x,GetModelPos(MODEL_SHOTGUN).y ,GetModelPos(MODEL_SHOTGUN).z };
-		FireInfo.MaxRadius = 1.0f;
-		FireInfo.MinRadius = 1.0f;
+		FireInfo.MaxRadius = 2.0f;
+		FireInfo.MinRadius = 2.0f;
 		FireInfo.Bece.bLoop = false;
 		FireInfo.Bece.nCoolDown = 2;
 		FireInfo.Bece.Gravity = 0.0f;
