@@ -38,8 +38,10 @@ public:
 	void Uninit(void) override;
 	void Update(void) override;
 	void Draw(void) override;
+	int GetTimer(void) const { return m_nCurrentTime; }
 private:
 	CTimer* m_pMinute; // タイマークラスへのポインタ(分)
+	int m_nCurrentTime;// 現在の時間
 	int m_nCounter;	   // カウンター
 };
 

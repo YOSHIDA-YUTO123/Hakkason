@@ -130,7 +130,7 @@ void CGame::Update(void)
 
 	int nPlayerLife = m_pPlayer->GetLife();
 
-	if (nPlayerLife <= 0 || m_pTimer->GetTime() <= 0)
+	if (nPlayerLife <= 0 || m_pTimer->GetTimer() <= 0)
 	{
 		m_state = STATE_END;
 	}
