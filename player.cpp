@@ -494,6 +494,8 @@ bool CPlayer::MoveJoyPad(CInputJoypad* pJoypad, CCamera* pCamera)
 //=================================================
 void CPlayer::UpdateShotBullet(CMotion* pMotion,CInputKeyboard *pKeyboard,CInputJoypad *pJoypad,const float fAngleY)
 {
+	if (CManager::GetMode() != CScene::MODE_GAME) return;
+
 	// クールダウンが無かったら発射できる
 	if (m_nCoolDown <= 0)
 	{

@@ -8,6 +8,10 @@
 // インクルード
 #include "tutorial.h"
 #include "object2D.h"
+#include "input.h"
+#include "manager.h"
+#include "fade.h"
+#include "game.h"
 
 //***************************************
 // コンストラクタ
@@ -39,6 +43,20 @@ HRESULT CTutorial::Init(void)
 //***************************************
 void CTutorial::Update(void)
 {
+	// キーボードの取得
+	CInputKeyboard* pKeyboard = CManager::GetInputKeyboard();
+
+	if (pKeyboard != nullptr && pKeyboard->GetTrigger(DIK_RETURN))
+	{
+		// フェードの取得
+		CFade* pFade = CManager::GetFade();
+
+		if (pFade != nullptr)
+		{
+			// シーンの遷移
+			pFade->SetFade(std::make_unique<CGame>());
+		}
+	}
 }
 
 //***************************************
