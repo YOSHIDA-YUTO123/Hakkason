@@ -87,7 +87,7 @@ void CEnemyNeedle::Update(void)
 	D3DXVec3Normalize(&pVec, &pVec);
 
 	// スピードをかける
-	pVec *= 2.0f;
+	pVec *= 3.0f;
 
 	// 設定
 	SetMove(pVec);

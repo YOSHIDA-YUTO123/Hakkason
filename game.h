@@ -30,6 +30,7 @@ class CGameCamera;
 class CLoadManager;
 class CEnemy;
 class CPlayer;
+class CDualUnitTimer;
 
 //***************************************************
 // ゲームクラスの定義
@@ -62,6 +63,7 @@ public:
 	static STATE GetState(void) { return m_state; }
 private:
 	static CPlayer* m_pPlayer;			// プレイヤーのインスタンス
+	static CDualUnitTimer* m_pTimer;	// タイマーのインスタンス
 	static STATE m_state;				// ゲームの状態
 	int m_nCounterState;				// 状態カウンター
 };
