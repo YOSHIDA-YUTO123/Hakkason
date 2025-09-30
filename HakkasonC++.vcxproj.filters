@@ -282,6 +282,12 @@
     <ClCompile Include="player.cpp">
       <Filter>ソース ファイル\character</Filter>
     </ClCompile>
+    <ClCompile Include="enemybonus.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="enemyshot.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h">
@@ -457,6 +463,12 @@
     </ClInclude>
     <ClInclude Include="player.h">
       <Filter>ヘッダー ファイル\character</Filter>
+    </ClInclude>
+    <ClInclude Include="enemybonus.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="enemyshot.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -165,7 +165,9 @@
     <ClCompile Include="dome.cpp" />
     <ClCompile Include="DualUnitTimer.cpp" />
     <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="enemybonus.cpp" />
     <ClCompile Include="enemyneedle.cpp" />
+    <ClCompile Include="enemyshot.cpp" />
     <ClCompile Include="enemysphere.cpp" />
     <ClCompile Include="mapmanager.cpp" />
     <ClCompile Include="modelmanager.cpp" />
@@ -231,7 +233,9 @@
     <ClInclude Include="dome.h" />
     <ClInclude Include="DualUnitTimer.h" />
     <ClInclude Include="enemy.h" />
+    <ClInclude Include="enemybonus.h" />
     <ClInclude Include="enemyneedle.h" />
+    <ClInclude Include="enemyshot.h" />
     <ClInclude Include="enemysphere.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="mapmanager.h" />
