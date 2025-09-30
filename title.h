@@ -16,6 +16,8 @@
 //***************************************************
 #include "scene.h"
 
+class CTitleManager;
+
 //***************************************************
 // タイトルシーンクラスの定義
 //***************************************************
@@ -30,6 +32,7 @@ public:
 	void Update(void) override;
 	void Draw(void) override;
 private:
+	static CTitleManager* m_pTitleManager;		// ポーズマネージャーへのポインタ
 };
 
 #endif

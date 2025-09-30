@@ -131,16 +131,19 @@ void CPlayer::Update(void)
 	// モーションの種類の取得
 	int nMotionType = pMotion->GetBlendType();
 
-	// キーボード,パッドの移動
-	if ((MoveKeyboard(pKeyboard, pCamera) || MoveJoyPad(pJoypad,pCamera)) && nMotionType != MOTIONTYPE_ACTION)
+	if (CManager::GetMode() == CScene::MODE_GAME)
 	{
-		// 移動モーションにする
-		pMotion->SetMotion(MOTIONTYPE_MOVE, true, 10);
-	}
-	else if(nMotionType == MOTIONTYPE_MOVE)
-	{
-		// ニュートラルモーションにする
-		pMotion->SetMotion(MOTIONTYPE_NEUTRAL, true, 10);
+		// キーボード,パッドの移動
+		if ((MoveKeyboard(pKeyboard, pCamera) || MoveJoyPad(pJoypad, pCamera)) && nMotionType != MOTIONTYPE_ACTION)
+		{
+			// 移動モーションにする
+			pMotion->SetMotion(MOTIONTYPE_MOVE, true, 10);
+		}
+		else if (nMotionType == MOTIONTYPE_MOVE)
+		{
+			// ニュートラルモーションにする
+			pMotion->SetMotion(MOTIONTYPE_NEUTRAL, true, 10);
+		}
 	}
 
 	// 移動量の減衰

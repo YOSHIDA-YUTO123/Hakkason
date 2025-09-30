@@ -17,6 +17,7 @@
 #include"fade.h"
 #include "game.h"
 #include "sound.h"
+#include "title.h"
 
 using namespace Const; // 名前空間Constを使用
 using namespace std; // 名前空間stdを使用
@@ -143,7 +144,7 @@ HRESULT CPauseContinue::Init(void)
 	}
 
 	// テクスチャの設定
-	SetTextureID("continuation.png");
+	SetTextureID("return.png");
 
 	return S_OK;
 }
@@ -261,7 +262,7 @@ HRESULT CPauseRetry::Init(void)
 	}
 
 	// テクスチャの設定
-	SetTextureID("return.png");
+	SetTextureID("start over.png");
 
 	return S_OK;
 }
@@ -380,7 +381,7 @@ HRESULT CPauseQuit::Init(void)
 	}
 
 	// テクスチャの設定
-	SetTextureID("data/TEXTURE/pause/pause_quit.png");
+	SetTextureID("quit.png");
 
 	return S_OK;
 }
@@ -442,7 +443,9 @@ void CPauseQuit::Update(void)
 		if (pKeyboard->GetTrigger(DIK_RETURN) || pJoyPad->GetTrigger(pJoyPad->JOYKEY_A))
 		{
 			// フェードの取得
-			//CFade* pFade = CManager::GetFade();
+			CFade* pFade = CManager::GetFade();
+
+			pFade->SetFade(make_unique<CTitle>());
 		}
 	}
 	else

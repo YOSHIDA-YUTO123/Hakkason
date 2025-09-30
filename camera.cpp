@@ -86,7 +86,10 @@ void CCamera::Uninit(void)
 //===================================================
 void CCamera::Update(void)
 {
-	MouseView();
+	if (CManager::GetMode() == CScene::MODE_GAME)
+	{
+		MouseView();
+	}
 
 	// äpìxÇÃê≥ãKâª
 	NormalizeRot(&m_rot.x);
