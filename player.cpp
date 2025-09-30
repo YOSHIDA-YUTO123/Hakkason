@@ -574,6 +574,7 @@ void CPlayer::UpdateShotBullet(CMotion* pMotion,CInputKeyboard *pKeyboard,CInput
 	// ƒtƒŒ[ƒ€‚Ì”»’è
 	if (pMotion->IsEventFrame(6, 6, MOTIONTYPE_ACTION))
 	{
+		// ‰¹‚ð—¬‚·
 		CManager::GetSound()->Play(CSound::SOUND_LABEL_SHOT);
 
 		// ‰Î‚Ìî•ñ‚ðÝ’è
