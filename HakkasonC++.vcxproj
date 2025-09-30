@@ -163,6 +163,7 @@
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="DualUnitTimer.cpp" />
     <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="enemysphere.cpp" />
     <ClCompile Include="modelmanager.cpp" />
     <ClCompile Include="NormalTimer.cpp" />
     <ClCompile Include="player.cpp" />
@@ -224,6 +225,7 @@
     <ClInclude Include="Collision.h" />
     <ClInclude Include="DualUnitTimer.h" />
     <ClInclude Include="enemy.h" />
+    <ClInclude Include="enemysphere.h" />
     <ClInclude Include="modelmanager.h" />
     <ClInclude Include="NormalTimer.h" />
     <ClInclude Include="player.h" />
