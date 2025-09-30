@@ -182,15 +182,15 @@ void CGame::Update(void)
 
 	CInputJoypad* pJoypad = CManager::GetInputJoypad();
 
-	CPauseManager::GetInstance()->SelectMenu();
-
-	if ((pKeyboard != nullptr && pJoypad != nullptr) && pKeyboard->GetTrigger(DIK_P) || pJoypad->GetTrigger(pJoypad->JOYKEY_START))
+	if (pKeyboard->GetTrigger(DIK_P) || pJoypad->GetTrigger(pJoypad->JOYKEY_START))
 	{
 		if (pPauseManager != nullptr)
 		{
 			pPauseManager->EnablePause();
 		}
 	}
+
+	CPauseManager::GetInstance()->SelectMenu();
 
 	static int ntimer = 0;
 	if (CPauseManager::GetPause() == false)
