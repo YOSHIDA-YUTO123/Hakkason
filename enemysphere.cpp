@@ -18,7 +18,7 @@
 //================================================
 // コンストラクタ
 //================================================
-CEnemySphere::CEnemySphere()
+CEnemySphere::CEnemySphere() : CEnemy(TYPE_ONE)
 {
 }
 

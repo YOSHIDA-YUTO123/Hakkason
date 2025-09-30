@@ -45,7 +45,8 @@ public:
 	void Uninit(void) override;
 	void Update(void) override;
 	void Draw(void) override;
-
+	int GetScore(void) const { return m_nScore; }
+	void AddScore(const int nAdd) { m_nScore += nAdd; }
 private:
 	static constexpr int MAX_DIGIT = 8; // ƒXƒRƒA‚ÌŒ…”
 
