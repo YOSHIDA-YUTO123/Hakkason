@@ -73,7 +73,7 @@ HRESULT CPlayer::Init(void)
 	CCharacter3D::SetCharacter(10, 5.0f, SHADOW_SCAL, PLAYER_SIZE);
 
 	// ƒ‚[ƒVƒ‡ƒ“‚Ì“Ç‚Ýž‚Ý
-	CCharacter3D::LoadMotion("motion.txt", MOTIONTYPE_MAX);
+	CCharacter3D::LoadMotion("player.txt", MOTIONTYPE_MAX);
 
 	return S_OK;
 }
@@ -100,6 +100,12 @@ void CPlayer::Update(void)
 
 	if (pCamera != nullptr)
 	{
+		D3DXVECTOR3 posRDest;
+
+		posRDest.x = modelpos.x + sinf(rot.y) * 1.0f;
+		posRDest.y = (modelpos.y + 0.0f) + sinf(rot.y) * 1.0f;
+		posRDest.z = modelpos.z + cosf(rot.y) * 1.0f;
+
 		// ƒJƒƒ‰‚Ì’Ç]
 		//pCamera->SetTracking(pos, pos, 0.01f);
 	}
