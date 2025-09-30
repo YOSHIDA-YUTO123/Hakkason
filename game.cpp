@@ -28,6 +28,8 @@
 #include "enemyneedle.h"
 #include "DualUnitTimer.h"
 #include "mapmanager.h"
+#include "enemybonus.h"
+#include "enemyshot.h"
 #include "dome.h"
 #include "math.h"
 
@@ -158,12 +160,28 @@ void CGame::Update(void)
 	{
 		for (int nCnt = 0; nCnt < 5; nCnt++)
 		{
-			int Type = rand() % 4 + 1;
+			int Type = rand() % 4;
 			float Angle = math::Randf(D3DX_PI * 2, 0.1f);
 			D3DXVECTOR3 SetPos = m_pPlayer->GetPosition();
 			SetPos.x += sinf(Angle) * 300.0f;
 			SetPos.z += cosf(Angle) * 300.0f;
-			CEnemyNeedle::Create(SetPos);
+			switch (Type)
+			{
+			case 0:
+				CEnemySphere::Create(SetPos);
+				break;
+			case 1:
+				CEnemyNeedle::Create(SetPos);
+				break;
+			case 2:
+				CEnemyBonus::Create(SetPos);
+				break;
+			case 3:
+				CEnemyShot::Create(SetPos);
+				break;
+			default:
+				break;
+			}
 		}
 	}
 #ifdef _DEBUG
