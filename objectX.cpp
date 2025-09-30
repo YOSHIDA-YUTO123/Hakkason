@@ -401,7 +401,12 @@ void CObjectX::SetUpDraw(const float Diffuse)
 HRESULT CObjectX::LoadModel(const char* pXFileName)
 {
 	// 省略用ファイルパス
-	string filePath = "data/MODEL/";
+	string Path = pXFileName;
+	string filePath;
+	if (Path.find("data/MODEL/") == string::npos)
+	{
+		filePath = "data/MODEL/";
+	}
 
 	// 文字列の連結
 	filePath += pXFileName;
