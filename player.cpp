@@ -172,7 +172,13 @@ void CPlayer::Update(void)
 	// 角度の取得
 	float fRotY = CCharacter3D::GetRotation().y;
 
-	if (pKeyboard->GetRepeat(DIK_RETURN,30))
+	if (pKeyboard->GetRepeat(DIK_RETURN, 30))
+	{
+		pMotion->SetMotion(MOTIONTYPE_ACTION, true, 5);
+	}
+
+	// フレームの判定
+	if (pMotion->IsEventFrame(8, 8, MOTIONTYPE_ACTION))
 	{
 		// 発射地点の取得
 		D3DXVECTOR3 shotGunPos = GetPositionFromMatrix(m_ShotMtx);
@@ -180,9 +186,8 @@ void CPlayer::Update(void)
 		// 弾の発射
 		CBulletManager::PushBackBullet(shotGunPos, VEC3_NULL,
 			D3DXVECTOR3(sinf(fRotY + D3DX_PI), 0.0f, cosf(fRotY + D3DX_PI)), 10.0f);
-
-		pMotion->SetMotion(MOTIONTYPE_ACTION, true, 10);
 	}
+
 	// モーションの更新処理
 	CCharacter3D::UpdateMotion();
 
