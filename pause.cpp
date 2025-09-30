@@ -545,7 +545,7 @@ void CPauseManager::EnablePause(void)
 	if (pKeyboard != nullptr)
 	{
 		// pキーが押された
-		if (pKeyboard->GetTrigger(DIK_P))
+		if (pKeyboard->GetTrigger(DIK_P) || CManager::GetInputJoypad()->GetTrigger(CInputJoypad::JOYKEY_START) == true)
 		{
 			// ポーズの切り替え処理
 			m_bPause = m_bPause ? false : true;
