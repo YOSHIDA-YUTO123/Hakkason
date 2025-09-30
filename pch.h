@@ -21,6 +21,7 @@
 #include "dinput.h"
 #include"Xinput.h"
 #include"xaudio2.h"
+#include "json.hpp"
 
 //***************************************************
 // ライブラリのリンク
@@ -36,7 +37,7 @@
 // マクロ定義
 //***************************************************
 #define CLASS_NAME "WindowClass"	// ウインドウクラスの名前
-#define WINDOW_NAME "The Parry"		// ウインドウの名前(キャプションに表示)
+#define WINDOW_NAME "Hakkason"		// ウインドウの名前(キャプションに表示)
 #define SCREEN_WIDTH (1280)			// ウインドウの幅
 #define SCREEN_HEIGHT (720)			// ウインドウの高さ
 #define FVF_VERTEX_2D (D3DFVF_XYZRHW | D3DFVF_DIFFUSE | D3DFVF_TEX1)			     // 2Dの頂点情報
