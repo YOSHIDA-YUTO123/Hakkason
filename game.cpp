@@ -136,7 +136,7 @@ void CGame::Update(void)
 	case STATE_END:
 		m_nCounterState++;
 
-		if (m_nCounterState <= 0)
+		if (m_nCounterState >= 60)
 		{
 			if (nPlayerLife <= 0)
 			{
