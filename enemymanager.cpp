@@ -14,6 +14,9 @@
 #include "Collision.h"
 #include "Collider.h"
 #include "bulletmanager.h"
+#include "game.h"
+#include "player.h"
+#include "debugproc.h"
 
 // 静的メンバ変数
 std::vector<CEnemy*> CEnemyManager::m_pvEnemy;
@@ -102,6 +105,42 @@ void CEnemyManager::CollisionBullet(void)
 				// 処理を切り上げる
 				return;
 			}
+		}
+	}
+}
+
+//===================================================
+// プレイヤーとの当たり判定
+//===================================================
+void CEnemyManager::CollisionPlayer(void)
+{
+	// プレイヤーの取得
+	CPlayer* pPlayer = CGame::GetPlayer();
+
+	// 取得できなかったら処理しない
+	if (pPlayer == nullptr) return;
+
+	// オブジェクトのリストから選択されているオブジェクトを探す
+	for (auto Enemeys = m_pvEnemy.begin(); Enemeys != m_pvEnemy.end(); Enemeys++)
+	{
+		// プレイヤーの位置
+		D3DXVECTOR3 playerPos = pPlayer->GetPosition();
+		D3DXVECTOR3 playerHead = D3DXVECTOR3(playerPos.x, playerPos.y + 200.0f, playerPos.z);
+
+		// 敵と弾の球の当たり判定を作る
+		CColliderSphere EnemyCollider = CColliderSphere::CreateCollider((*Enemeys)->GetPosition(), 10.0f);
+		CColliderSphere playerCollider = CColliderSphere::CreateCollider(playerPos,50.0f);
+
+		// 当たり判定
+		if (CCollisionSphere::Collision(&playerCollider, &EnemyCollider))
+		{
+			// 敵に当たった
+			CDebugProc::Print("プレイヤーと敵衝突\n");
+
+			// プレイヤーに当たった
+			pPlayer->Hit(1);
+
+			return;
 		}
 	}
 }
