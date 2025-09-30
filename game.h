@@ -65,6 +65,7 @@ private:
 	static CPlayer* m_pPlayer;			// プレイヤーのインスタンス
 	static CDualUnitTimer* m_pTimer;	// タイマーのインスタンス
 	static STATE m_state;				// ゲームの状態
+	int m_nScore;				// スコア
 	int m_nCounterState;				// 状態カウンター
 };
 

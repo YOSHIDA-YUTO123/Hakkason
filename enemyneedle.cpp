@@ -18,7 +18,7 @@
 //================================================
 // コンストラクタ
 //================================================
-CEnemyNeedle::CEnemyNeedle()
+CEnemyNeedle::CEnemyNeedle() : CEnemy(TYPE_TWO)
 {
 }
 
