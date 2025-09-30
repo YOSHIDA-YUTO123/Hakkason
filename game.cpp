@@ -103,6 +103,17 @@ HRESULT CGame::Init(void)
 
 	CEnemyManager::Reset();
 
+	for (int nCnt = 0; nCnt < 10; nCnt++)
+	{
+		int Type = rand() % 4;
+		float Angle = math::Randf(D3DX_PI * 2, 0.1f);
+		D3DXVECTOR3 SetPos = m_pPlayer->GetPosition();
+		SetPos.x += sinf(Angle) * 300.0f;
+		SetPos.y += 50.0f;
+		SetPos.z += cosf(Angle) * 300.0f;
+		CEnemyManager::PushBackBullet(SetPos, Type);
+	}
+
 	return S_OK;
 }
 
@@ -184,7 +195,7 @@ void CGame::Update(void)
 
 	if ((ntimer % 600) == 0 && ntimer != 0)
 	{
-		for (int nCnt = 0; nCnt < 5; nCnt++)
+		for (int nCnt = 0; nCnt < 10; nCnt++)
 		{
 			int Type = rand() % 4;
 			float Angle = math::Randf(D3DX_PI * 2, 0.1f);
