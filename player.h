@@ -20,6 +20,8 @@
 // 前方宣言
 //*************************************************
 class CInputKeyboard;
+class CMotion;
+class CInputJoypad;
 class CCamera;
 
 //*************************************************
@@ -68,9 +70,12 @@ public:
 private:
 	void Debug(CInputKeyboard* pKeyboard);
 	bool MoveKeyboard(CInputKeyboard* pKeyboard, CCamera* pCamera);
+	bool MoveJoyPad(CInputJoypad* pJoypad, CCamera* pCamera);
+	void UpdateShotBullet(CMotion* pMotion, CInputKeyboard* pKeyboard, CInputJoypad* pJoypad, const float fAngleY);
 
 	D3DXVECTOR3 m_move;		// 移動量
 	D3DXMATRIX m_ShotMtx;	// 発射地点のマトリックス
+	int m_nCoolDown;		// 発射のクールダウン
 };
 
 #endif
