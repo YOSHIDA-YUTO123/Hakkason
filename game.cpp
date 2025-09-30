@@ -32,6 +32,7 @@ using namespace std; // 名前空間stdを使用
 // 静的メンバ変数宣言
 //***************************************************
 CGame::STATE CGame::m_state = STATE_NORMAL;					   // ゲームの状態
+CPlayer* CGame::m_pPlayer = NULL;
 
 //===================================================
 // コンストラクタ
@@ -68,6 +69,9 @@ HRESULT CGame::Init(void)
 
 	// ポーズマネージャーの生成
 	CPauseManager::Create();
+
+	// プレイヤー生成
+	m_pPlayer = CPlayer::Create(VEC3_NULL, NULL);
 
 	return S_OK;
 }
