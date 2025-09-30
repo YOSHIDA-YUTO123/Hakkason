@@ -22,9 +22,12 @@
 #include "NormalTimer.h"
 #include "DualUnitTimer.h"
 #include "player.h"
+#include "titlemanager.h"
 
 using namespace Const;	// 名前空間Constの使用
 using namespace std;	// 名前空間stdの使用
+
+CTitleManager* CTitle::m_pTitleManager = NULL;
 
 //===================================================
 // コンストラクタ
@@ -54,9 +57,6 @@ HRESULT CTitle::Init(void)
 	pLight->SetDirectional(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f), D3DXVECTOR3(0.0f, -0.56f, 0.74f), D3DXVECTOR3(0.0f, 100.0f, 0.0f));
 	pLight->SetDirectional(D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f), D3DXVECTOR3(0.0f, -0.56f, -0.74f), D3DXVECTOR3(0.0f, 100.0f, 0.0f));
 
-	// 2Dオブジェクトの生成
-	CObject2D::Create(50.0f, 50.0f, CENTER_POS_2D)->SetTextureID("title.png");
-
 	// メッシュフィールドの生成
 	CMeshField::Create(VEC3_NULL, 10, 10, D3DXVECTOR2(500.0f, 500.0f));
 
@@ -70,6 +70,8 @@ HRESULT CTitle::Init(void)
 	CDualUnitTimer::Create(D3DXVECTOR3(640.0f, 500.0f, 0.0f), D3DXVECTOR2(100.0f, 50.0f), 5);
 
 	CPlayer::Create(VEC3_NULL, 0.0f);
+
+	m_pTitleManager = CTitleManager::CreateSingleton();
 
 	//// メッシュシリンダーの生成
 	//CMeshCylinder::Create(VEC3_NULL, -500.0f, 500.0f, 10, 10);

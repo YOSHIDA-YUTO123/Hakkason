@@ -220,6 +220,9 @@
     <ClCompile Include="texmanager.cpp" />
     <ClCompile Include="timer.cpp" />
     <ClCompile Include="title.cpp" />
+    <ClCompile Include="titleLogo.cpp" />
+    <ClCompile Include="titlemanager.cpp" />
+    <ClCompile Include="titlemenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="billboard.h" />
@@ -241,6 +244,7 @@
     <ClInclude Include="enemysphere.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="mapmanager.h" />
+    <ClInclude Include="math_T.h" />
     <ClInclude Include="modelmanager.h" />
     <ClInclude Include="NormalTimer.h" />
     <ClInclude Include="player.h" />
@@ -283,6 +287,9 @@
     <ClInclude Include="texmanager.h" />
     <ClInclude Include="timer.h" />
     <ClInclude Include="title.h" />
+    <ClInclude Include="titlelogo.h" />
+    <ClInclude Include="titlemanager.h" />
+    <ClInclude Include="titlemenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -33,6 +33,7 @@
 #include "dome.h"
 #include "math.h"
 #include "enemymanager.h"
+#include "pause.h"
 
 using namespace Const; // 名前空間Constを使用
 using namespace std; // 名前空間stdを使用
@@ -142,6 +143,8 @@ void CGame::Update(void)
 
 	// キーボードの取得
 	CInputKeyboard* pKeyboard = CManager::GetInputKeyboard();
+
+	CPauseManager::GetInstance()->SelectMenu();
 
 	if (pKeyboard != nullptr && pKeyboard->GetTrigger(DIK_P))
 	{
