@@ -22,16 +22,20 @@ public:
 	~CEnemy();
 
 	// メンバ関数
-	virtual HRESULT Init(void);
-	virtual void Uninit(void);
-	virtual void Update(void);
-	virtual void Draw(void);
+	virtual HRESULT Init(void) override;
+	virtual void Uninit(void) override;
+	virtual void Update(void) override;
+	virtual void Draw(void) override;
+
+	void SetDamage(const int nDamage) { m_nLife -= nDamage; }
 
 	// セッター
 	void SetMove(D3DXVECTOR3 Move) { m_Move = Move; }
+
 	// ゲッター
 	D3DXVECTOR3 GetMove(void) { return m_Move; }
 private:
 	D3DXVECTOR3 m_Move;	// 移動量
+	int m_nLife;		// 体力
 };
 #endif // !_ENEMY_H_
