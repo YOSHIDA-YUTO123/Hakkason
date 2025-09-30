@@ -18,6 +18,8 @@
 #include "sound.h"
 #include "title.h"
 #include "object2D.h"
+#include <fstream>
+#include "score.h"
 
 using namespace Const; // 名前空間Constを使用
 using namespace std; // 名前空間stdを使用
@@ -41,7 +43,11 @@ CResultWin::~CResultWin()
 //===================================================
 HRESULT CResultWin::Init(void)
 {
-	CObject2D::Create(50.0f, 50.0f, CENTER_POS_2D)->SetTextureID("result.png");
+	// スコアのロード
+	int nScore = LoadScore();
+
+	// スコアの生成
+	CScore::Create(CENTER_POS_2D, D3DXVECTOR2(300.0f, 100.0f), nScore);
 
 	return S_OK;
 }
@@ -81,6 +87,37 @@ void CResultWin::Update(void)
 //===================================================
 void CResultWin::Draw(void)
 {
+}
+
+//===================================================
+// スコアのロード
+//===================================================
+int CResultWin::LoadScore(void)
+{
+	// ファイルを開く
+	fstream file("data/TXT/result_score.txt");
+	string line, input;
+
+	string filepath;	// ファイルパス
+
+	int nScore = 0;
+
+	// nullじゃなかったら
+	if (file.is_open())
+	{
+		file >> nScore;
+
+		file.close();
+		file.clear();
+	}
+	else
+	{
+		MessageBox(NULL, "エラー", "LoadScore", MB_OK);
+		return 0;
+	}
+
+
+	return nScore;
 }
 
 //===================================================

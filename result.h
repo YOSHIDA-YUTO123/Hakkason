@@ -36,6 +36,7 @@ public:
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
+	int LoadScore(void);
 private:
 };
 

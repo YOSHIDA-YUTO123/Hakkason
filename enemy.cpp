@@ -140,7 +140,7 @@ void CEnemy::Update(void)
 		}
 		else
 		{
-			CGame::AddScore(114514);
+			CGame::AddScore(11451);
 		}
 	}
 }

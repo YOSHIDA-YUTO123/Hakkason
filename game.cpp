@@ -132,6 +132,9 @@ void CGame::Uninit(void)
 	}
 	// 状態のリセット
 	m_state = STATE_NORMAL;
+
+	// スコアのセーブ
+	SaveScore();
 }
 
 //===================================================
@@ -247,7 +250,11 @@ void CGame::SaveScore(void)
 
 	if (file.is_open())
 	{
+		// スコアの書き出し
+		file << m_nScore;
 
+		file.clear();
+		file.close();
 	}
 	else
 	{
