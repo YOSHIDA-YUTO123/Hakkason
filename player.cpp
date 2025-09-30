@@ -22,14 +22,16 @@ using namespace Const; // 名前空間Constの使用
 //*************************************************
 // 定数宣言
 //*************************************************
-const D3DXVECTOR3 SHADOW_SCAL = { 1.0f,1.0f,1.0f }; // 影のモデルの拡大率
+const D3DXVECTOR3 SHADOW_SCAL = { 1.0f,1.0f,1.0f };		// 影のモデルの拡大率
 const D3DXVECTOR3 PLAYER_SIZE = { 10.0f,100.0f,10.0f };	// プレイヤーの大きさ
+constexpr float INERTIA = 0.25f;						// 移動慣性
 
 //=================================================
 // コンストラクタ
 //=================================================
 CPlayer::CPlayer()
 {
+	m_move = VEC3_NULL;
 }
 
 //=================================================
@@ -100,6 +102,16 @@ void CPlayer::Update(void)
 	// 位置の取得
 	D3DXVECTOR3 pos = CCharacter3D::GetPosition();
 
+	// 移動量の減衰
+	m_move.x += (0.0f - m_move.x) * INERTIA;
+	m_move.z += (0.0f - m_move.z) * INERTIA;
+
+	// 移動量の更新
+	pos += m_move;
+
+	// キーボードの取得
+	CInputKeyboard* pKeyboard = CManager::GetInputKeyboard();
+
 	// 角度の取得
 	float fRotY = CCharacter3D::GetRotation().y;
 
@@ -109,8 +121,6 @@ void CPlayer::Update(void)
 	// 更新処理
 	CCharacter3D::Update();
 
-	// キーボードの取得
-	CInputKeyboard* pKeyboard = CManager::GetInputKeyboard();
 
 	if (pCamera != nullptr)
 	{
